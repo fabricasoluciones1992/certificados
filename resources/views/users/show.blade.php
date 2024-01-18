@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@section('title')
+    información personal
+@endsection
 @section('content')
             <!--Botón para volver-->
   <div class="d-grid gap-2 d-md-flex justify-content-end m-5">

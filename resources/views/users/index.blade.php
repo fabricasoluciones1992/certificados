@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@section('title')
+    Generar Certificado 
+@endsection
 @section('content')
     <body>
         <!--encabezado titulo-->
