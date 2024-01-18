@@ -2,7 +2,7 @@
 
 @section('content')
   <div class="d-grid gap-2 d-md-flex justify-content-md-end me-5">
-    <a href="{{asset('/admins')}}"><button class="btn btn-outline-danger" id=""><i class="fa-solid fa-arrow-left px-3 justify-content-center"></button></i></button></a>
+    <a href="{{asset('/home')}}"><button class="btn btn-outline-danger" id=""><i class="fa-solid fa-arrow-left px-3 justify-content-center"></button></i></button></a>
   </div>
   <section class="container my-5 w-50">
     <!--Formulario de registro-->
@@ -19,13 +19,6 @@
               {{ $users->name }}
           @endif
               </h2>
-        <h2 class="py-2"><b class="pe-3">Apellidos:</b>
-                @if( $users->last == '0' )
-                    {{"Por definir"}}
-                @else
-                    {{ $users->last }}
-                @endif
-                    </h2>
             <h3 class="py-2"><b class="pe-3">Correo:</b> {{$users->email}}</h3>
             <h4 class="py-2"><b class="pe-3">Tipo de Documento:</b> {{$people->documents->type}}</h4>
             <h4 class="py-2"><b class="pe-3">Documento:</b>       

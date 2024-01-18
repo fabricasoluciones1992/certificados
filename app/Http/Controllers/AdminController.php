@@ -32,14 +32,17 @@ class AdminController extends Controller
      {
          $this->middleware('auth');
      }
-     
+
     public function index()
     {
-        $people = Auth::user();
-        if ($people->id_roles != 2) {
+        $user = Auth::user();
+        $people = DB::table('people')->where('id_users','=',$user->id)->first();
+        $people = People::find($people->id);
+        if ($user->id_roles != 2) {
             return redirect(route('users.index'));
+        }else{
+            return view('users.admins.index', compact('people'));
         }
-        return view('users.admins.index');
     }
 
     /**
@@ -91,10 +94,10 @@ class AdminController extends Controller
      */
     public function show($id)
     {
-        $people = People::find($id);
-        $users = User::find($id);
-        $people2 = Auth::user();
-        if ($people2->id_roles != 2) {
+        $user = Auth::user();
+        $people = DB::table('people')->where('id_users','=',$user->id)->first();
+        $people = People::find($people->id);
+        if ($user->id_roles != 2) {
             return redirect(route('users.index'));
         }
         return view('users.admins.show', compact('people','users'));
@@ -108,7 +111,8 @@ class AdminController extends Controller
      */
     public function edit($id)
     {
-        $people = People::find($id);
+        $people = DB::table('people')->where('id_users','=',$id)->first();
+        $people = People::find($people->id);
         $users = User::find($id);
         $roles = Role::all();
         $contracts = Contract::all();
@@ -137,7 +141,6 @@ class AdminController extends Controller
             'role' => 'required|in:2,3,4,5,6',
             'contract' => 'required|in:2,3,4',
             'name' => 'required|min:2|max:100',
-            'last' => 'required|min:2|max:100',
             'date_i' => 'required',
             'onus' => 'required',
             'area' => 'required',
@@ -164,9 +167,8 @@ class AdminController extends Controller
         ]);
 
         $people = People::find($id);
-        $users = User::find($id);
-        $users->name = $request->name;   
-        $users->last = $request->last;        
+        $users = User::find($people->id_users);
+        $users->name = $request->name;
         $people->id_documents = $request->type;
         $people->doc = $request->doc; 
         $people->id_contracts = $request->contract;   
@@ -186,8 +188,7 @@ class AdminController extends Controller
         if ($people->id_roles != 2) {
             return redirect(route('users.index'));
         }
-        
-        return view('users.admins.show_users', compact('users','roles'));
+        return redirect(route('users.index'));
     }
 
 
@@ -207,9 +208,11 @@ class AdminController extends Controller
         $users = User::all();
         $roles = Role::all();
         $certificate = Certificates::all();
-        $people = People::all();        
-        $people2 = Auth::user();
-        if ($people2->id_roles != 2) {
+        $people2 = People::all();
+        $user = Auth::user();
+        $people = DB::table('people')->where('id_users','=',$user->id)->first();
+        $people = People::find($people->id);
+        if ($user->id_roles != 2) {
             return redirect(route('users.index'));
         }
         return view('users.admins.histories', compact('users','roles','certificate','people')); 
@@ -219,23 +222,27 @@ class AdminController extends Controller
     public function certificates($id)
     {
         $users = DB::table('users')->where('id', $id)->first();
-        $people = Auth::user();
-        if ($people->id_roles != 2) {
+        $user = Auth::user();
+        $people = DB::table('people')->where('id_users','=',$user->id)->first();
+        $people = People::find($people->id);
+        if ($user->id_roles != 2) {
             return redirect(route('users.index'));
         }
-        return view('users.admins.certificates', compact('users'));
+        return view('users.admins.certificates', compact('users','people'));
     }
 
     public function show_users()
     {
         $users = User::all();
         $roles = Role::all();
-        $people = Auth::user();
-        if ($people->id_roles != 2) {
+        $user = Auth::user();
+        $people = DB::table('people')->where('id_users','=',$user->id)->first();
+        $people = People::find($people->id);
+        if ($user->id_roles != 2) {
             return redirect(route('users.index'));
         }
         
-        return view('users.admins.show_users', compact('users','roles'));
+        return view('users.admins.show_users', compact('users','roles','people'));
 
     }
     

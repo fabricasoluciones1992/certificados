@@ -13,20 +13,13 @@
       </div>
       <div class="card-body">
         <h2 class="py-2"><b class="pe-3">Nombres:</b>
-          @if( $users->name == '0' )
+          @if( $user->name == '0' )
               {{"Por definir"}}
           @else
-              {{ $users->name }}
+              {{ $user->name }}
           @endif
               </h2>
-        <h2 class="py-2"><b class="pe-3">Apellidos:</b>
-                @if( $users->last == '0' )
-                    {{"Por definir"}}
-                @else
-                    {{ $users->last }}
-                @endif
-                    </h2>
-            <h3 class="py-2"><b class="pe-3">Correo:</b> {{$users->email}}</h3>
+            <h3 class="py-2"><b class="pe-3">Correo:</b> {{$user->email}}</h3>
             <h4 class="py-2"><b class="pe-3">Tipo de Documento:</b> {{$people->documents->type}}</h4>
             <h4 class="py-2"><b class="pe-3">Documento:</b>
           @if( $people->doc === '1' )
@@ -35,7 +28,7 @@
               {{ $people->doc }}
           @endif</h4>
             <h4 class="py-2"><b class="pe-3">Tipo de Contrato:</b> {{$people->contracts->contract}}</h4>
-            <h4 class="py-2"><b class="pe-3">Rol:</b> {{$users->roles->role}}</h4>
+            <h4 class="py-2"><b class="pe-3">Rol:</b> {{$user->roles->role}}</h4>
             <h4 class="py-2"><b class="pe-3">Salario:</b>       
           @if( $people->salary === '1' )
               {{"Por definir"}}

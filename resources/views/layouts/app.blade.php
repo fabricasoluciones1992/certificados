@@ -69,7 +69,7 @@
                                     <a class="nav-link active text-light rounded ms-3 {{request()->routeIs('customers.index') ? 'active' : ''}}" aria-current="page" href="{{route('certificates', Auth::user()->id)}}">Generar certificado</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link active text-light rounded mx-2 px-3 {{request()->routeIs('customers.index') ? 'active' : ''}}" aria-current="page" href="/admins">Inicio</a>
+                                    <a class="nav-link active text-light rounded mx-2 px-3 {{request()->routeIs('customers.index') ? 'active' : ''}}" aria-current="page" href="/home">Inicio</a>
                                 </li>
                             @endif
                         @endauth
@@ -97,7 +97,7 @@
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     @if(Auth::user()->id_roles =='2')         
-                                    <a class="dropdown-item rounded" href="{{ route('admins.show', Auth::user()->id) }}">
+                                    <a class="dropdown-item rounded" href="{{ route('admins.show', $people->id) }}">
                                         {{ __('Mi Info') }}
                                     </a> 
                                     @else

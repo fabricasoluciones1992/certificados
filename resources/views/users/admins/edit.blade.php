@@ -26,16 +26,6 @@
                                 </div>
                                 </div>
                         <div class="row mb-3">
-                                    <label for="last" class="col-md-4 col-form-label text-md-end">{{ __('Apellidos') }}</label>
-                                    <div class="col-md-6">
-                                        <input id="last" type="text" class="form-control" name="last" value="@if($users->last == '0'){{""}}@else{{$users->last}}@endif" placeholder="@if($users->last == '0'){{"Por Definir"}}@endif" autocomplete="last" autofocus>
-                                        @foreach ($errors->get('last') as $error)
-                                        <strong class="text-danger">{{ $error }}</strong>
-                                    @endforeach
-                                    <p class="fs-7 text-secondary">Los apellidos debe contener mínimo 2 caracteres y máximo 100 caracteres</p>
-                                    </div>
-                                    </div>
-                        <div class="row mb-3">
                                 <label for="type" class="col-md-4 col-form-label text-md-end">{{ __('Tipo de Documento') }}</label>
                             <div class="col-md-6"> 
                             <select class="form-control" id="type" type="type" class="form-control @error('type') is-invalid @enderror" name="type" value="{{$people->documents->type}}" autocomplete="type" autofocus>  

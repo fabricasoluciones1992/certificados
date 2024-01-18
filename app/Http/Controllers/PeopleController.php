@@ -10,6 +10,7 @@ use App\Models\People;
 use App\Models\User;
 
 use App\Models\Document;
+use Illuminate\Support\Facades\DB;
 
 class PeopleController extends Controller
 {
@@ -74,9 +75,10 @@ class PeopleController extends Controller
      */
     public function show($id)
     {
-        $people = People::find($id);
-        $users = User::find($id);
-        return view('users.show', compact('people','users'));
+        $user = User::find($id);
+        $people = DB::table('people')->where('id_users','=',$user->id)->first();
+        $people = People::find($people->id);
+        return view('users.show', compact('people','user'));
     }
 
     /**
@@ -117,13 +119,10 @@ class PeopleController extends Controller
         ]);
 
         $people = People::find($id);
-        $users = User::find($id);
         $people->id_documents = $request->type;
         $people->doc = $request->doc; 
         $people->date = $request->date;
-        $users->id = $request->id_users;
         $people->save();
-        $users->save();
 
         return redirect(route('home'));
     }

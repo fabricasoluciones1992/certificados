@@ -24,5 +24,4 @@ class People extends Model
     public function users(){
         return $this->belongsTo(User::class, 'id_users');
     }
-    
 }

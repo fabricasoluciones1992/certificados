@@ -31,7 +31,9 @@ class HomeController extends Controller
         $people = Auth::user();
         switch ($people->id_roles) {
             case '2':
-                return view('users.admins.index');
+                $people = DB::table('people')->where('id_users','=',$people->id)->first();
+                $people = People::find($people->id);
+                return view('users.admins.index', compact('people'));
                 break;
             case '1':
                 $error = ['name'=>"423",'desc'=>"Locked"];
@@ -128,8 +130,8 @@ class HomeController extends Controller
 
 
         $user = DB::table('users')->where('id', $id)->first();
-        $people2 = DB::table('people')->where('id', $id)->first();
-        $people = People::find($user->id);
+        $people = DB::table('people')->where('id_users','=', $user->id)->first();
+        $people = People::find($people->id);
         
         if($request->contract == "on" ){
             $contract = $people->contracts->contract;
@@ -154,8 +156,7 @@ class HomeController extends Controller
             $salary = 0;
         }
 
-            $name = $user->name." ".$user->last;
-
+            $name = $user->name;
             $day = date('d');
             $month = $month_es;
             $year = date('Y');
@@ -164,7 +165,7 @@ class HomeController extends Controller
         date_default_timezone_set("America/Bogota");
         $certificate->download_date = date("y.m.d"); 
         $certificate->download_hour = date("H:i:s"); 
-        $certificate->id_people = $people2->id;
+        $certificate->id_people = $people->id;
         $certificate->id_users = Auth::user()->id;
         $confirmdate = $request->confirmdate;
 
@@ -174,14 +175,14 @@ class HomeController extends Controller
         }else{
 
             if($confirmdate == $people->date){
-                
+
                 $certificate->save();
                 return view('myWord');
 
             }else{
                 return '<script language="javascript">alert("Fecha de expedición errónea");window.location.href="/home"</script>';
             }
-            
+
         }
 
     }

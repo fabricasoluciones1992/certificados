@@ -28,7 +28,6 @@
         <thead>
             <tr>
               <th scope="col">Nombres</th>
-              <th scope="col">Apellidos</th>
               <th scope="col">Correo institucional</th>
               <th scope="col">Rol</th>
               <th scope="col">Editar</th>
@@ -39,7 +38,6 @@
           @foreach ($users as $user)
           <tr>
             <td scope="col"> {{$user->name}}</td>
-            <td scope="col"> {{$user->last}}</td>
             <td scope="col"> {{$user->email}}</td>
             <td scope="col"> {{$user->roles->role}}</td>
             <td><div hclass="btn-group " role="group" aria-label="Button group name"><a href="{{route('admins.edit', $user->id)}}"> <button type="button" class="btn btn-outline-success"><i class="fa-solid fa-pen"></i></button></a></td>
