@@ -11,7 +11,7 @@
         <div class="col-md-8">
             <div class="card mb-5">
                 <div class="card-body">
-                    <form action="{{route('people.update',$people->id)}}" method="POST">
+                    <form action="{{route('users.update',$users->id)}}" method="POST">
                         <input type="hidden" name="id_users" value="{{Auth::user()->id}}">
                         @csrf
                         @method('PUT')
@@ -39,17 +39,6 @@
                                 <strong class="text-danger">{{ $error }}</strong>
                             @endforeach
                             <p class="fs-7 text-secondary">El número de documento debe contener mínimo 4 caracteres y máximo 15 caracteres</p>
-                            </div> 
-                        </div> 
-                        <div class="row mb-3">
-                            <label for="date" class="col-md-4 col-form-label text-md-end">{{ __('Fecha de Expedición') }}</label>
-                            
-                            <div class="col-md-6">    
-                                <input id="date" type="date" class="form-control @error('') is-invalid @enderror" name="date" value="" autocomplete="date">
-                                @foreach ($errors->get('date') as $error)
-                                <strong class="text-danger">{{ $error }}</strong>
-                            @endforeach
-                            <p class="fs-7 text-secondary">La fecha de expedición no puede superar a la fecha actual</p>
                             </div> 
                         </div> 
                         <div class="col-md-8 offset-md-4">

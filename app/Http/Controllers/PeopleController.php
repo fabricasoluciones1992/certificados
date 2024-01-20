@@ -89,10 +89,9 @@ class PeopleController extends Controller
      */
     public function edit($id)
     {
-        $people = People::find($id);
         $users = User::find($id);
         $documents = Document::all();
-        return view('users.edit', compact('people','users','documents'));
+        return view('users.edit', compact('users','documents'));
     }
 
     /**
@@ -108,12 +107,9 @@ class PeopleController extends Controller
         $request->validate([
             'doc' => 'required|min:4|max:15',
             'type' => 'required|in:2,3,4,5',
-            'date' => 'required|before_or_equal:today',
         ],[
             'doc.required' => 'Se requiere número de documento',
             'type.in' => 'Se requiere tipo de documento',
-            'date.required' => 'Se requiere fecha de expedición del documento',
-            'date.before_or_equal' => 'La fecha de expedición del documento no puede exceder la fecha actual',
             'doc.min' => 'Caracteres mínimos:4',
             'doc.max' => 'Caracteres máximos:15',
         ]);
@@ -121,7 +117,6 @@ class PeopleController extends Controller
         $people = People::find($id);
         $people->id_documents = $request->type;
         $people->doc = $request->doc; 
-        $people->date = $request->date;
         $people->save();
 
         return redirect(route('home'));

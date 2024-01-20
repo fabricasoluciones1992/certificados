@@ -76,25 +76,13 @@ class RegisterController extends Controller
     {
         $user = User::create([
             'name' => 0,
+            'document' => 0,
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'id_roles' => 1
+            'id_roles' => 1,
+            'id_documents' => 1
         ]);
 
-        $people = new People();
-        $people->id_documents = 1;
-        $people->doc = 0;
-        $people->date = date("Y-m-d");
-        $people->id_contracts =1;
-        $people->salary = 0;
-        $people->date_i = date("Y-m-d");
-        $people->date_f = date("Y-m-d");
-        $people->onus = 0;
-        $people->area = 0;
-        $people->pay_per_hour = 0;
-        $people->id_users = $user->id;
-
-        $people->save();
         return $user;
     }
 

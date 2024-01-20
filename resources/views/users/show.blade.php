@@ -20,28 +20,19 @@
           @endif
               </h2>
             <h3 class="py-2"><b class="pe-3">Correo:</b> {{$user->email}}</h3>
-            <h4 class="py-2"><b class="pe-3">Tipo de Documento:</b> {{$people->documents->type}}</h4>
+            <h4 class="py-2"><b class="pe-3">Tipo de Documento:</b> {{$user->documents->type}}</h4>
             <h4 class="py-2"><b class="pe-3">Documento:</b>
-          @if( $people->doc === '1' )
+          @if( $user->doc === '0' )
               {{"Por definir"}}
           @else
-              {{ $people->doc }}
+              {{ $user->document }}
           @endif</h4>
-            <h4 class="py-2"><b class="pe-3">Tipo de Contrato:</b> {{$people->contracts->contract}}</h4>
             <h4 class="py-2"><b class="pe-3">Rol:</b> {{$user->roles->role}}</h4>
-            <h4 class="py-2"><b class="pe-3">Salario:</b>       
-          @if( $people->salary === '1' )
-              {{"Por definir"}}
-          @else
-              {{ $people->salary }}
-          @endif</h4>
-            <h4 class="py-2"><b class="pe-3">Pago por Hora:</b>
-          @if( $people->pay_per_hour == '1' )
-              {{"Por definir"}}
-          @else
-              {{ $people->pay_per_hour }}
-          @endif
-        </h4>
+            <div class="row">
+              <div class="col-12">
+                <a class="btn btn-primary" href="{{route('contracts.index')}}" role="button">Mis contratos</a>
+              </div>
+            </div>
     </div>
   </section>
 @endsection

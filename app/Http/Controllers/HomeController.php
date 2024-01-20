@@ -28,33 +28,37 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $people = Auth::user();
-        switch ($people->id_roles) {
-            case '2':
-                $people = DB::table('people')->where('id_users','=',$people->id)->first();
-                $people = People::find($people->id);
-                return view('users.admins.index', compact('people'));
-                break;
-            case '1':
-                $error = ['name'=>"423",'desc'=>"Locked"];
-                $people = DB::table('people')->where('id_users', $people->id)->first();
-                $users = Auth::user();
-                if ($people->doc == '0') {
-                    return redirect(route('people.edit',$people->id));
-                }
-                else{
-                    if ($people->id_contracts == '1'){
-                        return view('home');
-                    }
-                    else{
-                        return redirect(route('users.index', compact('people')));
-                    }
-                }
-                break;
-            default:
-            return view('users.index');
-            break;
+        $user = Auth::user();
+
+        if ($user->id_roles == 2) {
+            return view('users.admins.index');
+        }else{
+            if ($user->document != "0"){
+                return view('home');
+            }
+            else{
+                return redirect(route('users.edit',$user->id));
+            }
         }
+        // switch ($people->id_roles) {
+        //     case '2':
+        //         $people = DB::table('people')->where('id_users','=',$people->id)->first();
+        //         $people = People::find($people->id);
+        //         return view('users.admins.index', compact('people'));
+        //         break;
+        //     case '1':
+        //             return redirect(route('people.edit',$people->id));
+        //             if ($people->id_contracts == '1'){
+        //                 return view('home');
+        //             }
+        //             else{
+        //                 return redirect(route('users.index', compact('people')));
+        //             }
+        //     break;
+        //     default:
+        //     return view('users.index');
+        //     break;
+        // }
     }
     public function historial()
     {

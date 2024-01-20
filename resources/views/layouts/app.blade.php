@@ -26,7 +26,7 @@
     <link href="https://unpkg.com/vanilla-datatables@latest/dist/vanilla-dataTables.min.css" rel="stylesheet" type="text/css">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
- 
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
@@ -53,9 +53,8 @@
                             <a class="text-light" href="https://login.microsoftonline.com/login.srf"><i class="text-light fa-solid fa-envelope"></i> Mail corporativo</a>
                         </div>
                     </ul>
-                    
                     <ul class="navbar-nav ms-auto">
-                        <!-- Right Side Of Navbar -->               
+                        <!-- Right Side Of Navbar -->
                         <!-- Authentication Links -->
                         @auth
                         @if(Auth::user()->id_roles =='2')
@@ -96,14 +95,14 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    @if(Auth::user()->id_roles =='2')         
-                                    <a class="dropdown-item rounded" href="{{ route('admins.show', $people->id) }}">
+                                    @if(Auth::user()->id_roles =='2')
+                                    <a class="dropdown-item rounded" href="{{ route('admins.show', Auth::user()->id) }}">
                                         {{ __('Mi Info') }}
-                                    </a> 
+                                    </a>
                                     @else
-                                    <a class="dropdown-item rounded" href="{{ route('people.show', Auth::user()->id) }}">
+                                    <a class="dropdown-item rounded" href="{{ route('users.show', Auth::user()->id) }}">
                                         {{ __('Mi Info') }}
-                                    </a>       
+                                    </a>
                                     @endif
                                     <a class="dropdown-item rounded" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
@@ -134,7 +133,6 @@
             <img src="{{asset('img/LogoFooter.png')}}" alt="Logo uniempresarial y cámara de comercio" class="container w-50 pb-2">
             <p class="mb-0">Institución de educación superior sujeta a la inspección y vigilancia del Ministerio de Educación / SNIES 2738</p>
         </div>
-      
     </div>
     <div class="text-center p-2 bg-secondary text-light">
       <p>Todos los derechos reservados © 2020 -2023 Fundación Universitaria de la Cámara de Comercio de Bogotá

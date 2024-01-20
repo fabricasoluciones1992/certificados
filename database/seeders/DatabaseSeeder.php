@@ -19,59 +19,59 @@ class DatabaseSeeder extends Seeder
     {
 
 
-        \App\Models\Contract::factory()->create([
-            'contract' => 'Por definir', 
+        \App\Models\TypeContracts::factory()->create([
+            'type_contract' => 'Por definir',
         ]);
-        \App\Models\Contract::factory()->create([
-            'contract' => 'Término Fijo', 
+        \App\Models\TypeContracts::factory()->create([
+            'type_contract' => 'Término Fijo',
         ]);
-        \App\Models\Contract::factory()->create([
-            'contract' => 'Término Indefinido', 
+        \App\Models\TypeContracts::factory()->create([
+            'type_contract' => 'Término Indefinido',
         ]);
-        \App\Models\Contract::factory()->create([
-            'contract' => 'Obra o labor', 
+        \App\Models\TypeContracts::factory()->create([
+            'type_contract' => 'Obra o labor',
         ]);
-        \App\Models\Contract::factory()->create([
-            'contract' => 'Aprendizaje', 
-        ]);
-        \App\Models\Role::factory()->create([
-            'role' => 'Por definir', 
+        \App\Models\TypeContracts::factory()->create([
+            'type_contract' => 'Aprendizaje',
         ]);
         \App\Models\Role::factory()->create([
-            'role' => 'Administrativos', 
+            'role' => 'Por definir',
         ]);
         \App\Models\Role::factory()->create([
-            'role' => 'Docentes planta', 
+            'role' => 'Administrativos',
         ]);
         \App\Models\Role::factory()->create([
-            'role' => 'Docentes cátedra', 
+            'role' => 'Docentes planta',
         ]);
         \App\Models\Role::factory()->create([
-            'role' => 'Aprendices', 
+            'role' => 'Docentes cátedra',
         ]);
         \App\Models\Role::factory()->create([
-            'role' => 'Talleristas bienestar', 
+            'role' => 'Aprendices',
+        ]);
+        \App\Models\Role::factory()->create([
+            'role' => 'Talleristas bienestar',
         ]);
         \App\Models\Document::factory()->create([
-            'type' => 'Por definir', 
+            'type' => 'Por definir',
         ]);
         \App\Models\Document::factory()->create([
-            'type' => 'Tarjeta de Identidad', 
+            'type' => 'Tarjeta de Identidad',
         ]);
         \App\Models\Document::factory()->create([
-            'type' => 'Cédula de Ciudadanía', 
+            'type' => 'Cédula de Ciudadanía',
         ]);
         \App\Models\Document::factory()->create([
-            'type' => 'Tarjeta de Extranjeria', 
+            'type' => 'Tarjeta de Extranjeria',
         ]);
         \App\Models\Document::factory()->create([
-            'type' => 'Pasaporte', 
+            'type' => 'Pasaporte',
         ]);
         \App\Models\Document::factory()->create([
-            'type' => 'Permiso especial de permanencia', 
+            'type' => 'Permiso especial de permanencia',
         ]);
-        $this->call( Usersseeder::class);
-        $this->call( Peopleseeder::class);
-        \App\Models\Certificates::factory(5)->create();
+        //$this->call( Usersseeder::class);
+        //$this->call( Peopleseeder::class);
+        //\App\Models\Certificates::factory(5)->create();
     }
 }

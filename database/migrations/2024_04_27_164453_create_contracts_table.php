@@ -15,7 +15,13 @@ return new class extends Migration
     {
         Schema::create('contracts', function (Blueprint $table) {
             $table->id();
-            $table->string('contract');
+            $table->date('start');
+            $table->date('end');
+            $table->double('salary');
+            $table->boolean('status');
+            $table->foreignId('id_users')->constrained('users');
+            $table->foreignId('id_posts')->constrained('posts');
+            $table->foreignId('id_type_contracts')->constrained('type_contracts');
             $table->timestamps();
         });
     }

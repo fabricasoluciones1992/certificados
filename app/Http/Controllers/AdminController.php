@@ -111,18 +111,9 @@ class AdminController extends Controller
      */
     public function edit($id)
     {
-        $people = DB::table('people')->where('id_users','=',$id)->first();
-        $people = People::find($people->id);
-        $users = User::find($id);
+        $user = User::find($id);
         $roles = Role::all();
-        $contracts = Contract::all();
-        $documents = Document::all();
-        $people2 = Auth::user();
-        if ($people2->id_roles != 2) {
-            return redirect(route('users.index'));
-        }
-        return view('users.admins.edit', compact('people','users','roles'
-        ,'documents','contracts'));
+        return view('users.admins.edit', compact('user','roles'));
     }
 
     /**
@@ -134,60 +125,25 @@ class AdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-
         $request->validate([
             'doc' => 'required|min:4|max:15',
-            'type' => 'required|in:2,3,4,5',
-            'role' => 'required|in:2,3,4,5,6',
-            'contract' => 'required|in:2,3,4',
             'name' => 'required|min:2|max:100',
-            'date_i' => 'required',
-            'onus' => 'required',
-            'area' => 'required',
-            'salary' => 'required',
-            'pay_per_hour' => 'required',
         ],[
             'doc.required' => 'Se requiere número de documento',
-            'type.in' => 'Se requiere tipo de documento',
             'doc.min' => 'Caracteres mínimos:4',
             'doc.max' => 'Caracteres máximos:15',
             'name.min' => 'Caracteres mínimos:2',
             'name.max' => 'Caracteres máximos:100',
             'name.required' => 'Se requiere nombre',
-            'last.min' => 'Caracteres mínimos:2',
-            'last.max' => 'Caracteres máximos:100',
-            'last.required' => 'Se requiere apellido',
             'role.in' => 'Se requiere rol',
-            'contract.in' => 'Se requiere tipo de contrato',
-            'onus.required' => 'Se requiere cargo',
-            'area.required' => 'Se requiere área',
-            'date:i.required' => 'Se requiere fecha de inicio',
-            'salary.required' => 'Se requiere salario',
-            'pay_per_hour.required' => 'Se requiere pago por hora',
         ]);
 
-        $people = People::find($id);
-        $users = User::find($people->id_users);
-        $users->name = $request->name;
-        $people->id_documents = $request->type;
-        $people->doc = $request->doc; 
-        $people->id_contracts = $request->contract;   
-        $people->date_i = $request->date_i;
-        $people->date_f = $request->date_f;
-        $people->onus = $request->onus;
-        $people->area = $request->area;
-        $people->salary = $request->salary;
-        $people->pay_per_hour = $request->pay_per_hour;
-        $users->id_roles = $request->role;
-        $people->save();
-        $users->save();
-        
-        $users = User::all();
-        $roles = Role::all();
-        $people = Auth::user();
-        if ($people->id_roles != 2) {
-            return redirect(route('users.index'));
-        }
+        $user = User::find($id);
+        $user->name = $request->name;
+        $user->document = $request->doc;
+        $user->id_roles = $request->role;
+        $user->save();
+
         return redirect(route('users.index'));
     }
 
@@ -236,13 +192,11 @@ class AdminController extends Controller
         $users = User::all();
         $roles = Role::all();
         $user = Auth::user();
-        $people = DB::table('people')->where('id_users','=',$user->id)->first();
-        $people = People::find($people->id);
         if ($user->id_roles != 2) {
             return redirect(route('users.index'));
         }
         
-        return view('users.admins.show_users', compact('users','roles','people'));
+        return view('users.admins.show_users', compact('users','roles'));
 
     }
     
