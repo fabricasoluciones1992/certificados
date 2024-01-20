@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@section('title')
+    Editar información 
+@endsection
 @section('content')
 
     <div class=" col-form-label text-md-center text-blue ">
