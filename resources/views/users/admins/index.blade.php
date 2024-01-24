@@ -16,7 +16,7 @@
       </section>
         <!--Menú perfil administrador-->
         <!--Botón menú-->
-        <div class="container mt-5">  
+      <div class="container mt-5">  
         <div class="row">
           <div class="col-md-6 col-sm-12">
             <div class="card ms-5">
@@ -39,15 +39,15 @@
             </div>
           </div>
         </div>
-        {{-- Card parte inferior --}}
+        {{-- Dos cards de la parte inferior --}}
         <div class="row mt-5">
           <div class="col-md-6 col-sm-12">
             <div class="card ms-5">
               <a href="{{route('certificates', Auth::user()->id)}}">
-                <img src="{{asset('img/GenerarCerti.jpg')}}" class="card-img-top imgAdmin" alt="Generando certificado">
+                <img src="{{asset('img/GenerarCerti.jpg')}}" class="card-img-top imgAdmin" alt="Certificado">
               </a>
               <div class="card-body bg-blue">
-                <h5 class="card-title text-light text-center">Generar certificado</h5>
+                <h5 class="card-title text-light text-center">Crear certificado</h5>
               </div>
             </div>
           </div>
@@ -57,7 +57,7 @@
                 <img src="{{asset('img/AreasCargos.jpg')}}" class="card-img-top imgAdmin " alt="Usuarios">
               </a>              
               <div class="card-body bg-red">
-                <h5 class="card-title text-light text-center">Áreas y cargos</h5>
+                <h5 class="card-title text-light text-center">Areas y cargos</h5>
               </div>
             </div>
           </div>

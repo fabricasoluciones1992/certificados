@@ -3,7 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Area;
+use App\Models\People;
+use App\Models\User;
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class AreaController extends Controller
 {
@@ -19,7 +24,14 @@ class AreaController extends Controller
     public function index()
     {
         $areas = Area::all();
-        return view('areas.index', compact('areas'));
+        $user = Auth::user();
+        $people = DB::table('people')->where('id_users','=',$user->id)->first();
+        $people = People::find($people->id);
+        if ($user->id_roles != 2) {
+            return redirect(route('users.index'));
+        }else{
+            return view('areas.index', compact('people', 'areas'));
+        }
     }
 
     /**
