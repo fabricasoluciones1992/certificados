@@ -28,7 +28,7 @@
     <!--Tabla de historial de los certificados imprimidos o descargados-->
     <div class="container-fluid mt-4">
       <table class="table table-blue text-light table-bordered " id="myTable">
-        <thead>
+        <thead class="text-center">
             <tr>
               <th scope="col">Nombres</th>
               <th scope="col">Correo institucional</th>
@@ -50,7 +50,6 @@
         </tbody>
       </table>
     </div>
-  </section>
     <script>
       $(document).ready( function () {
     $('#myTable').DataTable();

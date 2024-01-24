@@ -1,7 +1,9 @@
 @extends('layouts.app')
-
+@section('title')
+    Crear áreas
+@endsection
 @section('content')
-<div class="container">
+<div class="container my-6">
     <div class="card text-dark bg-light">
       <div class="card-body">
         <form action="{{route('areas.store')}}" method="POST">
