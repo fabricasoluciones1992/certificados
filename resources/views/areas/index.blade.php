@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container my-6">
     <div class="row">
         <a name="" id="" class="btn btn-success" href="{{route('areas.create')}}" role="button">Crear Areas</a>
     </div>
