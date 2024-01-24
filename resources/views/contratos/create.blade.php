@@ -1,0 +1,60 @@
+@extends('layouts.app')
+
+@section('content')
+<div class="container">
+    <div class="card text-dark bg-light">
+      <div class="card-body">
+        <form action="{{route('contracts.store')}}" method="POST">
+            @csrf
+            <div class="mb-3 mt-3">
+              <label for="name" class="form-label">Seleccione un usuario:</label>
+              <select class="form-select" name="id_users" aria-label="Default select example">
+                <option value="" selected>Seleccione</option>
+                @foreach ($users as $users)
+                <option value="{{$users->id}}">{{$users->name}}</option>
+      
+              @endforeach
+              </select>
+            </div>
+            <div class="mb-3 mt-3">
+              <label for="name" class="form-label">Inicio del Contrato:</label>
+              <input type="date" class="form-control" id="start" placeholder="Digite la fecha inicio del contrato" name="name">
+            </div>
+            <div class="mb-3 mt-3">
+              <label for="name" class="form-label">Fin del Contrato:</label>
+              <input type="date" class="form-control" id="end" placeholder="Digite la fecha fin del contrato" name="name">
+            </div>
+            <div class="mb-3 mt-3">
+              <label for="name" class="form-label">Salario del Contrato:</label>
+              <input type="number" min="0" class="form-control" id="salary" placeholder="Digite el salario del contrato" name="name">
+            </div>
+            <div class="mb-3 mt-3">
+              <label for="name" class="form-label">Seleccione el cargo:</label>
+              <select class="form-select" name="id_posts" aria-label="Default select example">
+                <option value="" selected>Seleccione</option>
+                @foreach ($posts as $post)
+                <option value="{{$post->id}}">{{$post->name}}</option>
+      
+              @endforeach
+              </select>
+            </div>
+            <div class="mb-3 mt-3">
+              <label for="name" class="form-label">Seleccione el tipo de contrato:</label>
+              <select class="form-select" name="id_type_contracts" aria-label="Default select example">
+                <option value="" selected>Seleccione</option>
+                @foreach ($typeContracts as $typeContract)
+                <option value="{{$typeContract->id}}">{{$typeContract->type_contract}}</option>
+      
+              @endforeach
+              </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Crear</button>
+          </form>
+      </div>
+    </div>
+</div>
+@endsection
+
+    
+</body>

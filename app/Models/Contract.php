@@ -9,7 +9,13 @@ class Contract extends Model
 {
     use HasFactory;
 
-    public function people(){
-        return $this->hasMany(People::class, 'id');
+    public function users(){
+        return $this->hasMany(User::class, 'id_users');
+    }
+    public function typeContracts(){
+        return $this->belongsTo(TypeContracts::class,'id_type_contracts');
+    }
+    public function posts(){
+        return $this->hasMany(Post::class, 'id_posts');
     }
 }

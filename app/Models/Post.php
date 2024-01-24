@@ -13,4 +13,7 @@ class Post extends Model
     {
         return $this->belongsTo(Area::class, 'id_areas');
     }
+    public function contracts(){
+        return $this->hasMany(Contract::class, 'id');
+    }
 }

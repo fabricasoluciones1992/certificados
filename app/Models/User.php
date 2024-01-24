@@ -50,4 +50,7 @@ class User extends Authenticatable
     public function roles(){
         return $this->belongsTo(Role::class, 'id_roles');
     }
+    public function contracts(){
+        return $this->hasMany(Contract::class, 'id');
+    }
 }

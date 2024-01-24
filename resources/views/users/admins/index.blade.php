@@ -61,6 +61,17 @@
               </div>
             </div>
           </div>
+          <div class="col-md-6 col-sm-12">
+            <div class="card ms-5">
+              <a href="{{route('contracts.index')}}">
+                <img src="{{asset('img/AreasCargos.jpg')}}" class="card-img-top imgAdmin " alt="Usuarios">
+              </a>              
+              <div class="card-body bg-red">
+                <h5 class="card-title text-light text-center">Contratos</h5>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
 
