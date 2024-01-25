@@ -132,14 +132,27 @@ class AdminController extends Controller
 
     public function histories()
     {
-        $users = User::all();
-        $roles = Role::all();
-        $certificate = Certificates::all();
+        try {
         $user = Auth::user();
-        if ($user->id_roles != 2) {
-            return redirect(route('users.index'));
+        if ($user->id_roles == 2) {
+            $certificate = Certificates::all();
+            return view('users.admins.histories', compact('certificate'));
+        }else{
+            //agregar el error de permisos
+            $errors = array();
+            $errors ['name'] = "Sin permisos";
+            $errors ['des'] = "Vuelva a la pagina anterior debido a que no posee los permisos necesarios";
+            return view('error', compact('errors'));
         }
-        return view('users.admins.histories', compact('users','roles','certificate')); 
+        } catch (\Exception $e) {
+            return "testing";
+
+            $error = array();
+            $error ['des'] = "opss lo siento regrese a la vista anterior";
+            $error ['name'] = "La vista anterior";
+            return view('errors.error', compact('error'));
+        }
+        
 
     }
 

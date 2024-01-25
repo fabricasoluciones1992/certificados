@@ -85,8 +85,6 @@ class PDFController extends Controller
             return trim($words);
 
         }
-
-
         $user = User::find($id);
         $contract = DB::table('contracts')->where('id_users', '=', $user->id)->where('status','=',1)->first();
         if ($contract == null) {

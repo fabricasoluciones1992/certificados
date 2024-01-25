@@ -79,7 +79,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-
+        
         $request->validate([
             'doc' => 'required|min:4|max:15',
             'type' => 'required|in:2,3,4,5',
