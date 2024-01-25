@@ -19,11 +19,12 @@ class AreaController extends Controller
     {
         try {
             $areas = Area::all();
+            $posts = DB::table('posts')->where('area_id', '=', $areas->id);
             $user = Auth::user();
             if ($user->id_roles != 2) {
                 return redirect(route('users.index'));
             }else{
-                return view('areas.index', compact('areas'));
+                return view('areas.index', compact('areas','posts'));
             }
         } catch (\Throwable $th) {
             $error = array();

@@ -33,7 +33,18 @@
             <tbody class="text-center">
                 @foreach ($areas as $area)
                 <tr class="">
-                    <td>{{$area->name}}</td>
+                    <td>
+                        <a class="text-light" type="button" data-bs-toggle="collapse" data-bs-target="#demo{{$area->id}}" aria-expanded="false" aria-controls="demo{{$area->id}}"> 
+                            {{$area->name}}
+                        </a>
+                        <div class="collapse" id="demo{{$area->id}}">
+                            <ul class="list-group bg-blue text-light">
+                                <li class="list-group-item bg-blue text-light">{{$posts->area->name}}</li>
+                                <li class="list-group-item bg-blue text-light">{{$posts->area->name}}</li>
+                                <li class="list-group-item bg-blue text-light">{{$posts->area->name}}</li>
+                              </ul>
+                        </div>
+                    </td>
                     <td class="text-center">
                         <div class="btn-group">
                             <a name="edit" id="" class="btn btn-outline-success fa-solid fa-pen me-2 rounded px-3" href="{{route('areas.edit', $area->id)}}" role="button"></a>
@@ -44,11 +55,12 @@
                 @endforeach
             </tbody>
         </table>
+        
     </div>
 </div>
-<script>
+{{-- <script>
     $(document).ready( function () {
   $('#myTable').DataTable();
 } );
-  </script>
+  </script> --}}
 @endsection
