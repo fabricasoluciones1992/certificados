@@ -430,9 +430,9 @@
           </svg>
         </div>
         <div class="col-md-6 align-self-center">
-          <h1>{{ $error['name'] }}</h1>
+          <h1>{{ $error['tittle'] }}</h1>
           <h2>UH OH! Error!!.</h2>
-          <p>{{ $error['des'] }}
+          <p>{{ $error['message'] }}
           </p>
         </div>
       </div>
