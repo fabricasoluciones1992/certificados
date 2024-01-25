@@ -127,6 +127,10 @@
     width:22vw;
     height:200px;
 }
+.imgAdmin{
+    height: 30vh;
+    object-fit: cover;
+}
 .close {
     background: #606061;
     color: #FFFFFF;

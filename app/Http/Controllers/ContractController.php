@@ -103,7 +103,7 @@ class ContractController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return $request;
+
         $contracts = Contract::find($id);
         $contracts->start = $request->start;
         $contracts->end = $request->end;
