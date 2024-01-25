@@ -43,7 +43,7 @@
               <a href="{{route('certificates', Auth::user()->id)}}">
                 <img src="{{asset('img/GenerarCerti.jpg')}}" class="card-img-top imgAdmin" alt="Certificado">
               </a>
-              <div class="card-body bg-blue">
+              <div class="card-body bg-red">
                 <h5 class="card-title text-light text-center">Crear certificado</h5>
               </div>
             </div>
@@ -56,7 +56,7 @@
               <a href="{{route('areas.index')}}">
                 <img src="{{asset('img/AreasCargos.jpg')}}" class="card-img-top imgAdmin " alt="Usuarios">
               </a>
-              <div class="card-body bg-red">
+              <div class="card-body bg-blue">
                 <h5 class="card-title text-light text-center">Areas y cargos</h5>
               </div>
             </div>
@@ -64,7 +64,7 @@
           <div class="col-md-4 col-sm-12">
             <div class="card ms-5">
               <a href="{{route('contracts.index')}}">
-                <img src="{{asset('img/AreasCargos.jpg')}}" class="card-img-top imgAdmin " alt="Usuarios">
+                <img src="{{asset('img/Contratos.jpg')}}" class="card-img-top imgAdmin" alt="Usuarios">
               </a>              
               <div class="card-body bg-red">
                 <h5 class="card-title text-light text-center">Contratos</h5>
