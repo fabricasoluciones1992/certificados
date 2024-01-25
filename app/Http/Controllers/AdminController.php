@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Models\People;
 
 use App\Models\User;
 
@@ -36,12 +35,10 @@ class AdminController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $people = DB::table('people')->where('id_users','=',$user->id)->first();
-        $people = People::find($people->id);
         if ($user->id_roles != 2) {
             return redirect(route('users.index'));
         }else{
-            return view('users.admins.index', compact('people'));
+            return view('users.admins.index');
         }
     }
 
@@ -61,30 +58,6 @@ class AdminController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        $people = new People();  
-        $users = new User();
-        $users->id = $request->name; 
-        $users->last = $request->last;        
-        $people->id_documents = $request->type;
-        $people->doc = $request->doc;
-        $people->id_roles = $request->role; 
-        $people->id_contracts = $request->contract;   
-        $people->date_i = $request->date_i;
-        $people->date_f = $request->date_f;
-        $people->onus = $request->onus;
-        $people->area = $request->area;
-        $people->salary = $request->salary;
-        $people->pay_per_hour = $request->pay_per_hour;
-        $users->id=$request->id_users;
-
-        //$work->id_redes = $request->id_redes;
-
-        $people->save();
-
-        return redirect(route('users.admins.index'));
-    }
 
     /**
      * Display the specified resource.
@@ -95,12 +68,10 @@ class AdminController extends Controller
     public function show($id)
     {
         $user = Auth::user();
-        $people = DB::table('people')->where('id_users','=',$user->id)->first();
-        $people = People::find($people->id);
         if ($user->id_roles != 2) {
             return redirect(route('users.index'));
         }
-        return view('users.admins.show', compact('people','users'));
+        return view('users.admins.show', compact('users'));
     }
 
     /**
@@ -164,14 +135,11 @@ class AdminController extends Controller
         $users = User::all();
         $roles = Role::all();
         $certificate = Certificates::all();
-        $people2 = People::all();
         $user = Auth::user();
-        $people = DB::table('people')->where('id_users','=',$user->id)->first();
-        $people = People::find($people->id);
         if ($user->id_roles != 2) {
             return redirect(route('users.index'));
         }
-        return view('users.admins.histories', compact('users','roles','certificate','people')); 
+        return view('users.admins.histories', compact('users','roles','certificate')); 
 
     }
 
@@ -179,12 +147,10 @@ class AdminController extends Controller
     {
         $users = DB::table('users')->where('id', $id)->first();
         $user = Auth::user();
-        $people = DB::table('people')->where('id_users','=',$user->id)->first();
-        $people = People::find($people->id);
         if ($user->id_roles != 2) {
             return redirect(route('users.index'));
         }
-        return view('users.admins.certificates', compact('users','people'));
+        return view('users.admins.certificates', compact('users'));
     }
 
     public function show_users()

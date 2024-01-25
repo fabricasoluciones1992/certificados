@@ -20,19 +20,16 @@
 
     @switch($id_roles)
         @case('2')
-            <p class="textContent "> Que el señor/a <b class="container">{{ $name }}</b> identificado/a con <b> {{ $t_doc }} </b> No. <b>{{ $doc }}</b>, está vinculado/a con la Fundación Universitaria Empresarial de la Cámara de Comercio de Bogotá Uniempresarial con NIT 830.084.876-6, desempeñando el cargo de <b>{{ $onus }}</b>. 
+            <p class="textContent "> Que el señor/a <b class="container">{{ $name }}</b> identificado/a con <b> {{ $t_doc }} </b> No. <b>{{ $document }}</b>, está vinculado/a con la Fundación Universitaria Empresarial de la Cámara de Comercio de Bogotá Uniempresarial con NIT 830.084.876-6, desempeñando el cargo de <b>{{ $onus }}</b>. 
 
             @if ($contract != '0')
-                Mediante un contrato a <b>{{ $contract }}</b>.
+                Mediante un contrato a <b>{{ $contract->typeContracts->type_contract }}</b>.
             @endif
             @if ($date_i != '0')
             @if ($date_f != null)
             Desde el <b>{{ $date_i }}</b> hasta el <b>{{$date_f}}</b>. 
             @endif
             Desde el <b>{{ $date_i }}</b>. 
-            @endif
-            @if ($pay_per_hour != '0')
-                Con un pago por hora de (letras y números) <b>{{ $pay_per_hour }}</b>. 
             @endif
             @if ($salary != '0')
                 Actualmente, devenga un salario de (letras y números) <b>{{ $salary }}</b>.

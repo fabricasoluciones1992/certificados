@@ -62,7 +62,8 @@ class PostController extends Controller
     public function edit($post)
     {
         $post = Post::find($post);
-        return view('posts.edit', compact('post'));
+        $areas = Area::all();
+        return view('posts.edit', compact('post', 'areas'));
     }
 
     /**

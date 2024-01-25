@@ -8,6 +8,7 @@ use App\Http\Controllers\SalariesController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\ContractController;
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -35,6 +36,7 @@ Route::resource('/users', UserController::class)->names('users');
 Route::resource('/people', PeopleController::class)->names('people');
 Route::resource('/admins', AdminController::class)->names('admins');
 Route::resource('/areas', AreaController::class)->names('areas');
+Route::resource('/posts', PostController::class)->names('posts');
 Route::resource('/contracts', ContractController::class)->names('contracts');
 
 Route::get('/histories', [AdminController::class, 'histories'])->name('histories');

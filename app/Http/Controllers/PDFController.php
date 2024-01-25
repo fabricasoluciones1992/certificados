@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Certificates;
+use App\Models\Contract;
 use Illuminate\Http\Request;
 use App\Models\People;
 use App\Models\User;
@@ -86,47 +87,41 @@ class PDFController extends Controller
         }
 
 
-        $user = DB::table('users')->where('id', $id)->first();
-        $people = DB::table('people')->where('id_users','=', $user->id)->first();
-        $people = People::find($people->id);
+        $user = User::find($id);
+        $contract = DB::table('contracts')->where('id_users', '=', $user->id)->where('status','=',1)->first();
+        if ($contract == null) {
+            return "El usuario no tiene contrato activo actualmente";
+        }
         if($request->contract == "on" ){
-            $contract = $people->contracts->contract;
+            $contract = Contract::find($contract->id);
         }else{
             $contract = 0;
         }
         if($request->date_i == "on"){
-            $date_i = $people->date_i;
+            $date_i = $contract->start;
         }else{
             $date_i = 0;
         }
-        if($request->pay_per_hour == "on"){
-            $pay_per_hour = $people->pay_per_hour;
-            $pay_per_hour = convertNumberToWords($pay_per_hour);
-        }else{
-            $pay_per_hour = 0;
-        }
         if($request->salary == "on"){
-            $salary = $people->salary;
+            $salary = $contract->salary;
             $salary = convertNumberToWords($salary);
         }else{
             $salary = 0;
         }
 
-        $name = $user->name;
 
         $data = [
             'title' => 'CERTIFICA',
-            'name' => $name,
-            't_doc' => $people->documents->type,
+            'name' => $user->name,
+            't_doc' => $user->documents->type,
             'contract' => $contract,
-            'doc' => $people->doc,
+            'document' => $user->document,
             'id_roles' => $user->id_roles,
             'date_i' => $date_i,
             'salary' => $salary,
-            'pay_per_hour' => $pay_per_hour,
-            'date_f' => $people->date_f,
-            'onus' => $people->onus,
-            'area' => $people->area,
+            'date_f' => $user->date_f,
+            'onus' => $user->onus,
+            'area' => $user->area,
             'day' => date('d'),
             'month' => $month_es,
             'year' => date('Y')
@@ -137,9 +132,8 @@ class PDFController extends Controller
 
         $certificate = new Certificates();
         date_default_timezone_set("America/Bogota");
-        $certificate->download_date = date("y.m.d"); 
-        $certificate->download_hour = date("H:i:s"); 
-        $certificate->id_people = $people->id;
+        $certificate->download_date = date("y.m.d");
+        $certificate->download_hour = date("H:i:s");
         $certificate->id_users = Auth::user()->id;
         $confirmdate = $request->confirmdate;
 
@@ -148,7 +142,7 @@ class PDFController extends Controller
             return $pdf->download('CertificadoLaboral.pdf');
         }else{
 
-            if($confirmdate == $people->date){
+            if($confirmdate == $user->date){
                 
                 $certificate->save();
                 return $pdf->download('CertificadoLaboral.pdf');

@@ -9,7 +9,7 @@ class Document extends Model
 {
     use HasFactory;
 
-    public function people(){
-        return $this->hasMany(People::class, 'id');
+    public function user(){
+        return $this->hasMany(User::class, 'id');
     }
 }

@@ -18,7 +18,7 @@
         <!--Botón menú-->
       <div class="container mt-5">  
         <div class="row">
-          <div class="col-md-6 col-sm-12">
+          <div class="col-md-4 col-sm-12">
             <div class="card ms-5">
               <a href="{{route('histories')}}">
                 <img src="{{asset('img/Certificado.jpg')}}" class="card-img-top imgAdmin" alt="Certificado">
@@ -28,7 +28,7 @@
               </div>
             </div>
           </div>
-          <div class="col-md-6 col-sm-12">
+          <div class="col-md-4 col-sm-12">
             <div class="card ms-5">
               <a href="{{route('users.index')}}">
                 <img src="{{asset('img/Usuarios.jpg')}}" class="card-img-top imgAdmin " alt="Usuarios">
@@ -38,10 +38,7 @@
               </div>
             </div>
           </div>
-        </div>
-        {{-- Dos cards de la parte inferior --}}
-        <div class="row mt-5">
-          <div class="col-md-6 col-sm-12">
+          <div class="col-md-4 col-sm-12">
             <div class="card ms-5">
               <a href="{{route('certificates', Auth::user()->id)}}">
                 <img src="{{asset('img/GenerarCerti.jpg')}}" class="card-img-top imgAdmin" alt="Certificado">
@@ -51,17 +48,20 @@
               </div>
             </div>
           </div>
-          <div class="col-md-6 col-sm-12">
+        </div>
+        {{-- Dos cards de la parte inferior --}}
+        <div class="row mt-5">
+          <div class="col-md-4 col-sm-12">
             <div class="card ms-5">
               <a href="{{route('areas.index')}}">
                 <img src="{{asset('img/AreasCargos.jpg')}}" class="card-img-top imgAdmin " alt="Usuarios">
-              </a>              
+              </a>
               <div class="card-body bg-red">
                 <h5 class="card-title text-light text-center">Areas y cargos</h5>
               </div>
             </div>
           </div>
-          <div class="col-md-6 col-sm-12">
+          <div class="col-md-4 col-sm-12">
             <div class="card ms-5">
               <a href="{{route('contracts.index')}}">
                 <img src="{{asset('img/AreasCargos.jpg')}}" class="card-img-top imgAdmin " alt="Usuarios">
@@ -71,7 +71,6 @@
               </div>
             </div>
           </div>
-
         </div>
       </div>
 
