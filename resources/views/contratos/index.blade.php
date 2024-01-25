@@ -42,13 +42,23 @@
     </thead>
     <tbody class="table-group-divider">
       @foreach ($contracts as $contract)
+      @if($contract->status != 2)
       <tr>
         <td scope="col" class="text-capitalize"> {{$contract->users->name}}</td>
         <td scope="col" class="text-capitalize">{{$contract->posts->name}}</td>
         <td scope="col">{{$contract->typeContracts->type_contract}} </td>
         <td><div hclass="btn-group " role="group" aria-label="Button group name"><a href="{{route('contracts.edit', $contract->id)}}"> <button type="button" class="btn btn-outline-success"><i class="fa-solid fa-pen"></i></button></a></td>
-        <td><div class="btn-group " role="group" aria-label="Button group name"><a href="#"> <button type="button" class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i></button></a></td>
+        <td>
+          <form action="{{route('contracts.destroy', $contract->id)}}" method="POST">
+            @csrf @method('DELETE')
+          <div class="btn-group " role="group" aria-label="Button group name"> 
+            <button type="submit" class="btn btn-outline-danger">
+              <i class="fa-solid fa-trash"></i>
+            </button></a>
+          </form>
+          </td>
       </tr>
+    @endif
       @endforeach
     </tbody>
   </table>

@@ -6,6 +6,7 @@ use App\Models\Contract;
 use App\Models\Post;
 use App\Models\TypeContracts;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ContractController extends Controller
@@ -47,23 +48,15 @@ class ContractController extends Controller
      */
     public function store(Request $request)
     {
-        // $contract = Contract::all();
-        // if(!$contract->status == 1){
-            $contracts = new Contract();
-            $contracts->id_users = $request->id_users;
-            $contracts->start = $request->start;
-            $contracts->end = $request->end;
-            $contracts->salary = $request->salary;
-            $contracts->id_posts = $request->id_posts;
-            $contracts->id_type_contracts = $request->id_type_contracts;
-            $contracts->status = 1;
-            $contracts->save();
-        // }else{
-
-
-
-
-        // }
+        $contracts = new Contract();
+        $contracts->id_users = $request->id_users;
+        $contracts->start = $request->start;
+        $contracts->end = $request->end;
+        $contracts->salary = $request->salary;
+        $contracts->id_posts = $request->id_posts;
+        $contracts->id_type_contracts = $request->id_type_contracts;
+        $contracts->status = 1;
+        $contracts->save();
         return redirect(route('contracts.index'));
     }
 
@@ -75,8 +68,8 @@ class ContractController extends Controller
      */
     public function show($id)
     {
-        $contracts = Contract::find($id);
-        return view('contratos.show', compact('contracts'));
+        // $contracts = Contract::find($id);
+        // return view('contratos.show', compact('contracts'));
     }
 
     /**
@@ -123,6 +116,10 @@ class ContractController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $contracts = Contract::find($id);
+        $contracts->end = Carbon::now();
+        $contracts->status = 2;
+        $contracts->save();
+        return redirect(route('contracts.index'));
     }
 }
