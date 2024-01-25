@@ -8,7 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Contract extends Model
 {
     use HasFactory;
-
+    protected $fillable = [
+        // Otras propiedades fillable,
+        '_token',
+    ];
     public function users(){
         return $this->belongsTo(User::class, 'id_users');
     }

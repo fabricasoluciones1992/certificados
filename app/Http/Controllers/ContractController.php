@@ -47,11 +47,16 @@ class ContractController extends Controller
      */
     public function store(Request $request)
     {
-        $contracts = Contract::create($request->all());
-        $typeContracts = TypeContracts::create($request->all());
-        $users = User::create($request->all());
-        $posts = Post::create($request->all());
-        return redirect(route('contratos.show'));
+        $contracts = new Contract();
+        $contracts->id_users = $request->id_users;
+        $contracts->start = $request->start;
+        $contracts->end = $request->end;
+        $contracts->salary = $request->salary;
+        $contracts->id_posts = $request->id_posts;
+        $contracts->id_type_contracts = $request->id_type_contracts;
+        $contracts->status = 1;
+        $contracts->save();
+        return redirect(route('contracts.index'));
     }
 
     /**
