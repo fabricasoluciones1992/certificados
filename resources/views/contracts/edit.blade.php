@@ -49,7 +49,7 @@
               @endforeach
               </select>
             </div>
-            <button type="submit" class=" mt-5 w-25 btn btn-blue ">Crear</button>
+            <button type="submit" class=" mt-5 w-25 btn btn-blue ">Editar</button>
 
           </form>
       </div>

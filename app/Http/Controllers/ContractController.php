@@ -22,7 +22,7 @@ class ContractController extends Controller
     public function index()
     {
         $contracts = Contract::all();
-        return view('contratos.index', compact('contracts'));
+        return view('contracts.index', compact('contracts'));
     }
 
     /**
@@ -36,7 +36,7 @@ class ContractController extends Controller
         $typeContracts = TypeContracts::all();
         $users = User::all();
         $posts = Post::all();
-        return view('contratos.create', compact('contracts','typeContracts','users','posts'));
+        return view('contracts.create', compact('contracts','typeContracts','users','posts'));
     }
 
     /**
@@ -93,7 +93,7 @@ class ContractController extends Controller
         $users = User::find($contracts->id_users);
         $posts = Post::all();
         $typeContracts = TypeContracts::all();
-        return view('contratos.edit', compact('contracts','users','posts','typeContracts'));
+        return view('contracts.edit', compact('contracts','users','posts','typeContracts'));
     }
 
     /**

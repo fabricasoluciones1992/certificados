@@ -57,7 +57,7 @@
                 <img src="{{asset('img/AreasCargos.jpg')}}" class="card-img-top imgAdmin " alt="Usuarios">
               </a>
               <div class="card-body bg-blue">
-                <h5 class="card-title text-light text-center">Areas y cargos</h5>
+                <h5 class="card-title text-light text-center">Áreas y cargos</h5>
               </div>
             </div>
           </div>

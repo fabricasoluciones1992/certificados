@@ -58,18 +58,26 @@
                         <!-- Authentication Links -->
                         @auth
                         @if(Auth::user()->id_roles =='2')
-                                <li class="nav-item">
-                                    <a class="nav-link active text-light rounded ms-3 {{request()->routeIs('customers.index') ? 'active' : ''}}" aria-current="page" href="/histories">Historial Certificados</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link active text-light rounded ms-3 {{request()->routeIs('customers.index') ? 'active' : ''}}" aria-current="page" href="/users">Control usuarios</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link active text-light rounded ms-3 {{request()->routeIs('customers.index') ? 'active' : ''}}" aria-current="page" href="{{route('certificates', Auth::user()->id)}}">Generar certificado</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link active text-light rounded mx-2 px-3 {{request()->routeIs('customers.index') ? 'active' : ''}}" aria-current="page" href="/home">Inicio</a>
-                                </li>
+                            <li class="nav-item">
+                                <a class="nav-link active text-light rounded ms-3 {{request()->routeIs('contracts.index') ? 'active' : ''}}" aria-current="page" href="/contracts">Contratos</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link active text-light rounded ms-3 {{request()->routeIs('areas.index') ? 'active' : ''}}" aria-current="page" href="/areas">Áreas y cargos</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link active text-light rounded ms-3 {{request()->routeIs('customers.index') ? 'active' : ''}}" aria-current="page" href="/histories">Historial Certificados</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active text-light rounded ms-3 {{request()->routeIs('customers.index') ? 'active' : ''}}" aria-current="page" href="/users">Control usuarios</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active text-light rounded ms-3 {{request()->routeIs('customers.index') ? 'active' : ''}}" aria-current="page" href="{{route('certificates', Auth::user()->id)}}">Generar certificado</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active text-light rounded mx-2 px-3 {{request()->routeIs('customers.index') ? 'active' : ''}}" aria-current="page" href="/home">Inicio</a>
+                            </li>
                             @endif
                         @endauth
                         @guest
