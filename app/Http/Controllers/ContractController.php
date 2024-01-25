@@ -47,15 +47,23 @@ class ContractController extends Controller
      */
     public function store(Request $request)
     {
-        $contracts = new Contract();
-        $contracts->id_users = $request->id_users;
-        $contracts->start = $request->start;
-        $contracts->end = $request->end;
-        $contracts->salary = $request->salary;
-        $contracts->id_posts = $request->id_posts;
-        $contracts->id_type_contracts = $request->id_type_contracts;
-        $contracts->status = 1;
-        $contracts->save();
+        // $contract = Contract::all();
+        // if(!$contract->status == 1){
+            $contracts = new Contract();
+            $contracts->id_users = $request->id_users;
+            $contracts->start = $request->start;
+            $contracts->end = $request->end;
+            $contracts->salary = $request->salary;
+            $contracts->id_posts = $request->id_posts;
+            $contracts->id_type_contracts = $request->id_type_contracts;
+            $contracts->status = 1;
+            $contracts->save();
+        // }else{
+
+
+
+
+        // }
         return redirect(route('contracts.index'));
     }
 
@@ -79,7 +87,11 @@ class ContractController extends Controller
      */
     public function edit($id)
     {
-        //
+        $contracts = Contract::find($id);
+        $users = User::find($contracts->id_users);
+        $posts = Post::all();
+        $typeContracts = TypeContracts::all();
+        return view('contratos.edit', compact('contracts','users','posts','typeContracts'));
     }
 
     /**
@@ -91,7 +103,16 @@ class ContractController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return $request;
+        $contracts = Contract::find($id);
+        $contracts->start = $request->start;
+        $contracts->end = $request->end;
+        $contracts->salary = $request->salary;
+        $contracts->id_posts = $request->id_posts;
+        $contracts->id_type_contracts = $request->id_type_contracts;
+        $contracts->status = 1;
+        $contracts->save();
+        return redirect(route('contracts.index'));
     }
 
     /**

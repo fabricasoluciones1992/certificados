@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@section('title')
+  Crear nuevos contratos
+@endsection
 @section('content')
 <div class="container">
   <div class="mb-5 mt-5 d-grid gap-2 d-md-flex justify-content-md-end ">
@@ -15,21 +17,20 @@
                 <option value="" selected>Seleccione</option>
                 @foreach ($users as $users)
                 <option value="{{$users->id}}">{{$users->name}}</option>
-      
               @endforeach
               </select>
             </div>
             <div class="mb-3 mt-3">
               <label for="name" class="form-label">Inicio del Contrato:</label>
-              <input type="date" class="form-control" id="start" placeholder="Digite la fecha inicio del contrato" name="name">
+              <input type="date" class="form-control" id="start" placeholder="Digite la fecha inicio del contrato" name="start">
             </div>
             <div class="mb-3 mt-3">
               <label for="name" class="form-label">Fin del Contrato:</label>
-              <input type="date" class="form-control" id="end" placeholder="Digite la fecha fin del contrato" name="name">
+              <input type="date" class="form-control" id="end" placeholder="Digite la fecha fin del contrato" name="end">
             </div>
             <div class="mb-3 mt-3">
               <label for="name" class="form-label">Salario del Contrato:</label>
-              <input type="number" min="0" class="form-control" id="salary" placeholder="Digite el salario del contrato" name="name">
+              <input type="number" min="0" class="form-control" id="salary" placeholder="Digite el salario del contrato" name="salary">
             </div>
             <div class="mb-3 mt-3">
               <label for="name" class="form-label">Seleccione el cargo:</label>
@@ -51,13 +52,10 @@
               @endforeach
               </select>
             </div>
+            <button type="submit" class=" mt-5 w-25 btn btn-blue ">Crear</button>
 
-            <button type="submit" class="btn btn-primary">Crear</button>
           </form>
       </div>
     </div>
 </div>
 @endsection
-
-    
-</body>
