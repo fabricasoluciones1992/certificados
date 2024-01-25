@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\Contract;
 use App\Models\Post;
 use App\Models\TypeContracts;
@@ -48,16 +47,26 @@ class ContractController extends Controller
      */
     public function store(Request $request)
     {
-        $contracts = new Contract();
-        $contracts->id_users = $request->id_users;
-        $contracts->start = $request->start;
-        $contracts->end = $request->end;
-        $contracts->salary = $request->salary;
-        $contracts->id_posts = $request->id_posts;
-        $contracts->id_type_contracts = $request->id_type_contracts;
-        $contracts->status = 1;
-        $contracts->save();
-        return redirect(route('contracts.index'));
+            // Validar si el usuario ya tiene un contrato
+        $existingContract = Contract::where('id_users', $request->id_users)->where('status', 1)->first();
+        if ($existingContract) {
+            // El usuario ya tiene un contrato
+            return redirect(route('contracts.index'));
+        }
+        try {
+            $contracts = new Contract();
+            $contracts->id_users = $request->id_users;
+            $contracts->start = $request->start;
+            $contracts->end = $request->end;
+            $contracts->salary = $request->salary;
+            $contracts->id_posts = $request->id_posts;
+            $contracts->id_type_contracts = $request->id_type_contracts;
+            $contracts->status = 1;
+            $contracts->save();
+            return redirect(route('contracts.index'));
+        } catch (\Exception $e) {
+            return redirect(route('contracts.index'));
+        }
     }
 
     /**
