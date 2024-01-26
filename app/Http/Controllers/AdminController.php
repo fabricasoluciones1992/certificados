@@ -160,9 +160,6 @@ class AdminController extends Controller
     {
         $users = DB::table('users')->where('id', $id)->first();
         $user = Auth::user();
-        if ($user->id_roles != 2) {
-            return redirect(route('users.index'));
-        }
         return view('users.admins.certificates', compact('users'));
     }
 

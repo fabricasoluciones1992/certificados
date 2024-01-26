@@ -25,7 +25,7 @@ class PDFController extends Controller
         $this->middleware('auth');
     }
 
-    public function generatePDF(Request $request, $id)
+    public function generatePDF(Request $request)
     {
         $meses_en = array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
         $meses_es = array('enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre');
@@ -85,7 +85,7 @@ class PDFController extends Controller
             return trim($words);
 
         }
-        $user = User::find($id);
+        $user = Auth::user();
         $contract = DB::table('contracts')->where('id_users', '=', $user->id)->where('status','=',1)->first();
         if ($contract == null) {
             return "El usuario no tiene contrato activo actualmente";

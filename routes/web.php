@@ -49,9 +49,9 @@ Route::post('/generateWord/{id}', [HomeController::class, 'generateWord'])->name
 
 Route::post('/generate/{id}', function (Request $request, $id) {
     if ($request->opc == 'word') {
-        return HomeController::generateWord($request, $id);
+        return HomeController::generateWord($request);
     }else if ($request->opc == 'pdf') {
-        return PDFController::generatePDF($request, $id);
+        return PDFController::generatePDF($request);
     }else {
         return '<script language="javascript">alert("Selecciona una forma de descargar el certificado(Word/Pdf)");</script>';
     }})->name('generate');
