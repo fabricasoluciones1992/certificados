@@ -34,14 +34,22 @@
                 @foreach ($areas as $area)
                 <tr class="">
                     <td>
-                        <a class="text-light" type="button" data-bs-toggle="collapse" data-bs-target="#demo{{$area->id}}" aria-expanded="false" aria-controls="demo{{$area->id}}"> 
+                        <a class="text-light py-2 w-100" type="button" data-bs-toggle="collapse" data-bs-target="#demo{{$area->id}}" aria-expanded="false" aria-controls="demo{{$area->id}}"> 
                             {{$area->name}}
                         </a>
                         <div class="collapse" id="demo{{$area->id}}">
                             <ul class="list-group bg-blue text-light">
-                                <li class="list-group-item bg-blue text-light">{{$posts->area->name}}</li>
-                                <li class="list-group-item bg-blue text-light">{{$posts->area->name}}</li>
-                                <li class="list-group-item bg-blue text-light">{{$posts->area->name}}</li>
+                                @foreach ($posts as $post)
+                                    @if($post->id_areas == $area->id)
+                                          
+                                        <a name="edit" id="" class="btn btn-outline-light border-0 my-2" href="{{route('posts.edit', $post->id)}}" role="button">
+                                            <li class="list-group-item bg-blue text-light">{{$post->name}}
+                                            </li>  </a>
+                                    @endif
+                                    
+                                    
+                                @endforeach
+                                
                               </ul>
                         </div>
                     </td>

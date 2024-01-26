@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Area;
+use App\Models\Post;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,8 +20,8 @@ class AreaController extends Controller
     {
         try {
             $areas = Area::all();
-            $posts = DB::table('posts')->where('area_id', '=', $areas->id);
-            $user = Auth::user();
+            $posts = Post::all();
+         $user = Auth::user();
             if ($user->id_roles != 2) {
                 return redirect(route('users.index'));
             }else{
@@ -42,6 +43,16 @@ class AreaController extends Controller
 
     public function store(Request $request)
     {
+
+       // Validación para crear un área
+       $request->validate([
+        'name' =>'required|min:1|max:60',
+        ],[
+        'name.required' => 'El nombre del área es requerido.',
+        'name.min' => 'El área debe tener al menos 1 caracter.',
+        'name.max' => 'El área no debe tener más de 60 caracteres.',
+        ]);
+
         try {
             $area = Area::create($request->all());
             return redirect(route('areas.index'));
@@ -84,6 +95,15 @@ class AreaController extends Controller
 
     public function update(Request $request, $post)
     {
+        // Validación para editar un área
+        $request->validate([
+            'name' =>'required|min:1|max:60',
+        ],[
+            'name.required' => 'El nombre del área es requerido.',
+            'name.min' => 'El área debe tener al menos 1 caracter.',
+            'name.max' => 'El área no debe tener más de 60 caracteres.',
+        ]);
+
         try {
             $area = Area::find($post);
             $area->name = $request->name;

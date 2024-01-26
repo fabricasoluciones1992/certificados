@@ -16,7 +16,7 @@ class PostController extends Controller
     {
         try {
             $posts = Post::all();
-            return view('posts.index', compact('posts'));
+            return view('areas.index', compact('posts'));
         } catch (\Throwable $th) {
             $error = array();
             $error['tittle'] = "Error";
@@ -52,9 +52,20 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        // Validación para crear un cargo
+        $request->validate([
+            'name' =>'required|min:1|max:60',
+            'id_areas' =>'required|numeric',
+        ],[
+            'name.required' => 'El nombre del cargo es requerido.',
+            'name.min' => 'El cargo debe tener al menos 1 caracter.',
+            'name.max' => 'El cargo no debe tener más de 60 caracteres.',
+            'id_areas.numeric' => 'El campo area es requerido.',
+        ]);
+
         try {
             $post = Post::create($request->all());
-            return redirect(route('posts.index'));
+            return redirect(route('areas.index'));
         } catch (\Throwable $th) {
             $error = array();
             $error['tittle'] = "Error";
@@ -111,11 +122,22 @@ class PostController extends Controller
      */
     public function update(Request $request, $post)
     {
+
+        $request->validate([
+            'name' =>'required|min:1|max:60',
+            'area' =>'required',
+        ],[
+            'name.required' => 'Este campo es requerido.',
+            'name.min' => 'El cargo debe tener al menos 1 caracter.',
+            'name.max' => 'El cargo no debe tener más de 60 caracteres.',
+            'area.required' => 'El campo area es requerido.',
+        ]);
+
         try {
             $post = Post::find($post);
             $post->name = $request->name;
             $post->save();
-            return redirect(route('posts.index'));
+            return redirect(route('areas.index'));
         } catch (\Throwable $th) {
             $error = array();
             $error['tittle'] = "Error";
@@ -135,7 +157,7 @@ class PostController extends Controller
         try {
             $post = Post::find($post);
             $post->destroy($post);
-            return redirect(route('posts.index'));
+            return redirect(route('areas.index'));
         } catch (\Throwable $th) {
             $error = array();
             $error['tittle'] = "Error";
