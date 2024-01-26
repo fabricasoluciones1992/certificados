@@ -20,14 +20,26 @@
             <div class="mb-3 mt-3">
               <label for="name" class="form-label">Inicio del Contrato:</label>
               <input type="date" class="form-control" id="start" value="{{$contracts->start}}" placeholder="Digite la fecha inicio del contrato" name="start">
+              {{-- Alerta Validación --}}
+              @foreach($errors->get('start') as $error)
+                <strong class="text-danger"> {{$error}} </strong>
+              @endforeach
             </div>
             <div class="mb-3 mt-3">
               <label for="name" class="form-label">Fin del Contrato:</label>
               <input type="date" class="form-control" id="end" value="{{$contracts->end}}" placeholder="Digite la fecha fin del contrato" name="end">
+            {{-- Alerta Validación --}}
+            @foreach($errors->get('end') as $error)
+              <strong class="text-danger"> {{$error}} </strong>
+            @endforeach
             </div>
             <div class="mb-3 mt-3">
               <label for="name" class="form-label">Salario del Contrato:</label>
               <input type="number" min="0" class="form-control" value="{{$contracts->salary}}" id="salary" placeholder="Digite el salario del contrato" name="salary">
+            {{-- Alerta Validación --}}
+            @foreach($errors->get('salary') as $error)
+              <strong class="text-danger"> {{$error}} </strong>
+            @endforeach
             </div>
             <div class="mb-3 mt-3">
               <label for="name" class="form-label">Seleccione el cargo:</label>
@@ -35,7 +47,6 @@
                 <option value="{{$contracts->posts->id}}" selected>{{$contracts->posts->name}}</option>
                 @foreach ($posts as $post)
                 <option value="{{$post->id}}">{{$post->name}}</option>
-      
               @endforeach
               </select>
             </div>
@@ -48,6 +59,10 @@
       
               @endforeach
               </select>
+                {{-- Alerta Validación --}}
+              @foreach($errors->get('id_type_contracts') as $error)
+                <strong class="text-danger"> {{$error}} </strong>
+              @endforeach
             </div>
             <button type="submit" class=" mt-5 w-25 btn btn-blue ">Editar</button>
 

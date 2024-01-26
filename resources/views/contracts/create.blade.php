@@ -19,18 +19,34 @@
                 <option value="{{$users->id}}">{{$users->name}}</option>
               @endforeach
               </select>
+                {{-- Alerta Validación --}}
+              @foreach($errors->get('id_users') as $error)
+                <strong class="text-danger"> {{$error}} </strong>
+              @endforeach
             </div>
             <div class="mb-3 mt-3">
               <label for="name" class="form-label">Inicio del Contrato:</label>
               <input type="date" class="form-control" id="start" placeholder="Digite la fecha inicio del contrato" name="start">
+              {{-- Alerta Validación --}}
+              @foreach($errors->get('start') as $error)
+                <strong class="text-danger"> {{$error}} </strong>
+              @endforeach
             </div>
             <div class="mb-3 mt-3">
               <label for="name" class="form-label">Fin del Contrato:</label>
               <input type="date" class="form-control" id="end" placeholder="Digite la fecha fin del contrato" name="end">
+              {{-- Alerta Validación --}}
+              @foreach($errors->get('end') as $error)
+                <strong class="text-danger"> {{$error}} </strong>
+              @endforeach
             </div>
             <div class="mb-3 mt-3">
               <label for="name" class="form-label">Salario del Contrato:</label>
               <input type="number" min="0" class="form-control" id="salary" placeholder="Digite el salario del contrato" name="salary">
+              {{-- Alerta Validación --}}
+              @foreach($errors->get('salary') as $error)
+                <strong class="text-danger"> {{$error}} </strong>
+              @endforeach
             </div>
             <div class="mb-3 mt-3">
               <label for="name" class="form-label">Seleccione el cargo:</label>
@@ -38,9 +54,12 @@
                 <option value="" selected>Seleccione</option>
                 @foreach ($posts as $post)
                 <option value="{{$post->id}}">{{$post->name}}</option>
-      
               @endforeach
               </select>
+              {{-- Alerta Validación --}}
+              @foreach($errors->get('id_posts') as $error)
+                <strong class="text-danger"> {{$error}} </strong>
+              @endforeach
             </div>
             <div class="mb-3 mt-3">
               <label for="name" class="form-label">Seleccione el tipo de contrato:</label>
@@ -51,6 +70,10 @@
       
               @endforeach
               </select>
+              {{-- Alerta Validación --}}
+              @foreach($errors->get('id_type_contracts') as $error)
+                <strong class="text-danger"> {{$error}} </strong>
+              @endforeach
             </div>
             <button type="submit" class=" mt-5 w-25 btn btn-blue ">Crear</button>
 
