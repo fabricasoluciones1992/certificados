@@ -61,6 +61,22 @@ class ContractController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'id_users'=>'required',
+            'id_posts'=>'required',
+            'start'=>'date',
+            'end'=>'date',
+            'salary'=>'required|numeric',
+            'id_type_contracts'=>'in:1,2,3,4'
+        ],[
+            'id_users.required'=>'Seleccione un usuario',
+            'id_posts.required'=>'Seleccione un cargo',
+            'start.date'=>'Por favor seleccione la fecha de inicio del contrato',
+            'end.date'=>'Por favor seleccione la fecha de fin del contrato',
+            'salary.required'=>'Por favor digite el salario del contrato',
+            'salary.numeric'=>'Por favor digite solo números',
+            'id_type_contracts.in'=>'Seleccione un cargo'
+        ]);
         try {
             // Validar si el usuario ya tiene un contrato
         $existingContract = Contract::where('id_users', $request->id_users)->where('status', 1)->first();
@@ -135,6 +151,18 @@ class ContractController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'start'=>'date',
+            'end'=>'date',
+            'salary'=>'required|numeric',
+            'id_type_contracts'=>'in:1,2,3,4'
+        ],[
+            'start.date'=>'Por favor seleccione la fecha de inicio del contrato',
+            'end.date'=>'Por favor seleccione la fecha de fin del contrato',
+            'salary.required'=>'Por favor digite el salario del contrato',
+            'salary.numeric'=>'Por favor digite solo números',
+            'id_type_contracts.in'=>'Seleccione un cargo'
+        ]);
         try {
             $contracts = Contract::find($id);
             $contracts->start = $request->start;
