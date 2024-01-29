@@ -14,8 +14,15 @@ class PostController extends Controller
      }
     public function index()
     {
-        $posts = Post::all();
-        return view('posts.index', compact('posts'));
+        try {
+            $posts = Post::all();
+            return view('areas.index', compact('posts'));
+        } catch (\Throwable $th) {
+            $error = array();
+            $error['tittle'] = "Error";
+            $error['message'] = "Opss se presento un error, pongase en contacto con fabrica de soluciones"; 
+            return view('errors.error', compact('error'));
+        }
     }
 
     /**
@@ -23,10 +30,18 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        $areas = Area::all();
-        return view('posts.create', compact('areas'));
+        try {
+            $areas = Area::all();
+            return view('posts.create', compact('areas'));
+        } catch (\Throwable $th) {
+            $error = array();
+            $error['tittle'] = "Error";
+            $error['message'] = "Opss se presento un error, pongase en contacto con fabrica de soluciones"; 
+            return view('errors.error', compact('error'));
+        }
+
     }
 
     /**
@@ -37,8 +52,26 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $post = Post::create($request->all());
-        return redirect(route('posts.index'));
+        // Validación para crear un cargo
+        $request->validate([
+            'name' =>'required|min:1|max:60',
+            'id_areas' =>'required|numeric',
+        ],[
+            'name.required' => 'El nombre del cargo es requerido.',
+            'name.min' => 'El cargo debe tener al menos 1 caracter.',
+            'name.max' => 'El cargo no debe tener más de 60 caracteres.',
+            'id_areas.numeric' => 'El campo area es requerido.',
+        ]);
+
+        try {
+            $post = Post::create($request->all());
+            return redirect(route('areas.index'));
+        } catch (\Throwable $th) {
+            $error = array();
+            $error['tittle'] = "Error";
+            $error['message'] = "Opss se presento un error, pongase en contacto con fabrica de soluciones"; 
+            return view('errors.error', compact('error'));
+        }
     }
 
     /**
@@ -49,8 +82,15 @@ class PostController extends Controller
      */
     public function show($post)
     {
-        $post = Post::find($post);
-        return view('posts.show', compact('post'));
+        try {
+            $post = Post::find($post);
+            return view('posts.show', compact('post'));
+        } catch (\Throwable $th) {
+            $error = array();
+            $error['tittle'] = "Error";
+            $error['message'] = "Opss se presento un error, pongase en contacto con fabrica de soluciones"; 
+            return view('errors.error', compact('error'));
+        }
     }
 
     /**
@@ -61,9 +101,16 @@ class PostController extends Controller
      */
     public function edit($post)
     {
-        $post = Post::find($post);
-        $areas = Area::all();
-        return view('posts.edit', compact('post', 'areas'));
+        try {
+            $post = Post::find($post);
+            $areas = Area::all();
+            return view('posts.edit', compact('post', 'areas'));
+        } catch (\Throwable $th) {
+            $error = array();
+            $error['tittle'] = "Error";
+            $error['message'] = "Opss se presento un error, pongase en contacto con fabrica de soluciones"; 
+            return view('errors.error', compact('error'));
+        }
     }
 
     /**
@@ -75,10 +122,28 @@ class PostController extends Controller
      */
     public function update(Request $request, $post)
     {
-        $post = Post::find($post);
-        $post->name = $request->name;
-        $post->save();
-        return redirect(route('posts.index'));
+
+        $request->validate([
+            'name' =>'required|min:1|max:60',
+            'area' =>'required',
+        ],[
+            'name.required' => 'Este campo es requerido.',
+            'name.min' => 'El cargo debe tener al menos 1 caracter.',
+            'name.max' => 'El cargo no debe tener más de 60 caracteres.',
+            'area.required' => 'El campo area es requerido.',
+        ]);
+
+        try {
+            $post = Post::find($post);
+            $post->name = $request->name;
+            $post->save();
+            return redirect(route('areas.index'));
+        } catch (\Throwable $th) {
+            $error = array();
+            $error['tittle'] = "Error";
+            $error['message'] = "Opss se presento un error, pongase en contacto con fabrica de soluciones"; 
+            return view('errors.error', compact('error'));
+        }
     }
 
     /**
@@ -89,8 +154,15 @@ class PostController extends Controller
      */
     public function destroy($post)
     {
-        $post = Post::find($post);
-        $post->destroy($post);
-        return redirect(route('posts.index'));
+        try {
+            $post = Post::find($post);
+            $post->destroy($post);
+            return redirect(route('areas.index'));
+        } catch (\Throwable $th) {
+            $error = array();
+            $error['tittle'] = "Error";
+            $error['message'] = "Opss se presento un error, pongase en contacto con fabrica de soluciones"; 
+            return view('errors.error', compact('error'));
+        }
     }
 }

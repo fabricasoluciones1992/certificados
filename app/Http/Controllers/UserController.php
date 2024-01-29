@@ -53,8 +53,15 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        $user = User::find($id);
-        return view('users.show', compact('user'));
+        try {
+            $user = User::find($id);
+            return view('users.show', compact('user'));
+        } catch (\Throwable $th) {
+            $error = array();
+            $error['tittle'] = "Error";
+            $error['message'] = "Opss se presento un error, pongase en contacto con fabrica de soluciones"; 
+            return view('errors.error', compact('error'));
+        }
     }
 
     /**
@@ -65,9 +72,16 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $users = User::find($id);
-        $documents = Document::all();
-        return view('users.edit', compact('users','documents'));
+        try {
+            $users = User::find($id);
+            $documents = Document::all();
+            return view('users.edit', compact('users','documents'));
+        } catch (\Throwable $th) {
+            $error = array();
+            $error['tittle'] = "Error";
+            $error['message'] = "Opss se presento un error, pongase en contacto con fabrica de soluciones"; 
+            return view('errors.error', compact('error'));
+        }
     }
 
     /**
@@ -79,23 +93,30 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+        try {
+            $request->validate([
+                'doc' => 'required|min:4|max:15',
+                'type' => 'required|in:2,3,4,5',
+            ],[
+                'doc.required' => 'Se requiere número de documento',
+                'type.in' => 'Se requiere tipo de documento',
+                'doc.min' => 'Caracteres mínimos:4',
+                'doc.max' => 'Caracteres máximos:15',
+            ]);
+    
+            $user = User::find($id);
+            $user->id_documents = $request->type;
+            $user->document = $request->doc; 
+            $user->save();
+    
+            return redirect(route('home'));
+        } catch (\Throwable $th) {
+            $error = array();
+            $error['tittle'] = "Error";
+            $error['message'] = "Opss se presento un error, pongase en contacto con fabrica de soluciones"; 
+            return view('errors.error', compact('error'));
+        }
         
-        $request->validate([
-            'doc' => 'required|min:4|max:15',
-            'type' => 'required|in:2,3,4,5',
-        ],[
-            'doc.required' => 'Se requiere número de documento',
-            'type.in' => 'Se requiere tipo de documento',
-            'doc.min' => 'Caracteres mínimos:4',
-            'doc.max' => 'Caracteres máximos:15',
-        ]);
-
-        $user = User::find($id);
-        $user->id_documents = $request->type;
-        $user->document = $request->doc; 
-        $user->save();
-
-        return redirect(route('home'));
     }
 
     /**
