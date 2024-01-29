@@ -50,31 +50,53 @@ class HomeController extends Controller
         }
         
     }
-    public function generateWord() {
+    public function generateWord(Request $request) {
         try {
             $user = Auth::user();
+            $hoy = date('Y-m-d');
             $contract = DB::table('contracts')->where('id_users', '=', $user->id)->where('status','=',1)->first();
             if ($contract == null) {
                 return "El usuario no tiene contrato activo actualmente";
             }else{
             $contract = Contract::find($contract->id);
+            if ($contract == null) {
+                return "El usuario no tiene contrato activo actualmente";
+            }
             $templete = new TemplateProcessor('document.docx');
             $templete->setValue('name', $user->name);
             $templete->setValue('type_document', $user->documents->type);
             $templete->setValue('document', $user->document);
-            $templete->setValue('type_contract', $contract->typeContracts->type_contract);
+            $templete->setValue('type_contract', $contract->typeContracts->type_contract.".");
             $templete->setValue('post', $contract->posts->name);
-            $templete->setValue('start', $contract->start);
-            $templete->setValue('salary', $contract->salary);
+            if($request->contract == "on"){
+                $templete->setValue('type_contract', "Mediante un contrato a ".$contract->typeContracts->type_contract.".");
+            }else{
+                $templete->setValue('type_contract', "");
+            }
+            if($request->date_i == "on"){
+                $msg = "";
+                if ($hoy > $contract->end) {
+                    $msg = "Desde el ".$contract->start. " hasta el ". $contract->end.".";
+                }else{
+                    $msg = "Actualmente vigente desde el ".$contract->start.".";
+                }
+                $templete->setValue('start', $msg);
+            }else{
+                $templete->setValue('start', "");
+            }
+            if($request->salary == "on"){
+                $templete->setValue('salary', "devengando un salario de $ ".$contract->salary.".");
+            }else{
+                $templete->setValue('salary', "");
+            }
+            $templete->setValue('date', "(".$hoy.")");
             $templete->saveAs($user->name.'.docx');
             response()->download(storage_path('document.docx'))->deleteFileAfterSend(false);
             return response()->download($user->name.'.docx')->deleteFileAfterSend(false);
             }
         } catch (\PhpOffice\PhpWord\Exception\Exception $e) {
-            $error = array();
-            $error['tittle'] = "Error";
-            $error['message'] = "Opss se presento un error regrese a la anterior vista"; 
-            return view('errors.error', compact('error'));        }
+            return back($e->getCode());
+        }
     }
 
 }
