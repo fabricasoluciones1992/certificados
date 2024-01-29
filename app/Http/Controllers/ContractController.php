@@ -67,7 +67,7 @@ class ContractController extends Controller
             'start'=>'date',
             'end'=>'date',
             'salary'=>'required|numeric',
-            'id_type_contracts'=>'in:1,2,3,4'
+            'id_type_contracts'=>'required'
         ],[
             'id_users.required'=>'Seleccione un usuario',
             'id_posts.required'=>'Seleccione un cargo',
@@ -75,7 +75,7 @@ class ContractController extends Controller
             'end.date'=>'Por favor seleccione la fecha de fin del contrato',
             'salary.required'=>'Por favor digite el salario del contrato',
             'salary.numeric'=>'Por favor digite solo números',
-            'id_type_contracts.in'=>'Seleccione un cargo'
+            'id_type_contracts.required'=>'Seleccione un cargo'
         ]);
         try {
             // Validar si el usuario ya tiene un contrato

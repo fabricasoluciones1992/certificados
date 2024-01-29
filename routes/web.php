@@ -39,12 +39,10 @@ Route::resource('/posts', PostController::class)->names('posts');
 Route::resource('/contracts', ContractController::class)->names('contracts');
 
 Route::get('/histories', [AdminController::class, 'histories'])->name('histories');
-Route::get('/certificates', [AdminController::class, 'certificates'])->name('certificates');
+Route::get('/certificates/{id}', [AdminController::class, 'certificates'])->name('certificates');
 Route::get('/error', [HomeController::class, 'error'])->name('error');
 Route::get('/users', [AdminController::class, 'show_users'])->name('users.index');
-
-Route::post('/generatePDF/{id}', [PDFController::class, 'generatePDF'])->name('generatePDF');
-Route::post('/generateWord/{id}', [HomeController::class, 'generateWord'])->name('generateWord');
+Route::get('/select/contract', [HomeController::class, 'select_contract'])->name('select_contract');
 
 Route::post('/generate/{id}', function (Request $request, $id) {
     if ($request->opc == 'word') {

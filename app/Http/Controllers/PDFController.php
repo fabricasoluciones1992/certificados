@@ -25,9 +25,9 @@ class PDFController extends Controller
         $this->middleware('auth');
     }
 
-    public function generatePDF(Request $request, $id)
+    public static function generatePDF(Request $request, $id)
     {
-        try {
+        // try {
             $meses_en = array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
             $meses_es = array('enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre');
             $month = date('F');
@@ -86,13 +86,9 @@ class PDFController extends Controller
                 return trim($words);
     
             }
-            $user = User::find($id);
-            $contract = DB::table('contracts')->where('id_users', '=', $user->id)->where('status','=',1)->first();
-            if ($contract == null) {
-                return "El usuario no tiene contrato activo actualmente";
-            }
+            $user = Auth::user();
             if($request->contract == "on" ){
-                $contract = Contract::find($contract->id);
+                $contract = Contract::find($id);
             }else{
                 $contract = 0;
             }
@@ -151,12 +147,12 @@ class PDFController extends Controller
                 }
                 
             }
-        } catch (\Throwable $th) {
-            $error = array();
-            $error['tittle'] = "Error";
-            $error['message'] = "Opss se presento un error, pongase en contacto con fabrica de soluciones"; 
-            return view('errors.error', compact('error'));
-        }
+        // } catch (\Throwable $th) {
+        //     $error = array();
+        //     $error['tittle'] = "Error";
+        //     $error['message'] = "Opss se presento un error, pongase en contacto con fabrica de soluciones"; 
+        //     return view('errors.error', compact('error'));
+        // }
 
     }
 

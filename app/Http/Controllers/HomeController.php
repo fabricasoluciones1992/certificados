@@ -50,8 +50,8 @@ class HomeController extends Controller
         }
         
     }
-    public function generateWord(Request $request) {
-        try {
+    public static function generateWord(Request $request) {
+        
             $user = Auth::user();
             $hoy = date('Y-m-d');
             $contract = DB::table('contracts')->where('id_users', '=', $user->id)->where('status','=',1)->first();
@@ -94,9 +94,18 @@ class HomeController extends Controller
             response()->download(storage_path('document.docx'))->deleteFileAfterSend(false);
             return response()->download($user->name.'.docx')->deleteFileAfterSend(false);
             }
-        } catch (\PhpOffice\PhpWord\Exception\Exception $e) {
-            return back($e->getCode());
+        
+    }
+
+    function select_contract() {
+        $user = Auth::user();
+        $contracts = DB::table('contracts')->where('id_users','=',$user->id)->get();
+        $data = array();
+        foreach ($contracts as $contract) {
+            $contract = Contract::find($contract->id);
+            array_push($data,$contract);
         }
+        return view('contracts', compact('data'));
     }
 
 }
