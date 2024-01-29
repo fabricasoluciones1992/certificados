@@ -21,7 +21,7 @@ class UserController extends Controller
 
      public function index()
     {
-        return "asd";
+        return redirect(route('users.index'));
     }
 
     /**
