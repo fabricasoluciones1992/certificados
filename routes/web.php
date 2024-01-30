@@ -32,16 +32,15 @@ Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-Route::resource('/users', UserController::class)->names('users');
-Route::resource('/admins', AdminController::class)->names('admins');
-Route::resource('/areas', AreaController::class)->names('areas');
-Route::resource('/posts', PostController::class)->names('posts');
+Route::resource('/users', UserController::class)->middleware('Administrador')->names('users');
+Route::resource('/admins', AdminController::class)->middleware('Administrador')->names('admins');
+Route::resource('/areas', AreaController::class)->middleware('Administrador')->names('areas');
+Route::resource('/posts', PostController::class)->middleware('Administrador')->names('posts');
 Route::resource('/contracts', ContractController::class)->middleware('Administrador')->names('contracts');
 
 Route::get('/histories', [AdminController::class, 'histories'])->name('histories');
 Route::get('/certificates/{id}', [AdminController::class, 'certificates'])->name('certificates');
 Route::get('/error', [HomeController::class, 'error'])->name('error');
-Route::get('/users', [AdminController::class, 'show_users'])->name('users.index');
 Route::get('/select/contract', [HomeController::class, 'select_contract'])->name('select_contract');
 
 Route::post('/generate/{id}', function (Request $request, $id) {

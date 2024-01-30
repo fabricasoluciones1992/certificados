@@ -208,21 +208,7 @@ class AdminController extends Controller
 
     public function show_users()
     {
-        try {
-            $users = User::all();
-            $roles = Role::all();
-            $user = Auth::user();
-            if ($user->id_roles != 2) {
-                return redirect(route('users.index'));
-            }
-            
-            return view('users.admins.show_users', compact('users','roles'));
-        } catch (\Throwable $th) {
-            $error = array();
-            $error['tittle'] = "Error";
-            $error['message'] = "Opss se presento un error, pongase en contacto con fabrica de soluciones"; 
-            return view('errors.error', compact('error'));
-        }
+        
         
 
     }

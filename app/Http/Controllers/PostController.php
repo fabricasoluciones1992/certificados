@@ -122,20 +122,20 @@ class PostController extends Controller
      */
     public function update(Request $request, $post)
     {
-
         $request->validate([
             'name' =>'required|min:1|max:60',
-            'area' =>'required',
+            'id_areas' =>'required',
         ],[
             'name.required' => 'Este campo es requerido.',
             'name.min' => 'El cargo debe tener al menos 1 caracter.',
             'name.max' => 'El cargo no debe tener más de 60 caracteres.',
-            'area.required' => 'El campo area es requerido.',
+            'id_areas.required' => 'El campo area es requerido.',
         ]);
 
         try {
             $post = Post::find($post);
             $post->name = $request->name;
+            $post->id_areas = $request->id_areas;
             $post->save();
             return redirect(route('areas.index'));
         } catch (\Throwable $th) {

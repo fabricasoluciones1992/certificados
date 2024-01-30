@@ -36,7 +36,7 @@ class HomeController extends Controller
             return view('users.admins.index');
         }else{
             if ($user->document != "0"){
-                return view('home');
+                return redirect(route('select_contract'));
             }
             else{
                 return redirect(route('users.edit',$user->id));
