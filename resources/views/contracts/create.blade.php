@@ -75,7 +75,10 @@
                 <strong class="text-danger"> {{$error}} </strong>
               @endforeach
             </div>
-            <button type="submit" class=" mt-5 w-25 btn btn-blue ">Crear</button>
+            <div class="container text-center">
+              <button type="submit" class="btn btn btn-outline-primary mt-3 px-5 me-2">Crear</button>
+              <a href="{{route('contracts.index')}}" class="btn btn-outline-danger mt-3 px-5 ms-2">Cancelar</a>
+          </div>
 
           </form>
       </div>
