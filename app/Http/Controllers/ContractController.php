@@ -82,8 +82,11 @@ class ContractController extends Controller
         $existingContract = Contract::where('id_users', $request->id_users)->where('status', 1)->first();
         if ($existingContract) {
             // El usuario ya tiene un contrato
-            return redirect(route('contracts.index'));
-        }
+            $mostrarAlerta = true;
+            if ($mostrarAlerta) {
+                return redirect(route('contracts.index'))->with('mostrarAlerta', true);
+            }
+        }else{
             try {
                 $contracts = new Contract();
                 $contracts->id_users = $request->id_users;
@@ -95,8 +98,9 @@ class ContractController extends Controller
                 $contracts->status = 1;
                 $contracts->save();
                 return redirect(route('contracts.index'));
-            } catch (\Exception $e) {
+                } catch (\Exception $e) {
                 return redirect(route('contracts.index'));
+                }
             }
         } catch (\Throwable $th) {
             $error = array();

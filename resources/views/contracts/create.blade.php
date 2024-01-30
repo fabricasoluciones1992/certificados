@@ -9,7 +9,7 @@
   </div>
     <div class="card text-dark bg-light  shadow p-3 mb-5 bg-body-tertiary rounded">
       <div class="card-body">
-        <form action="{{route('contracts.store')}}" method="POST">
+        <form id="tuFormulario" action="{{route('contracts.store')}}" method="POST">
             @csrf
             <div class="mb-3 mt-3">
               <label for="name" class="form-label">Seleccione un usuario:</label>
@@ -81,4 +81,48 @@
       </div>
     </div>
 </div>
+@endsection
+@section('scripts')
+  @if(isset($mostrarAlerta) && $mostrarAlerta)
+      <script>
+  // Escucha el evento de envío del formulario
+  document.getElementById('tuFormulario').addEventListener('submit', function (event) {
+  event.preventDefault(); // Previene el envío del formulario por defecto
+  // Muestra la alerta de SweetAlert
+  const swalWithBootstrapButtons = Swal.mixin({
+    customClass: {
+      confirmButton: 'btn btn-success',
+      cancelButton: 'btn btn-danger'
+    },
+    buttonsStyling: false
+  });
+
+  swalWithBootstrapButtons.fire({
+    title: 'El usuario ya cuenta con un contrato, ¿desea desactivarlo?',
+    text: '¡No podrás revertir esto!',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'Sí, desactivarlo!',
+    cancelButtonText: 'No, cancelar!',
+    reverseButtons: true
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // Aquí puedes ejecutar el código para enviar el formulario si el usuario confirma
+      // Por ejemplo, puedes usar document.getElementById('tuFormulario').submit();
+      swalWithBootstrapButtons.fire({
+        title: 'Deleted!',
+        text: 'Your file has been deleted.',
+        icon: 'success'
+      });
+    } else if (result.dismiss === Swal.DismissReason.cancel) {
+      swalWithBootstrapButtons.fire({
+        title: 'Cancelado',
+        text: 'Tu registro está a salvo :)',
+        icon: 'error'
+      });
+    }
+  });
+});
+      </script>
+  @endif
 @endsection
