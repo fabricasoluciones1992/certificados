@@ -31,7 +31,7 @@
             <div class="container text-center">
               <button type="submit" class="btn btn btn-outline-primary mt-3 px-5 me-2">Editar</button>
               <a href="{{route('areas.index')}}" class="btn btn-outline-danger mt-3 px-5 ms-2">Cancelar</a>
-          </div>
+            </div>
           </form>
       </div>
     </div>
