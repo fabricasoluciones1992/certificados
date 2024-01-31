@@ -87,11 +87,7 @@ class PDFController extends Controller
     
             }
             $user = Auth::user();
-            if($request->contract == "on" ){
-                $contract = Contract::find($id);
-            }else{
-                $contract = 0;
-            }
+            $contract = Contract::find($id);
             if($request->date_i == "on"){
                 $date_i = $contract->start;
             }else{
