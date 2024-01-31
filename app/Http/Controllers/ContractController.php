@@ -136,6 +136,10 @@ class ContractController extends Controller
         }else{
             try {
                 $contracts = Contract::find($id);
+                $contracts->status = 0;
+                $contracts->save();
+                $contracts = new Contract();
+                $contracts->id_users = $request->id_users;
                 $contracts->start = $request->start;
                 $contracts->end = $request->end;
                 $contracts->salary = $request->salary;

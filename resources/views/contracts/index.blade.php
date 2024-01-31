@@ -34,6 +34,7 @@
   <table class="table table-blue text-light table-bordered shadow bg-body-tertiary rounded " id="myTable">
     <thead class="text-center">
         <tr>
+          <th scope="col">Estado</th>
           <th scope="col">Nombres</th>
           <th scope="col">Cargo</th>
           <th scope="col">Tipo de contrato</th>
@@ -47,6 +48,7 @@
     <tbody class="table-group-divider">
       @foreach ($contracts as $contract)
       <tr>
+        <td scope="col" value="{{$contract->status}}" class="text-capitalize">@if($contract->status == 1) Activo @else Desactivo @endif</td>
         <td scope="col" class="text-capitalize"> {{$contract->users->name}}</td>
         <td scope="col" class="text-capitalize">{{$contract->posts->name}}</td>
         <td scope="col">{{$contract->typeContracts->type_contract}} </td>

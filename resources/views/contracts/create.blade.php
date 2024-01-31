@@ -76,7 +76,7 @@
               @endforeach
             </div>
             <div class="container text-center">
-              <button type="submit" class="btn btn btn-outline-primary mt-3 px-5 me-2">Crear</button>
+              <button type="submit" class="btn btn btn-outline-success mt-3 px-5 me-2">Crear</button>
               <a href="{{route('contracts.index')}}" class="btn btn-outline-danger mt-3 px-5 ms-2">Cancelar</a>
           </div>
 
