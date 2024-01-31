@@ -37,17 +37,22 @@
           <th scope="col">Nombres</th>
           <th scope="col">Cargo</th>
           <th scope="col">Tipo de contrato</th>
+          <th scope="col">Salario</th>
+          <th scope="col">fecha inicio del contrato</th>
+          <th scope="col">fecha fin del contrato</th>
           <th scope="col">Editar</th>
           <th scope="col">Eliminar</th>
         </tr>
     </thead>
     <tbody class="table-group-divider">
       @foreach ($contracts as $contract)
-      @if($contract->status != 2)
       <tr>
         <td scope="col" class="text-capitalize"> {{$contract->users->name}}</td>
         <td scope="col" class="text-capitalize">{{$contract->posts->name}}</td>
         <td scope="col">{{$contract->typeContracts->type_contract}} </td>
+        <td scope="col" class="text-capitalize">{{$contract->salary}}</td>
+        <td scope="col" class="text-capitalize">{{$contract->start}}</td>
+        <td scope="col" class="text-capitalize">{{$contract->end}}</td>
         <td><div hclass="btn-group " role="group" aria-label="Button group name"><a href="{{route('contracts.edit', $contract->id)}}"> <button type="button" class="btn btn-outline-success"><i class="fa-solid fa-pen"></i></button></a></td>
         <td>
           <form action="{{route('contracts.destroy', $contract->id)}}" method="POST">
@@ -59,7 +64,6 @@
           </form>
           </td>
       </tr>
-    @endif
       @endforeach
     </tbody>
   </table>

@@ -37,6 +37,8 @@ Route::resource('/admins', AdminController::class)->middleware('Administrador')-
 Route::resource('/areas', AreaController::class)->middleware('Administrador')->names('areas');
 Route::resource('/posts', PostController::class)->middleware('Administrador')->names('posts');
 Route::resource('/contracts', ContractController::class)->middleware('Administrador')->names('contracts');
+Route::post('/create2', [ContractController::class, 'create2'])->middleware('Administrador')->name('create2');
+
 
 Route::get('/histories', [AdminController::class, 'histories'])->name('histories');
 Route::get('/certificates/{id}', [AdminController::class, 'certificates'])->name('certificates');

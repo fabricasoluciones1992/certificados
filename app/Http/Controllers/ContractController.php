@@ -82,10 +82,8 @@ class ContractController extends Controller
         $existingContract = Contract::where('id_users', $request->id_users)->where('status', 1)->first();
         if ($existingContract) {
             // El usuario ya tiene un contrato
-            $mostrarAlerta = true;
-            if ($mostrarAlerta) {
-                return redirect(route('contracts.index'))->with('mostrarAlerta', true);
-            }
+                $request;
+                return view('contracts.modal',compact('request'));
         }else{
             try {
                 $contracts = new Contract();
@@ -110,7 +108,50 @@ class ContractController extends Controller
         }
 
     }
-
+    public function create2(Request $request)
+    {
+        $id = $request->id_users;
+        if($request->opc == 1){
+            try {
+                try {
+                    $contracts = new Contract();
+                    $contracts->id_users = $request->id_users;
+                    $contracts->start = $request->start;
+                    $contracts->end = $request->end;
+                    $contracts->salary = $request->salary;
+                    $contracts->id_posts = $request->id_posts;
+                    $contracts->id_type_contracts = $request->id_type_contracts;
+                    $contracts->status = 0;
+                    $contracts->save();
+                    return redirect(route('contracts.index'));
+                    } catch (\Exception $e) {
+                    return redirect(route('contracts.index'));
+                    }
+            } catch (\Throwable $th) {
+                $error = array();
+                $error['tittle'] = "Error";
+                $error['message'] = "Opss se presento un error, pongase en contacto con fabrica de soluciones"; 
+                return view('errors.error', compact('error'));
+            }
+        }else{
+            try {
+                $contracts = Contract::find($id);
+                $contracts->start = $request->start;
+                $contracts->end = $request->end;
+                $contracts->salary = $request->salary;
+                $contracts->id_posts = $request->id_posts;
+                $contracts->id_type_contracts = $request->id_type_contracts;
+                $contracts->status = 1;
+                $contracts->save();
+                return redirect(route('contracts.index'));
+            } catch (\Throwable $th) {
+                $error = array();
+                $error['tittle'] = "Error";
+                $error['message'] = "Opss se presento un error, pongase en contacto con fabrica de soluciones"; 
+                return view('errors.error', compact('error'));
+            }
+        }
+    }
     /**
      * Display the specified resource.
      *
@@ -196,7 +237,7 @@ class ContractController extends Controller
         try {
             $contracts = Contract::find($id);
             $contracts->end = Carbon::now();
-            $contracts->status = 2;
+            $contracts->status = 0;
             $contracts->save();
             return redirect(route('contracts.index'));
         } catch (\Throwable $th) {
