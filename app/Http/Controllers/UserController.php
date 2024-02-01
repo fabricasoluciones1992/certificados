@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Document;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -21,7 +22,13 @@ class UserController extends Controller
 
      public function index()
     {
-        return redirect(route('users.index'));
+        $user = Auth::user();
+        if ($user->id_roles == 2) {
+            $users = User::all();
+            return view('users.admins.show_users', compact('users'));
+        }else{
+            return redirect(route('home'));
+        }
     }
 
     /**
@@ -72,16 +79,16 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        try {
+        // try {
             $users = User::find($id);
             $documents = Document::all();
             return view('users.edit', compact('users','documents'));
-        } catch (\Throwable $th) {
-            $error = array();
-            $error['tittle'] = "Error";
-            $error['message'] = "Opss se presento un error, pongase en contacto con fabrica de soluciones"; 
-            return view('errors.error', compact('error'));
-        }
+        // } catch (\Throwable $th) {
+        //     $error = array();
+        //     $error['tittle'] = "Error";
+        //     $error['message'] = "Opss se presento un error, pongase en contacto con fabrica de soluciones"; 
+        //     return view('errors.error', compact('error'));
+        // }
     }
 
     /**

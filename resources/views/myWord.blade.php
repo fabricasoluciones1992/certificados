@@ -79,7 +79,7 @@ header('Cache-Control: private, max-age=0, must-revalidate');
             Con un pago por hora de (letras y números) <b>{{ $pay_per_hour }}</b>. 
         @endif
         @if ($salary != '0')
-            Actualmente, devenga un salario de (letras y números) <b>{{ $salary }}</b>.
+            Actualmente, devenga un salario de (letras y números) <b>{{ $contract->salary }}</b>.
         @endif
         </p>   
 

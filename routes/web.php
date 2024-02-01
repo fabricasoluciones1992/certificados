@@ -32,7 +32,7 @@ Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-Route::resource('/users', UserController::class)->middleware('Administrador')->names('users');
+Route::resource('/users', UserController::class)->names('users');
 Route::resource('/admins', AdminController::class)->middleware('Administrador')->names('admins');
 Route::resource('/areas', AreaController::class)->middleware('Administrador')->names('areas');
 Route::resource('/posts', PostController::class)->middleware('Administrador')->names('posts');
@@ -44,6 +44,7 @@ Route::get('/histories', [AdminController::class, 'histories'])->name('histories
 Route::get('/certificates/{id}', [AdminController::class, 'certificates'])->name('certificates');
 Route::get('/error', [HomeController::class, 'error'])->name('error');
 Route::get('/select/contract', [HomeController::class, 'select_contract'])->name('select_contract');
+Route::get('/select/contracts/{id}', [HomeController::class, 'select_contracts'])->name('select_contracts');
 
 Route::post('/generate/{id}', function (Request $request, $id) {
     if ($request->opc == 'word') {

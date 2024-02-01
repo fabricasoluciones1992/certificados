@@ -7,7 +7,9 @@
     <link href="\xampp\htdocs\certificados\public\css/pdf.css" rel="stylesheet">
 </head>
 <body>
-    <img src="img/header.png" alt="" class="img1">
+    <div class="px-5 py-2">
+    <img src="img/LogoUECCB.png" alt="" class="img1">
+    </div>
     <!--"Header"-->
     <div class="container">
     <p class="title"> <b> LA FUNDACIÓN UNIVERSITARIA EMPRESARIAL DE LA CÁMARA DE COMERCIO DE BOGOTÁ
@@ -18,115 +20,13 @@
   </p>
     <h3 class="titleCertificado">{{ $title }}</h3>
 
-    @switch($id_roles)
-        @case('2')
-            <p class="textContent "> Que el señor/a <b class="container">{{ $name }}</b> identificado/a con <b> {{ $t_doc }} </b> No. <b>{{ $document }}</b>, está vinculado/a con la Fundación Universitaria Empresarial de la Cámara de Comercio de Bogotá Uniempresarial con NIT 830.084.876-6, desempeñando el cargo de <b>{{ $onus }}</b>. 
-
-            @if ($contract != '0')
-                Mediante un contrato a <b>{{ $contract->typeContracts->type_contract }}</b>.
-            @endif
-            @if ($date_i != '0')
-            @if ($date_f != null)
-            Desde el <b>{{ $date_i }}</b> hasta el <b>{{$date_f}}</b>. 
-            @endif
-            Desde el <b>{{ $date_i }}</b>. 
-            @endif
-            @if ($salary != '0')
-                Actualmente, devenga un salario de (letras y números) <b>{{ $salary }}</b>.
-            @endif
-            </p>   
-    
-    @break
-    @case('3')
-    <p class="textContent "> Que el señor(a) <b class="container">{{ $name }}</b> identificado(a) con <b> {{ $t_doc }} </b> No.<b>{{ $doc }}</b>, está vinculado(a) con la Fundación Universitaria Empresarial de la Cámara de Comercio de Bogotá Uniempresarial con NIT 830.084.876-6, desempeña el cargo de <b>{{ $onus }}</b>.
-    @if ($contract != '0')
-                Mediante un contrato a <b>{{ $contract }}</b>.
-            @endif
-            @if ($date_i != '0')
-            @if ($date_f != null)
-            Desde el <b>{{ $date_i }}</b> hasta el <b>{{$date_f}}</b>. 
-            @endif
-            Desde el <b>{{ $date_i }}</b>. 
-            @endif
-            @if ($pay_per_hour != '0')
-                Con un pago por hora de (letras y números) <b>{{ $pay_per_hour }}</b>. 
-            @endif
-            @if ($salary != '0')
-                Actualmente, devenga un salario de (letras y números) <b>{{ $salary }}</b>.
-            @endif
-    </p>
-        @break
-
-    @case('4')
-    <p class="textContent "> Que el señor/a <b class="container">{{ $name }}</b> identificado/a con <b> {{ $t_doc }} </b> No. <b>{{ $doc }}</b>, está vinculado/a con la Fundación Universitaria Empresarial de la Cámara de Comercio de Bogotá Uniempresarial con NIT 830.084.876-6, desempeñando el cargo de <b>{{ $onus }}</b>. 
-
-        @if ($contract != '0')
-            Mediante un contrato a <b>{{ $contract }}</b>.
-        @endif
-        @if ($date_i != '0')
-        @if ($date_f != null)
-        Desde el <b>{{ $date_i }}</b> hasta el <b>{{$date_f}}</b>. 
-        @endif
-        Desde el <b>{{ $date_i }}</b>. 
-        @endif
-        @if ($pay_per_hour != '0')
-            Con un pago por hora de (letras y números) <b>{{ $pay_per_hour }}</b>. 
-        @endif
-        @if ($salary != '0')
-            Actualmente, devenga un salario de (letras y números) <b>{{ $salary }}</b>.
-        @endif
-        </p>   
-
-        @break
-
-    @case('5')
-    <p class="textContent ">Que el señor(a) <b class="container">{{ $name }}</b>, identificado(a) con <b> {{ $t_doc }}</b> No. <b>{{ $doc }}</b>, esta vinculado(a) con la Fundación Universitaria Empresarial de la Cámara de Comercio de Bogotá Uniempresarial con NIT 830.084.876-6,  hasta el {{ $date_f }} en el área de {{ $area }}.
-
-    @if ($contract != '0')
-                Mediante un contrato a <b>{{ $contract }}</b>.
-            @endif
-            @if ($date_i != '0')
-            @if ($date_f != null)
-            Desde el <b>{{ $date_i }}</b> hasta el <b>{{$date_f}}</b>. 
-            @endif
-            Desde el <b>{{ $date_i }}</b>. 
-            @endif
-            @if ($pay_per_hour != '0')
-                Con un pago por hora de (letras y números) <b>{{ $pay_per_hour }}</b>. 
-            @endif
-            @if ($salary != '0')
-                Actualmente, devenga un apoyo de sostenimiento de (letras y números) <b>{{ $salary }}</b>.
-            @endif
-    </p>
-    @break
-
-    @case('6')
-    <p class="textContent "> Que el señor/a <b class="container">{{ $name }}</b> identificado/a con <b> {{ $t_doc }} </b> No. <b>{{ $doc }}</b>, está vinculado/a con la Fundación Universitaria Empresarial de la Cámara de Comercio de Bogotá Uniempresarial con NIT 830.084.876-6, desempeñando el cargo de <b>{{ $onus }}</b>. 
-
-    @if ($contract != '0')
-        Mediante un contrato a <b>{{ $contract }}</b>.
-    @endif
-    @if ($date_i != '0')
-    @if ($date_f != null)
-    Desde el <b>{{ $date_i }}</b> hasta el <b>{{$date_f}}</b>. 
-    @endif
-    Desde el <b>{{ $date_i }}</b>. 
-    @endif
-    @if ($pay_per_hour != '0')
-        Con un pago por hora de (letras y números) <b>{{ $pay_per_hour }}</b>. 
-    @endif
-    @if ($salary != '0')
-        Actualmente, devenga un salario de (letras y números) <b>{{ $salary }}</b>.
-    @endif
-    </p>   
-
-@break
-
-    @default
-@endswitch
+            <p class="textContent "> Que el señor/a <b class="container">{{ $name }}</b> identificado/a con <b> {{ $t_doc }} </b> No. <b>{{ $document }}</b>, está vinculado/a con la Fundación Universitaria Empresarial de la Cámara de Comercio de Bogotá Uniempresarial con NIT 830.084.876-6, desempeñando el cargo de <b>{{ $contract->posts->name }}</b>.
+            {{$type_contract}}
+            {{$date}}
+            {{$salary}}
+            </p>
 <!--"Footer"-->
 <p class="textContent">El presente certificado se expide a solicitud del interesado a los ({{ $day }}) días del mes de ({{ $month }}) de {{ $year }}.</p><br>
-        
 <p class="bodyText">Atentamente,</p><br>
 <div class="info">
     <p class="foot">LUZ YAZMÍN LIZARAZO JIMÉNEZ</strong></p>

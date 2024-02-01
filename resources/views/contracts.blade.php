@@ -25,10 +25,6 @@
   <div class="d-grid gap-2 d-md-flex justify-content-md-end">
     <a href="{{asset('/home')}}"><button class="btn btn-outline-danger shadow bg-body-tertiary rounded" id=""><i class="fa-solid fa-arrow-left px-3 justify-content-center"></button></i></a>
   </div>
-  {{-- Botón para crear un contrato --}}
-  <div class="mt-3 d-grid gap-2 d-md-flex justify-content-md-end">
-    <a name="" id="" class="btn btn-outline-success  shadow bg-body-tertiary rounded" href="{{route('contracts.create')}}" role="button">Crear un nuevo contrato</a>
-</div>
 <!--Tabla de Contratos-->
 <div class="container-fluid mt-4">
   <table class="table table-blue text-light table-bordered shadow bg-body-tertiary rounded " id="myTable">

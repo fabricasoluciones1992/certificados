@@ -86,38 +86,42 @@ class PDFController extends Controller
                 return trim($words);
     
             }
+            $hoy = date('Y-m-d');
             $user = Auth::user();
             $contract = Contract::find($id);
-            if($request->date_i == "on"){
-                $date_i = $contract->start;
+            if($request->contract == "on"){
+                $typeContract = "Mediante un contrato a ".$contract->typeContracts->type_contract.".";
             }else{
-                $date_i = 0;
+                $typeContract = "";
+            }
+            if($request->date_i == "on"){
+                if ($hoy > $contract->end) {
+                    $msg = "Desde el ".$contract->start. " hasta el ". $contract->end.".";
+                }else{
+                    $msg = "Actualmente vigente desde el ".$contract->start.".";
+                }
+            }else{
+                $msg = "";
             }
             if($request->salary == "on"){
-                $salary = $contract->salary;
-                $salary = convertNumberToWords($salary);
+                $salary ="devengando un salario de $ ".$contract->salary.".";
             }else{
-                $salary = 0;
+                $salary ="";
             }
-    
-    
+
             $data = [
                 'title' => 'CERTIFICA',
                 'name' => $user->name,
                 't_doc' => $user->documents->type,
                 'contract' => $contract,
+                'type_contract' => $typeContract,
                 'document' => $user->document,
-                'id_roles' => $user->id_roles,
-                'date_i' => $date_i,
+                'date' => $msg,
                 'salary' => $salary,
-                'date_f' => $user->date_f,
-                'onus' => $user->onus,
-                'area' => $user->area,
                 'day' => date('d'),
                 'month' => $month_es,
                 'year' => date('Y')
             ];
-              
             $pdf = PDF::loadView('myPDF', $data);
         
     

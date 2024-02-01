@@ -15,8 +15,7 @@ class PostController extends Controller
     public function index()
     {
         try {
-            $posts = Post::all();
-            return view('areas.index', compact('posts'));
+            return redirect(route('areas.index'));
         } catch (\Throwable $th) {
             $error = array();
             $error['tittle'] = "Error";
@@ -54,12 +53,13 @@ class PostController extends Controller
     {
         // Validación para crear un cargo
         $request->validate([
-            'name' =>'required|min:1|max:60',
+            'name' =>'required|min:1|max:60|regex:/^[A-Z]+$/u',
             'id_areas' =>'required|numeric',
         ],[
             'name.required' => 'El nombre del cargo es requerido.',
             'name.min' => 'El cargo debe tener al menos 1 caracter.',
             'name.max' => 'El cargo no debe tener más de 60 caracteres.',
+            'name.regex' => 'Solo se puede agregar el nombre en mayusculas, sin numeros ni caracteres especiales.',
             'id_areas.numeric' => 'El campo area es requerido.',
         ]);
 

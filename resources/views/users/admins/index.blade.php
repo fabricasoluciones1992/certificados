@@ -40,7 +40,7 @@
           </div>
           <div class="col-md-4 col-sm-12">
             <div class="card ms-5">
-              <a href="{{route('certificates', Auth::user()->id)}}">
+              <a href="{{route('select_contract')}}">
                 <img src="{{asset('img/GenerarCerti.jpg')}}" class="card-img-top imgAdmin" alt="Certificado">
               </a>
               <div class="card-body bg-red">

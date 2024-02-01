@@ -48,26 +48,24 @@ class HomeController extends Controller
             $error['message'] = "Opss se presento un error regrese a la anterior pantalla"; 
             return view('errors.error', compact('error'));
         }
-        
     }
+
     public static function generateWord(Request $request) {
-        
+            $meses_en = array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
+            $meses_es = array('enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre');
+            $month = date('F');
+            $month_es = str_replace($meses_en, $meses_es, $month);
+            $date_create =" (".(date('d')).") días del mes de ($month_es) de ".(date('Y'))."";
             $user = Auth::user();
             $hoy = date('Y-m-d');
             $contract = DB::table('contracts')->where('id_users', '=', $user->id)->where('status','=',1)->first();
-            if ($contract == null) {
-                return "El usuario no tiene contrato activo actualmente";
-            }else{
             $contract = Contract::find($contract->id);
-            if ($contract == null) {
-                return "El usuario no tiene contrato activo actualmente";
-            }
             $templete = new TemplateProcessor('document.docx');
             $templete->setValue('name', $user->name);
             $templete->setValue('type_document', $user->documents->type);
             $templete->setValue('document', $user->document);
-            $templete->setValue('type_contract', $contract->typeContracts->type_contract.".");
             $templete->setValue('post', $contract->posts->name);
+            $templete->setValue('date_create', $date_create);
             if($request->contract == "on"){
                 $templete->setValue('type_contract', "Mediante un contrato a ".$contract->typeContracts->type_contract.".");
             }else{
@@ -94,12 +92,20 @@ class HomeController extends Controller
             response()->download(storage_path('document.docx'))->deleteFileAfterSend(false);
             return response()->download($user->name.'.docx')->deleteFileAfterSend(false);
             }
-        
-    }
 
     function select_contract() {
         $user = Auth::user();
         $contracts = DB::table('contracts')->where('id_users','=',$user->id)->get();
+        $data = array();
+        foreach ($contracts as $contract) {
+            $contract = Contract::find($contract->id);
+            array_push($data,$contract);
+        }
+        return view('contracts', compact('data'));
+    }
+
+    function select_contracts($id) {;
+        $contracts = DB::table('contracts')->where('id_users','=',$id)->get();
         $data = array();
         foreach ($contracts as $contract) {
             $contract = Contract::find($contract->id);

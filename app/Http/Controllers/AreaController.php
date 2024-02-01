@@ -46,11 +46,12 @@ class AreaController extends Controller
 
        // Validación para crear un área
        $request->validate([
-        'name' =>'required|min:1|max:60',
+        'name' =>'required|min:1|max:60|regex:/^[A-Z]+$/u',
         ],[
         'name.required' => 'El nombre del área es requerido.',
         'name.min' => 'El área debe tener al menos 1 caracter.',
         'name.max' => 'El área no debe tener más de 60 caracteres.',
+        'name.regex' => 'Solo se puede agregar el nombre en mayusculas, sin numeros ni caracteres especiales.'
         ]);
 
         try {
