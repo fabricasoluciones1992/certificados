@@ -101,15 +101,9 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    @if(Auth::user()->id_roles =='2')
-                                    <a class="dropdown-item rounded" href="{{ route('admins.show', Auth::user()->id) }}">
-                                        {{ __('Mi Info') }}
-                                    </a> 
-                                    @else
                                     <a class="dropdown-item rounded" href="{{ route('users.show', Auth::user()->id) }}">
                                         {{ __('Mi Info') }}
                                     </a>
-                                    @endif
                                     <a class="dropdown-item rounded" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

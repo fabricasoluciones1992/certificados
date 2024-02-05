@@ -30,9 +30,12 @@
               {{ $user->document }}
           @endif</h4>
             <h4 class="py-2"><b class="pe-3">Rol:</b> {{$user->roles->role}}</h4>
-            <div class="row">
-              <div class="col-12">
-                <a class="btn btn-primary" href="{{route('contracts.index')}}" role="button">Mis contratos</a>
+            <div class="row container px-5">
+              <div class="col-6">
+                <a class="btn btn-primary" href="{{route('select_contract')}}" role="button">Mis contratos</a>
+              </div>
+              <div class="col-6">
+                <a class="btn btn-success" href="{{route('edit_password')}}" role="button">Cambiar Contraseña</a>
               </div>
             </div>
     </div>

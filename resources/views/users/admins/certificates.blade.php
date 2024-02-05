@@ -22,7 +22,7 @@
                     
                 <!-- contenido card -->
                 <div class=" card-body">
-                    <form action="{{route('generate', $users->id)}}" class="mt-4 d-grid m-auto" method="POST">
+                    <form action="{{route('generate', $id)}}" class="mt-4 d-grid m-auto" method="POST">
                         @csrf
                         <div class="row">
                             <div class="col-lg-7 col-md-12 py-4">

@@ -9,7 +9,9 @@ use App\Models\Contract;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use PhpOffice\PhpWord\TemplateProcessor;
+use Illuminate\Validation\Rules\Password;
 
 class HomeController extends Controller
 {
@@ -48,6 +50,37 @@ class HomeController extends Controller
             $error['message'] = "Opss se presento un error regrese a la anterior pantalla"; 
             return view('errors.error', compact('error'));
         }
+    }
+
+    public function edit(){
+        $user = User::find(Auth::id());
+        return view('users.edit_password');
+    }
+
+    public function update(Request $request)
+    {
+        $request->validate([
+            'password' => 'required',
+            'new_password' => 'required|min:8|confirmed',
+        ],[
+            'password.required' => "Contraseña requerida",
+            'new_password.required' => "Contraseña requerida",
+            'new_password.confirmed' => "Contraseña requerida",
+        ]);
+
+        $user = Auth::user();
+
+        // Verificar que la contraseña actual sea válida
+        if (!Hash::check($request->current_password, $user->password)) {
+            return 'error: La contraseña actual es incorrecta.';
+        }
+
+        // Cambiar la contraseña
+        $user->update([
+            'password' => Hash::make($request->new_password),
+        ]);
+
+        return "redirect()->route('change-password')->with('success', 'Contraseña cambiada exitosamente.')";
     }
 
     public static function generateWord(Request $request) {

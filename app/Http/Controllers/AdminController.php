@@ -182,7 +182,7 @@ class AdminController extends Controller
 
     }
 
-    public function certificates()
+    public function certificates($id)
     {
         try {
             $users = Auth::user();
@@ -191,12 +191,8 @@ class AdminController extends Controller
                 $errors ['name'] = "Sin permisos";
                 $errors ['des'] = "Vuelva a la pagina anterior debido a que no posee los permisos necesarios";
                 return view('error', compact('errors'));
-            }else{
-            if ($users->id_roles != 2) {
-                return redirect(route('users.index'));
             }
-        }
-            return view('users.admins.certificates', compact('users'));
+            return view('users.admins.certificates', compact('id'));
         } catch (\Throwable $th) {
             $error = array();
             $error['tittle'] = "Error";
