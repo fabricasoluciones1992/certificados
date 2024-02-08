@@ -61,26 +61,30 @@ class HomeController extends Controller
     {
         $request->validate([
             'password' => 'required',
-            'new_password' => 'required|min:8|confirmed',
+            'new_password' => 'required',
+            'password_confirmation' => 'required|same:new_password',
         ],[
             'password.required' => "Contraseña requerida",
             'new_password.required' => "Contraseña requerida",
             'new_password.confirmed' => "Contraseña requerida",
+            'password_confirmation.required' => "Contraseña requerida",
+            'password_confirmation.same' => "Contraseñas no coinciden",
         ]);
 
-        $user = Auth::user();
+        $user = Auth::id();
+        $user = User::find($user);
 
         // Verificar que la contraseña actual sea válida
-        if (!Hash::check($request->current_password, $user->password)) {
-            return 'error: La contraseña actual es incorrecta.';
+        if (password_verify($request->password, $user->password)) {
+            $user->password = Hash::make($request->new_password);
+            $user->save();
+            return redirect(route('logout'));
+        }else{
+            $error = array();
+            $error['tittle'] = "Error";
+            $error['message'] = "La contraseña no coinciden.";
+            return view('errors.error', compact('error'));
         }
-
-        // Cambiar la contraseña
-        $user->update([
-            'password' => Hash::make($request->new_password),
-        ]);
-
-        return "redirect()->route('change-password')->with('success', 'Contraseña cambiada exitosamente.')";
     }
 
     public static function generateWord(Request $request) {
