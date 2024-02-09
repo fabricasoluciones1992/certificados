@@ -87,8 +87,8 @@ class PDFController extends Controller
     
             }
             $hoy = date('Y-m-d');
-            $user = Auth::user();
             $contract = Contract::find($id);
+            $user = User::find($contract->id_users);
             if($request->contract == "on"){
                 $typeContract = "Mediante un contrato a ".$contract->typeContracts->type_contract.".";
             }else{

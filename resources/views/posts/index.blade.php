@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <a name="" id="" class="btn btn-success" href="{{route('posts.create')}}" role="button">Crear posts</a>
+        <a name="" id="" class="btn btn-success" href="{{url()->previous()}}" role="button">Crear posts</a>
     </div>
     <div class="table-responsive">
         <table class="table table-dark">

@@ -23,11 +23,11 @@
 
   <!--Botón para volver-->
   <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-    <a href="{{asset('/home')}}"><button class="btn btn-outline-danger shadow bg-body-tertiary rounded" id=""><i class="fa-solid fa-arrow-left px-3 justify-content-center"></button></i></a>
+    <a href="{{url()->previous()}}"><button class="btn btn-danger shadow bg-body-tertiary rounded" id=""><i class="fa-solid fa-arrow-left px-3 justify-content-center"></button></i></a>
   </div>
   {{-- Botón para crear un contrato --}}
   <div class="mt-3 d-grid gap-2 d-md-flex justify-content-md-end">
-    <a name="" id="" class="btn btn-outline-success  shadow bg-body-tertiary rounded" href="{{route('contracts.create')}}" role="button">Crear un nuevo contrato</a>
+    <a name="" id="" class="btn btn-success  shadow bg-body-tertiary rounded" href="{{route('contracts.create')}}" role="button">Crear un nuevo contrato</a>
 </div>
 <!--Tabla de Contratos-->
 <div class="container-fluid mt-4">
@@ -55,12 +55,12 @@
         <td scope="col" class="text-capitalize">{{$contract->salary}}</td>
         <td scope="col" class="text-capitalize">{{$contract->start}}</td>
         <td scope="col" class="text-capitalize">{{$contract->end}}</td>
-        <td><div hclass="btn-group " role="group" aria-label="Button group name"><a href="{{route('contracts.edit', $contract->id)}}"> <button type="button" class="btn btn-outline-success"><i class="fa-solid fa-pen"></i></button></a></td>
+        <td><div hclass="btn-group " role="group" aria-label="Button group name"><a href="{{route('contracts.edit', $contract->id)}}"> <button type="button" class="btn btn-success"><i class="fa-solid fa-pen"></i></button></a></td>
         <td>
           <form action="{{route('contracts.destroy', $contract->id)}}" method="POST">
             @csrf @method('DELETE')
           <div class="btn-group " role="group" aria-label="Button group name"> 
-            <button type="submit" class="btn btn-outline-danger">
+            <button type="submit" class="btn btn-danger">
               <i class="fa-solid fa-trash"></i>
             </button></a>
           </form>

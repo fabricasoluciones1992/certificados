@@ -27,8 +27,8 @@ Crear cargo
               <strong class="text-danger">{{$error}}</strong>
               @endforeach
             <div class="container text-center">
-              <button type="submit" class="btn btn btn-outline-primary mt-3 px-5 me-2">Crear</button>
-              <a href="{{route('areas.index')}}" class="btn btn-outline-danger mt-3 px-5 ms-2">Cancelar</a>
+              <button type="submit" class="btn btn btn-primary mt-3 px-5 me-2">Crear</button>
+              <a href="{{url()->previous()}}" class="btn btn-danger mt-3 px-5 ms-2">Cancelar</a>
           </div>
         </form>
       </div>

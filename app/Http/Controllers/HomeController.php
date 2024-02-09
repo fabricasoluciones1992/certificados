@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Http\Request;
 use App\Models\People;
 use App\Models\Certificates;
@@ -10,6 +11,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
 use PhpOffice\PhpWord\TemplateProcessor;
 use Illuminate\Validation\Rules\Password;
 
@@ -78,7 +80,9 @@ class HomeController extends Controller
         if (password_verify($request->password, $user->password)) {
             $user->password = Hash::make($request->new_password);
             $user->save();
-            return redirect(route('logout'));
+            Auth::logout();
+            $request->session()->invalidate();
+            return redirect()->route('login')->with('success', 'Contraseña cambiada exitosamente. Por favor, inicie sesión con su nueva contraseña.');
         }else{
             $error = array();
             $error['tittle'] = "Error";
@@ -87,16 +91,15 @@ class HomeController extends Controller
         }
     }
 
-    public static function generateWord(Request $request) {
+    public static function generateWord(Request $request, $id) {
             $meses_en = array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
             $meses_es = array('enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre');
             $month = date('F');
             $month_es = str_replace($meses_en, $meses_es, $month);
             $date_create =" (".(date('d')).") días del mes de ($month_es) de ".(date('Y'))."";
-            $user = Auth::user();
             $hoy = date('Y-m-d');
-            $contract = DB::table('contracts')->where('id_users', '=', $user->id)->where('status','=',1)->first();
-            $contract = Contract::find($contract->id);
+            $contract = Contract::find($id);
+            $user = User::find($contract->id_users);
             $templete = new TemplateProcessor('document.docx');
             $templete->setValue('name', $user->name);
             $templete->setValue('type_document', $user->documents->type);
@@ -125,9 +128,9 @@ class HomeController extends Controller
                 $templete->setValue('salary', "");
             }
             $templete->setValue('date', "(".$hoy.")");
-            $templete->saveAs($user->name.'.docx');
+            $templete->saveAs('Certificado Laboral.docx');
             response()->download(storage_path('document.docx'))->deleteFileAfterSend(false);
-            return response()->download($user->name.'.docx')->deleteFileAfterSend(false);
+            return response()->download('Certificado Laboral.docx')->deleteFileAfterSend(false);
             }
 
     function select_contract() {

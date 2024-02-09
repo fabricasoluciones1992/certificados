@@ -40,14 +40,15 @@ Route::resource('/contracts', ContractController::class)->middleware('Administra
 Route::post('/create2', [ContractController::class, 'create2'])->middleware('Administrador')->name('create2');
 
 
-Route::get('/histories', [AdminController::class, 'histories'])->name('histories');
 Route::get('/certificates/{id}', [AdminController::class, 'certificates'])->name('certificates');
-Route::get('/error', [HomeController::class, 'error'])->name('error');
-Route::get('/select/contract', [HomeController::class, 'select_contract'])->name('select_contract');
-Route::get('/confirm          /password', [HomeController::class, 'confirm          '])->name('confirm          _password');
+Route::get('/confirm/password', [HomeController::class, 'confirm'])->name('confirm_password');
 Route::get('/edit/password', [HomeController::class, 'edit'])->name('edit_password');
-Route::put('/update/password', [HomeController::class, 'update'])->name('update_password');
+Route::get('/error', [HomeController::class, 'error'])->name('error');
+Route::get('/export', [AdminController::class, 'export'])->name('export');
+Route::get('/histories', [AdminController::class, 'histories'])->name('histories');
+Route::get('/select/contract', [HomeController::class, 'select_contract'])->name('select_contract');
 Route::get('/select/contracts/{id}', [HomeController::class, 'select_contracts'])->middleware('Administrador')->name('select_contracts');
+Route::put('/update/password', [HomeController::class, 'update'])->name('update_password');
 
 Route::post('/generate/{id}', function (Request $request, $id) {
     if ($request->opc == 'word') {

@@ -21,7 +21,6 @@
                     @csrf
                     <input type="hidden" name="id_users" value="{{$request->new_password}}">
                     <button type="submit" value="1" name="opc" class="btn btn-success me-2">Solo crear</button>
-                    <button type="submit" value="2" name="opc" class="btn btn-blue me-1">Desactivar</button>
                 </form>
                 <button type="button" value="3" name="opc" class="btn btn-danger" onclick="cancelar()">Cancelar</button>
             </div>
@@ -36,7 +35,7 @@
         });
         function cancelar() {
         // Redirige a contracts.create
-        window.location.href = "{{ route('contracts.create') }}";
+        window.location.href = "{{ route('edit_password') }}";
         }
       </script>
 @endsection

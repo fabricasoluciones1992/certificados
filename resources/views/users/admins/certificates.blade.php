@@ -13,7 +13,7 @@
         </section> 
         <!--Boton regresar-->
         <div class="d-grid gap-2 d-md-flex justify-content-end m-5">
-            <a href="{{asset('/admins')}}"><button class="btn btn-outline-danger" id=""><i class="fa-solid fa-arrow-left px-3"></button></i></button></a>
+            <a href="{{url()->previous()}}"><button class="btn btn-danger" id=""><i class="fa-solid fa-arrow-left px-3"></button></i></button></a>
         </div>
 
         <section class="formsCards container mt-5 w-60">

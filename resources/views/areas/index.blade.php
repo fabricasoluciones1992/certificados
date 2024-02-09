@@ -12,14 +12,14 @@
 <div class="container my-5">
     <!--Botón para volver-->
     <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-5">
-        <a href="{{asset('/home')}}"><button class="btn btn-outline-danger shadow bg-body-tertiary rounded" id=""><i class="fa-solid fa-arrow-left px-3 justify-content-center"></button></i></a>
+        <a href="{{url()->previous()}}"><button class="btn btn-danger shadow bg-body-tertiary rounded" id=""><i class="fa-solid fa-arrow-left px-3 justify-content-center"></button></i></a>
     </div>
     <div class="row">
         <div class="col-6 text-end">
-            <a name="" id="" class="btn btn-outline-success col-12" href="{{route('areas.create')}}" role="button">Crear áreas</a>
+            <a name="" id="" class="btn btn-success col-12" href="{{route('areas.create')}}" role="button">Crear áreas</a>
         </div>
         <div class="col-6">
-        <a name="" id="#" class="btn btn-outline-primary col-12" href="{{route('posts.create')}}" role="button">Crear cargos</a>
+        <a name="" id="#" class="btn btn-primary col-12" href="{{route('posts.create')}}" role="button">Crear cargos</a>
         </div>
     </div>
     <div class="container-fluid mt-5">
@@ -42,7 +42,7 @@
                                 @foreach ($posts as $post)
                                     @if($post->id_areas == $area->id)
                                           
-                                        <a name="edit" id="" class="btn btn-outline-light border-0 my-2" href="{{route('posts.edit', $post->id)}}" role="button">
+                                        <a name="edit" id="" class="btn btn-light border-0 my-2" href="{{route('posts.edit', $post->id)}}" role="button">
                                             <li class="list-group-item bg-blue text-light">{{$post->name}}
                                             </li>  </a>
                                     @endif
@@ -55,7 +55,7 @@
                     </td>
                     <td class="text-center">
                         <div class="btn-group">
-                            <a name="edit" id="" class="btn btn-outline-success fa-solid fa-pen me-2 rounded px-3" href="{{route('areas.edit', $area->id)}}" role="button"></a>
+                            <a name="edit" id="" class="btn btn-success fa-solid fa-pen me-2 rounded px-3" href="{{route('areas.edit', $area->id)}}" role="button"></a>
                             <input type="hidden" name="id" value="{{$area->id}}">
                         </div>
                     </td>

@@ -199,7 +199,7 @@ class AdminController extends Controller
 
     }
 
-    public function ExportHC()
+    public function export()
     {
         $data = DB::select("SELECT certificates.download_date, certificates.download_hour, users.name 
         FROM certificates

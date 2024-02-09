@@ -23,7 +23,7 @@
 
   <!--Botón para volver-->
   <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-    <a href="{{asset('/home')}}"><button class="btn btn-outline-danger shadow bg-body-tertiary rounded" id=""><i class="fa-solid fa-arrow-left px-3 justify-content-center"></button></i></a>
+    <a href="{{asset('/home')}}"><button class="btn btn-danger shadow bg-body-tertiary rounded" id=""><i class="fa-solid fa-arrow-left px-3 justify-content-center"></button></i></a>
   </div>
 <!--Tabla de Contratos-->
 <div class="container-fluid mt-4">
@@ -42,7 +42,7 @@
         <td scope="col" class="text-capitalize"> {{$contract->users->name}}</td>
         <td scope="col" class="text-capitalize">{{$contract->posts->name}}</td>
         <td scope="col">{{$contract->typeContracts->type_contract}} </td>
-        <td><div hclass="btn-group " role="group" aria-label="Button group name"><a href="{{route('certificates', $contract->id)}}"> <button type="button" class="btn btn-outline-success"><i class="fa-solid fa-arrow-right-from-bracket"></i></button></a></td>
+        <td><div hclass="btn-group " role="group" aria-label="Button group name"><a href="{{route('certificates', $contract->id)}}"> <button type="button" class="btn btn-success"><i class="fa-solid fa-arrow-right-from-bracket"></i></button></a></td>
       </tr>
       @endforeach
     </tbody>

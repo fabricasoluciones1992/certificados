@@ -23,7 +23,7 @@
 
       <!--Botón para volver-->
       <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <a href="{{asset('/admins')}}"><button class="btn btn-outline-danger" id=""><i class="fa-solid fa-arrow-left px-3 justify-content-center"></button></i></a>
+        <a href="{{url()->previous()}}"><button class="btn btn-danger" id=""><i class="fa-solid fa-arrow-left px-3 justify-content-center"></button></i></a>
       </div>
     <!--Tabla de historial de los certificados imprimidos o descargados-->
     <div class="container-fluid mt-4">
@@ -43,8 +43,8 @@
             <td scope="col"> {{$user->name}}</td>
             <td scope="col"> {{$user->email}}</td>
             <td scope="col"> {{$user->roles->role}}</td>
-            <td><div hclass="btn-group " role="group" aria-label="Button group name"><a href="{{route('admins.edit', $user->id)}}"> <button type="button" class="btn btn-outline-success"><i class="fa-solid fa-pen"></i></button></a></td>
-            <td><div class="btn-group " role="group" aria-label="Button group name"><a href="{{route('select_contracts', $user->id)}}"> <button type="button" class="btn btn-outline-success"><i class="fa-solid fa-file-pdf"></i></button></a></td>
+            <td><div hclass="btn-group " role="group" aria-label="Button group name"><a href="{{route('admins.edit', $user->id)}}"> <button type="button" class="btn btn-success"><i class="fa-solid fa-pen"></i></button></a></td>
+            <td><div class="btn-group " role="group" aria-label="Button group name"><a href="{{route('select_contracts', $user->id)}}"> <button type="button" class="btn btn-success"><i class="fa-solid fa-file-pdf"></i></button></a></td>
           </tr>
           @endforeach
         </tbody>

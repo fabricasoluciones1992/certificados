@@ -65,7 +65,6 @@ class ContractController extends Controller
             'id_users'=>'required',
             'id_posts'=>'required',
             'start'=>'date',
-            'end'=>'date',
             'salary'=>'required|numeric',
             'id_type_contracts'=>'required'
         ],[

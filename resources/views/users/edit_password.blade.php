@@ -15,7 +15,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-body">
-                    <form method="POST" action="{{ route('confirm_password') }}">
+                    <form method="POST" action="{{ route('update_password') }}">
                         @csrf
                         @method('PUT')
                         <div class="row my-3">
