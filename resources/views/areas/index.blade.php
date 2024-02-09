@@ -12,7 +12,7 @@
 <div class="container my-5">
     <!--Botón para volver-->
     <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-5">
-        <a href="{{url()->previous()}}"><button class="btn btn-danger shadow bg-body-tertiary rounded" id=""><i class="fa-solid fa-arrow-left px-3 justify-content-center"></button></i></a>
+        <a href="{{route('home')}}"><button class="btn btn-danger shadow bg-body-tertiary rounded" id=""><i class="fa-solid fa-arrow-left px-3 justify-content-center"></button></i></a>
     </div>
     <div class="row">
         <div class="col-6 text-end">

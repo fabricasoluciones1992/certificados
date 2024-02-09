@@ -102,7 +102,7 @@ class AdminController extends Controller
     {
         try {
             $request->validate([
-                'doc' => 'required|min:4|max:15',
+                'doc' => 'required|min:4|max:15|unique:users',
                 'name' => 'required|min:2|max:100',
             ],[
                 'doc.required' => 'Se requiere número de documento',

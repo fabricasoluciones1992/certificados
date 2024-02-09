@@ -133,8 +133,9 @@ class ContractController extends Controller
                 return view('errors.error', compact('error'));
             }
         }else{
-            try {
-                $contracts = Contract::find($id);
+            // try {
+                //el error esta en que confunde el id del request que deberia ser el id del usuario con el id de campo de la tabla 
+                $contracts = Contract::findOrFail($request->id_users);
                 $contracts->status = 0;
                 $contracts->save();
                 $contracts = new Contract();
@@ -147,12 +148,12 @@ class ContractController extends Controller
                 $contracts->status = 1;
                 $contracts->save();
                 return redirect(route('contracts.index'));
-            } catch (\Throwable $th) {
-                $error = array();
-                $error['tittle'] = "Error";
-                $error['message'] = "Opss se presento un error, pongase en contacto con fabrica de soluciones"; 
-                return view('errors.error', compact('error'));
-            }
+            // } catch (\Throwable $th) {
+            //     $error = array();
+            //     $error['tittle'] = "Error";
+            //     $error['message'] = "Opss se presento un error, pongase en contacto con fabrica de soluciones"; 
+            //     return view('errors.error', compact('error'));
+            // }
         }
     }
     /**

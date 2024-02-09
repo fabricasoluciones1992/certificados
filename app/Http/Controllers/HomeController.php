@@ -84,10 +84,7 @@ class HomeController extends Controller
             $request->session()->invalidate();
             return redirect()->route('login')->with('success', 'Contraseña cambiada exitosamente. Por favor, inicie sesión con su nueva contraseña.');
         }else{
-            $error = array();
-            $error['tittle'] = "Error";
-            $error['message'] = "La contraseña no coinciden.";
-            return view('errors.error', compact('error'));
+            return redirect('users.edit_password');
         }
     }
 

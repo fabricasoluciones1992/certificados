@@ -23,7 +23,7 @@
 
       <!--Botón para volver-->
       <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <a href="{{url()->previous()}}"><button class="btn btn-danger" id=""><i class="fa-solid fa-arrow-left px-3 justify-content-center"></button></i></a>
+        <a href="{{route('home')}}"><button class="btn btn-danger" id=""><i class="fa-solid fa-arrow-left px-3 justify-content-center"></button></i></a>
       </div>
     <!--Tabla de historial de los certificados imprimidos o descargados-->
     <div class="container-fluid mt-4">
