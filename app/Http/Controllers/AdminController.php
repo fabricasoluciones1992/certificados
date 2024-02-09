@@ -3,19 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
-
 use App\Models\User;
-
 use App\Models\Role;
-
 use App\Models\Document;
-
 use App\Models\Contract;
-
 use App\Models\Certificates;
-
-
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -171,8 +163,6 @@ class AdminController extends Controller
             return view('error', compact('errors'));
         }
         } catch (\Exception $e) {
-            return "testing";
-
             $error = array();
             $error ['des'] = "opss lo siento regrese a la vista anterior";
             $error ['name'] = "La vista anterior";
@@ -207,6 +197,16 @@ class AdminController extends Controller
         
         
 
+    }
+
+    public function ExportHC()
+    {
+        $data = DB::select("SELECT certificates.download_date, certificates.download_hour, users.name 
+        FROM certificates
+        INNER JOIN users ON certificates.id_users = users.id");
+        // return $data;
+
+        return view('users.admins.export', compact('data'));
     }
     
 }
