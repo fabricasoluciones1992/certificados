@@ -101,26 +101,51 @@ class AdminController extends Controller
     public function update(Request $request, $id)
     {
         try {
-            $request->validate([
-                'doc' => 'required|min:4|max:15|unique:users',
-                'name' => 'required|min:2|max:100',
-            ],[
-                'doc.required' => 'Se requiere número de documento',
-                'doc.min' => 'Caracteres mínimos:4',
-                'doc.max' => 'Caracteres máximos:15',
-                'name.min' => 'Caracteres mínimos:2',
-                'name.max' => 'Caracteres máximos:100',
-                'name.required' => 'Se requiere nombre',
-                'role.in' => 'Se requiere rol',
-            ]);
-    
-            $user = User::find($id);
-            $user->name = $request->name;
-            $user->document = $request->doc;
-            $user->id_roles = $request->role;
-            $user->save();
-    
+            $val = DB::select("SELECT * FROM users WHERE document = $request->document");
+            if (empty($val)) {
+                $request->validate([
+                    'document' => 'required|min:4|max:15',
+                    'name' => 'required|min:2|max:100',
+                ],[
+                    'document.required' => 'Se requiere número de documento',
+                    'document.min' => 'Caracteres mínimos:4',
+                    'document.max' => 'Caracteres máximos:15',
+                    'name.min' => 'Caracteres mínimos:2',
+                    'name.max' => 'Caracteres máximos:100',
+                    'name.required' => 'Se requiere nombre',
+                    'role.in' => 'Se requiere rol',
+                ]);
+                $user = User::find($id);
+                $user->name = $request->name;
+                $user->document = $request->document;
+                $user->id_roles = $request->role;
+                $user->save();
+            }elseif($val[0]->id == $request->id_users) {
+                $request->validate([
+                    'document' => 'required|min:4|max:15',
+                    'name' => 'required|min:2|max:100',
+                ],[
+                    'document.required' => 'Se requiere número de documento',
+                    'document.min' => 'Caracteres mínimos:4',
+                    'document.max' => 'Caracteres máximos:15',
+                    'name.min' => 'Caracteres mínimos:2',
+                    'name.max' => 'Caracteres máximos:100',
+                    'name.required' => 'Se requiere nombre',
+                    'role.in' => 'Se requiere rol',
+                ]);
+                $user = User::find($id);
+                $user->name = $request->name;
+                $user->document = $request->document;
+                $user->id_roles = $request->role;
+                $user->save();
+            }else{
+                $error = array();
+                $error['tittle'] = "Documento existente";
+                $error['message'] = "Estas intentado usar el documento de un usuario existente"; 
+                return view('errors.error', compact('error'));
+            }
             return redirect(route('users.index'));
+
         } catch (\Throwable $th) {
             $error = array();
             $error['tittle'] = "Error";

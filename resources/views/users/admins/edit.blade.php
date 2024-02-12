@@ -30,8 +30,8 @@
                         <div class="row mb-3">
                             <label for="CC" class="col-md-4 col-form-label text-md-end">{{ __('Documento') }}</label>
                             <div class="col-md-6">
-                                <input id="doc" type="number" class="form-control @error('') is-invalid @enderror" name="doc" value="{{$user->document}}" autocomplete="doc" autofocus>
-                                @foreach ($errors->get('doc') as $error)
+                                <input id="document" type="number" class="form-control @error('') is-invalid @enderror" name="document" value="{{$user->document}}" autocomplete="document" autofocus>
+                                @foreach ($errors->get('document') as $error)
                                 <strong class="text-danger">{{ $error }}</strong>
                             @endforeach
                             <p class="fs-7 text-secondary">El número de documento debe contener mínimo 8 caracteres y máximo 15 caracteres</p>

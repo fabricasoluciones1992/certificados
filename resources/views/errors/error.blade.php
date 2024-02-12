@@ -434,6 +434,9 @@
           <h2>UH OH! Error!!.</h2>
           <p>{{ $error['message'] }}
           </p>
+          <div class="d-grid gap-2 d-md-flex justify-content-end m-5">
+            <a href="{{url()->previous()}}"><button class="btn btn-outline-danger" id=""><i class="fa-solid fa-arrow-left px-3 justify-content-center"></button></i></button></a>
+          </div>
         </div>
       </div>
     </div>
@@ -531,4 +534,6 @@
   });
   //# sourceURL=pen.js
       </script>
+      <script src="https://kit.fontawesome.com/0bf8ac12b9.js" crossorigin="anonymous"></script>
+
   </body></html>
