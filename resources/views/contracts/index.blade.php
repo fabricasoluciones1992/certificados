@@ -42,7 +42,7 @@
           <th scope="col">fecha inicio del contrato</th>
           <th scope="col">fecha fin del contrato</th>
           <th scope="col">Editar</th>
-          <th scope="col">Eliminar</th>
+          <th scope="col">Des/Activar</th>
         </tr>
     </thead>
     <tbody class="table-group-divider">
