@@ -44,7 +44,7 @@
                 <img src="{{asset('img/GenerarCerti.jpg')}}" class="card-img-top imgAdmin" alt="Certificado">
               </a>
               <div class="card-body bg-red">
-                <h5 class="card-title text-light text-center">Crear certificado</h5>
+                <h5 class="card-title text-light text-center">Generar  certificado</h5>
               </div>
             </div>
           </div>

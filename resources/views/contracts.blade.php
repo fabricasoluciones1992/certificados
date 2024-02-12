@@ -13,7 +13,7 @@
 <section class="sectionTitulo">
     <div class="divTitulo col-md-4 col-form-label text-md-end bg-red p-3 w-50 text-light">
       <h2 >
-      Contratos
+      Generar certificado
       </h2>
     </div>
   </section>

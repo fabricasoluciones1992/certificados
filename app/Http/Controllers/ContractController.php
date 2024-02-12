@@ -239,9 +239,10 @@ class ContractController extends Controller
     public function destroy($id)
     {
         try {
-            $contracts = Contract::find($id);
+            $contracts = Contract::find($id);   
             $contracts->end = Carbon::now();
-            $contracts->status = 0;
+            $actYdes = ($contracts->status == 0) ? 1 : 0;
+            $contracts->status = $actYdes;
             $contracts->save();
             return redirect(route('contracts.index'));
         } catch (\Throwable $th) {
