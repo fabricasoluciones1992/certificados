@@ -70,11 +70,7 @@ img{
     image-rendering: pixelated;
     
 }
-.title-center{
-    width: 100%;
-    margin: 0 auto;
-    text-align: center;
-}
+
 
 .info{
     margin-top: 6%;
