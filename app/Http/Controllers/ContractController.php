@@ -134,8 +134,8 @@ class ContractController extends Controller
             }
         }else{
             try {
-                $contract = DB::table("contracts")->where('id_users','=',$request->id_users)->first();
-                $contract = Contract::findOrFail($request->id_users);
+                $contract = DB::table("contracts")->where('id_users','=',$request->id_users)->where('status','=','1')->first();
+                $contract = Contract::findOrFail($contract->id);
                 $contract->status = 0;
                 $contract->end = date('Y-m-d');
                 $contract->save();
