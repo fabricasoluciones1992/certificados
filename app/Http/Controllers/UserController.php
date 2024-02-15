@@ -58,10 +58,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(string $id)
+    public function show()
     {
         try {
-            $user = User::find($id);
+            $user = User::find(Auth::id());
             return view('users.show', compact('user'));
         } catch (\Throwable $th) {
             $error = array();
@@ -80,7 +80,7 @@ class UserController extends Controller
     public function edit($id)
     {
         // try {
-            $users = User::find($id);
+            $users = User::find(Auth::id());
             $documents = Document::all();
             return view('users.edit', compact('users','documents'));
         // } catch (\Throwable $th) {
