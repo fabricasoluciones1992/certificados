@@ -77,7 +77,7 @@ class ContractController extends Controller
             'salary.numeric'=>'Por favor digite solo números',
             'id_type_contracts.required'=>'Seleccione un cargo'
         ]);
-        try {
+        // try {
             // Validar si el usuario ya tiene un contrato
         $existingContract = Contract::where('id_users', $request->id_users)->where('status', 1)->first();
         if ($existingContract) {
@@ -85,7 +85,6 @@ class ContractController extends Controller
                 $request;
                 return view('contracts.modal',compact('request'));
         }else{
-            try {
                 $contracts = new Contract();
                 $contracts->id_users = $request->id_users;
                 $contracts->start = $request->start;
@@ -96,16 +95,13 @@ class ContractController extends Controller
                 $contracts->status = 1;
                 $contracts->save();
                 return redirect(route('contracts.index'));
-                } catch (\Exception $e) {
-                return redirect(route('contracts.index'));
-                }
             }
-        } catch (\Throwable $th) {
-            $error = array();
-            $error['tittle'] = "Error";
-            $error['message'] = "Opss se presento un error, pongase en contacto con fabrica de soluciones"; 
-            return view('errors.error', compact('error'));
-        }
+        // } catch (\Throwable $th) {
+        //     $error = array();
+        //     $error['tittle'] = "Error";
+        //     $error['message'] = "Opss se presento un error, pongase en contacto con fabrica de soluciones"; 
+        //     return view('errors.error', compact('error'));
+        // }
 
     }
     public function create2(Request $request)
@@ -120,11 +116,14 @@ class ContractController extends Controller
                     $contracts->salary = $request->salary;
                     $contracts->id_posts = $request->id_posts;
                     $contracts->id_type_contracts = $request->id_type_contracts;
-                    $contracts->status = 0;
+                    $contracts->status = 1;
                     $contracts->save();
                     return redirect(route('contracts.index'));
                     } catch (\Exception $e) {
-                    return redirect(route('contracts.index'));
+                        $error = array();
+                        $error['tittle'] = "Error";
+                        $error['message'] = "Opss se presento un error, pongase en contacto con fabrica de soluciones"; 
+                        return view('errors.error', compact('error'));
                     }
             } catch (\Throwable $th) {
                 $error = array();

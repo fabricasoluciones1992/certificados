@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('contracts', function (Blueprint $table) {
             $table->id();
             $table->date('start');
-            $table->date('end');
+            $table->date('end')->nullable();
             $table->double('salary');
             $table->boolean('status');
             $table->foreignId('id_users')->constrained('users');
