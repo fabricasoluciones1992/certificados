@@ -9,7 +9,7 @@
 <body>
     <div class="test">
     <img src="img/LogoUECCB4.png" alt="" class="img1">
-    </div><br>
+    </div><br><br>
     <!--"Header"-->
     <div class="container">
     <p class="title"> <b> LA FUNDACIÓN UNIVERSITARIA EMPRESARIAL DE LA CÁMARA DE COMERCIO DE BOGOTÁ
