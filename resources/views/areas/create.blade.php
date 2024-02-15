@@ -10,7 +10,7 @@
             @csrf
             <div class="mb-3 mt-3">
               <label for="name" class="form-label">Nombre:</label>
-              <input type="name" class="form-control" id="name" placeholder="Ingrese Nombre del área" name="name">
+              <input type="name" class="form-control" id="name" placeholder="Ingrese Nombre del área (solo mayúsculas)" name="name">
               @foreach($errors->get('name') as $error)
               <strong class="text-danger">{{$error}}</strong>
               @endforeach

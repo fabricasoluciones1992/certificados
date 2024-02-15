@@ -10,7 +10,7 @@ Crear cargo
             @csrf
             <div class="my-3">
               <label for="name" class="form-label">Nombre:</label>
-              <input type="name" class="form-control" id="name" placeholder="Ingrese Nombre" name="name">
+              <input type="name" class="form-control" id="name" placeholder="Ingrese Nombre (Solo en mayúsculas)" name="name">
               @foreach($errors->get('name') as $error)
                 <strong class="text-danger">{{$error}}</strong>
               @endforeach
