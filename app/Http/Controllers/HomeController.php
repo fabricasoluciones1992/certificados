@@ -68,7 +68,7 @@ class HomeController extends Controller
         ], [
             'password.required' => "Contraseña requerida",
             'new_password.required' => "Contraseña requerida",
-            'new_password.regex' => "La contraseña debe tener al menos 8 caracteres, incluyendo al menos una letra, un número y un caracter especial",
+            'new_password.regex' => "La contraseña debe tener al menos 8 caracteres, incluyendo al menos una letra, un número y un caracter especial entre estos: (@$!%*?&.)",
             'password_confirmation.required' => "Contraseña requerida",
             'password_confirmation.same' => "Las contraseñas no coinciden",
         ]);

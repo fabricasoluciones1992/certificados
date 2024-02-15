@@ -36,6 +36,9 @@
 </div>
 
 </section class="margen">
-    <img src="img/footerpdf.png" alt="" class="img2 fixed-bottom">
+<footer class="footer">
+  <img src="img/footerpdf.png" alt="" class="img2">
+</footer>
+    
 </body>
 </html>
