@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="test"><br>
-    <img src="img/LogoUECCB2.png" alt="" class="img1">
+    <img src="img/LogoUECCB4.png" alt="" class="img1">
     </div><br>
     <!--"Header"-->
     <div class="container">
