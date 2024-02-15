@@ -71,9 +71,9 @@ img{
     
 }
 .titleCertificado{
-    margin-top: 4%;
-    margin-bottom: 2%;
-    text-align: center;
+   width: 100%;
+   margin: 0 auto;
+   text-align: center;
 }
 .info{
     margin-top: 6%;
