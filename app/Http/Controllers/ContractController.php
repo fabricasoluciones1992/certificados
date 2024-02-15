@@ -133,7 +133,7 @@ class ContractController extends Controller
                 return view('errors.error', compact('error'));
             }
         }else{
-            try {
+            // try {
                 $contract = DB::table("contracts")->where('id_users','=',$request->id_users)->first();
                 $contract = Contract::findOrFail($request->id_users);
                 $contract->status = 0;
@@ -149,12 +149,12 @@ class ContractController extends Controller
                 $contracts->status = 1;
                 $contracts->save();
                 return redirect(route('contracts.index'));
-            } catch (\Throwable $th) {
-                $error = array();
-                $error['tittle'] = "Error";
-                $error['message'] = "Opss se presento un error, pongase en contacto con fabrica de soluciones"; 
-                return view('errors.error', compact('error'));
-            }
+            // } catch (\Throwable $th) {
+            //     $error = array();
+            //     $error['tittle'] = "Error";
+            //     $error['message'] = "Opss se presento un error, pongase en contacto con fabrica de soluciones"; 
+            //     return view('errors.error', compact('error'));
+            // }
         }
     }
     /**

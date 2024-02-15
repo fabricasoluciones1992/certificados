@@ -120,7 +120,7 @@ class AdminController extends Controller
                 $user->document = $request->document;
                 $user->id_roles = $request->role;
                 $user->save();
-            }elseif($val[0]->id == $request->id_users) {
+            }elseif($val[0]->id == $id) {
                 $request->validate([
                     'document' => 'required|min:4|max:15',
                     'name' => 'required|min:2|max:100',

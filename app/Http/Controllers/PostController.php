@@ -53,7 +53,7 @@ class PostController extends Controller
     {
         // Validación para crear un cargo
         $request->validate([
-            'name' =>'required|min:1|max:60|regex:/^[A-Z]+$/u',
+            'name' =>'required|min:1|max:60|regex:/^[A-ZÑ ]+$/u',
             'id_areas' =>'required|numeric',
         ],[
             'name.required' => 'El nombre del cargo es requerido.',
