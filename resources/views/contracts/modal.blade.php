@@ -41,7 +41,7 @@
         });
         function cancelar() {
         // Redirige a contracts.create
-        window.location.href = "{{url()->previous()}}";
+        window.location.href = "{{route('contracts.index')}}";
         }
       </script>
 @endsection

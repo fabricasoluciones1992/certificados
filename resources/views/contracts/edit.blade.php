@@ -66,7 +66,7 @@
             </div>
             <div class="container text-center">
               <button type="submit" class="btn btn btn-primary mt-3 px-5 me-2">Editar</button>
-              <a href="{{url()->previous()}}" class="btn btn-danger mt-3 px-5 ms-2">Cancelar</a>
+              <a href="{{route('contracts.index')}}" class="btn btn-danger mt-3 px-5 ms-2">Cancelar</a>
           </div>
 
           </form>
