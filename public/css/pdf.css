@@ -48,13 +48,7 @@ img{
     padding: 5px;    
     box-sizing: border-box;
 }
-.img1{
-    width: 90%;
-    height: 80px;
-    margin-top: -4%;
-    object-fit: cover;
-    image-rendering: pixelated;
-}
+
 .footer{
     position: absolute;
   bottom: 0;

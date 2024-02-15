@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="test">
-    <img src="img/LogoUECCB4.png" alt="" class="img1">
+    <img src="img/LogoUECCB.png" alt="" style="    width: 90%;    height: 80px;    margin-top: -4%;    object-fit: cover;    image-rendering: pixelated;">
     </div><br><br>
     <!--"Header"-->
     <div class="container">
