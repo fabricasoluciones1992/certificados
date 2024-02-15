@@ -7,9 +7,9 @@
     <link href="\xampp\htdocs\certificados\public\css/pdf.css" rel="stylesheet">
 </head>
 <body>
-    <div class="test">
+    <div class="test"><br>
     <img src="img/LogoUECCB2.png" alt="" class="img1">
-    </div>
+    </div><br>
     <!--"Header"-->
     <div class="container">
     <p class="title"> <b> LA FUNDACIÓN UNIVERSITARIA EMPRESARIAL DE LA CÁMARA DE COMERCIO DE BOGOTÁ
@@ -35,8 +35,8 @@
 <b>202311031-348</b></p>
 </div>
 
-</section class="margen">
-<footer class="footer">
+</section class="margen"><br><br>
+<footer style="position: absolute;bottom: 0;width: 100%;height: 30px;text-align: center;color: white;">
   <img src="img/footerpdf.png" alt="" class="img2">
 </footer>
     
