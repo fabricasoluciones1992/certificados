@@ -70,11 +70,12 @@ img{
     image-rendering: pixelated;
     
 }
-.titleCertificado{
-   width: 100%;
-   margin: 0 auto;
-   text-align: center;
+.title-center{
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
 }
+
 .info{
     margin-top: 6%;
 }
