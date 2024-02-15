@@ -5,7 +5,7 @@
 @section('content')
             <!--Botón para volver-->
   <div class="d-grid gap-2 d-md-flex justify-content-end m-5">
-    <a href="{{url()->previous()}}"><button class="btn btn-danger" id=""><i class="fa-solid fa-arrow-left px-3 justify-content-center"></button></i></button></a>
+    <a href="{{route('home')}}"><button class="btn btn-danger" id=""><i class="fa-solid fa-arrow-left px-3 justify-content-center"></button></i></button></a>
   </div>
   <section class="container my-5 w-50">
     <!--Formulario de registro-->
