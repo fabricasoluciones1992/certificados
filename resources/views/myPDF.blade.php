@@ -7,8 +7,8 @@
     <link href="\xampp\htdocs\certificados\public\css/pdf.css" rel="stylesheet">
 </head>
 <body>
-    <div class="px-5 py-2 img-header">
-    <img src="img/LogoUECCB.png" alt="" class="img1">
+    <div class="test">
+    <img src="img/LogoUECCB2.png" alt="" class="img1">
     </div>
     <!--"Header"-->
     <div class="container">
