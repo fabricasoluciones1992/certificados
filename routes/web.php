@@ -9,6 +9,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\ContractController;
 use App\Http\Controllers\PostController;
+use App\Models\Contract;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -49,10 +50,17 @@ Route::get('/select/contracts/{id}', [HomeController::class, 'select_contracts']
 Route::put('/update/password', [HomeController::class, 'update'])->name('update_password');
 
 Route::post('/generate/{id}', function (Request $request, $id) {
+    $contract = Contract::find($id);
+    if (Auth::user()->id_roles != 2) {
+        if ($contract->id_users != Auth::id()) {
+            return "No puedes generar este certificado, no es tu certificado >:v";
+        }
+    }
     if ($request->opc == 'word') {
         return HomeController::generateWord($request, $id);
     }else if ($request->opc == 'pdf') {
         return PDFController::generatePDF($request, $id);
     }else {
         return '<script language="javascript">alert("Selecciona una forma de descargar el certificado(Word/Pdf)");</script>';
-    }})->name('generate');
+    }
+    })->name('generate');

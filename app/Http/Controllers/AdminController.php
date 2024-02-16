@@ -164,12 +164,14 @@ class AdminController extends Controller
     public function certificates($id)
     {
         try {
-            $users = Auth::user();
-            if ($users == null) {
-                $errors = array();
-                $errors ['name'] = "Sin permisos";
-                $errors ['des'] = "Vuelva a la pagina anterior debido a que no posee los permisos necesarios";
-                return view('error', compact('errors'));
+            $contract = Contract::find($id);
+            if (Auth::user()->id_roles != 2) {
+                if ($contract->id_users != Auth::id()) {
+                    $error = array();
+                    $error ['tittle'] = "Sin permisos";
+                    $error ['message'] = "Vuelva a la pagina anterior debido a que no posee los permisos necesarios";
+                    return view('errors.error', compact('error'));
+                }
             }
             return view('users.admins.certificates', compact('id'));
         } catch (\Throwable $th) {
