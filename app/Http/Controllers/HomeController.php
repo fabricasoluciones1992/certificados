@@ -67,6 +67,7 @@ class HomeController extends Controller
             'password_confirmation' => ['required', 'same:new_password'],
         ], [
             'password.required' => "Contraseña requerida",
+            'password.regex' => "La contraseña debe tener al menos 8 caracteres, incluyendo al menos una letra, un número y un caracter especial entre estos: (@$!%*?&.)",
             'new_password.required' => "Contraseña requerida",
             'new_password.regex' => "La contraseña debe tener al menos 8 caracteres, incluyendo al menos una letra, un número y un caracter especial entre estos: (@$!%*?&.)",
             'password_confirmation.required' => "Contraseña requerida",
@@ -85,7 +86,10 @@ class HomeController extends Controller
             $request->session()->invalidate();
             return redirect()->route('login')->with('success', 'Contraseña cambiada exitosamente. Por favor, inicie sesión con su nueva contraseña.');
         }else{
-            return redirect(route('users.edit_password'));
+            $error = array();
+            $error['tittle'] = "Error";
+            $error['message'] = "Contraseña actual no coinciden."; 
+            return view('errors.error', compact('error'));
         }
     }
 
