@@ -33,11 +33,11 @@ Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::resource('/users', UserController::class)->names('users');
-Route::resource('/admins', AdminController::class)->middleware('Administrador')->names('admins');
-Route::resource('/areas', AreaController::class)->middleware('Administrador')->names('areas');
-Route::resource('/posts', PostController::class)->middleware('Administrador')->names('posts');
-Route::resource('/contracts', ContractController::class)->middleware('Administrador')->names('contracts');
-Route::post('/create2', [ContractController::class, 'create2'])->middleware('Administrador')->name('create2');
+Route::resource('/admins', AdminController::class)->middleware('ADMIN')->names('admins');
+Route::resource('/areas', AreaController::class)->middleware('ADMIN')->names('areas');
+Route::resource('/posts', PostController::class)->middleware('ADMIN')->names('posts');
+Route::resource('/contracts', ContractController::class)->middleware('ADMIN')->names('contracts');
+Route::post('/create2', [ContractController::class, 'create2'])->middleware('ADMIN')->name('create2');
 Route::get('/certificates/{id}', [AdminController::class, 'certificates'])->name('certificates');
 Route::get('/confirm/password', [HomeController::class, 'confirm'])->name('confirm_password');
 Route::get('/edit/password', [HomeController::class, 'edit'])->name('edit_password');
@@ -45,7 +45,7 @@ Route::get('/error', [HomeController::class, 'error'])->name('error');
 Route::get('/export', [AdminController::class, 'export'])->name('export');
 Route::get('/histories', [AdminController::class, 'histories'])->name('histories');
 Route::get('/select/contract', [HomeController::class, 'select_contract'])->name('select_contract');
-Route::get('/select/contracts/{id}', [HomeController::class, 'select_contracts'])->middleware('Administrador')->name('select_contracts');
+Route::get('/select/contracts/{id}', [HomeController::class, 'select_contracts'])->middleware('ADMIN')->name('select_contracts');
 Route::put('/update/password', [HomeController::class, 'update'])->name('update_password');
 
 Route::post('/generate/{id}', function (Request $request, $id) {
