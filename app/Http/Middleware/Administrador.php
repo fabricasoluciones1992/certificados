@@ -18,7 +18,7 @@ class Administrador
     {
 
         if(auth()->check()){
-            if(auth()->user()->roles->role == "Administrativos"){
+            if(auth()->user()->roles->role == "ADMIN"){
                 return $next($request);
             }
         }
