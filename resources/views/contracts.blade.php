@@ -22,9 +22,11 @@
   <!--Filtro selección de cargo-->
 
   <!--Botón para volver-->
+  @if (Auth::user()->id_roles == 2)
   <div class="d-grid gap-2 d-md-flex justify-content-md-end">
     <a href="{{route('home')}}"><button class="btn btn-danger shadow bg-body-tertiary rounded" id=""><i class="fa-solid fa-arrow-left px-3 justify-content-center"></button></i></a>
   </div>
+  @endif
 <!--Tabla de Contratos-->
 <div class="container-fluid mt-4">
   <table class="table table-blue text-light table-bordered shadow bg-body-tertiary rounded " id="myTable">

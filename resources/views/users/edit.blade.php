@@ -3,7 +3,7 @@
     Editar información 
 @endsection
 @section('content')
-
+<div class="my-5">
     <div class=" col-form-label text-md-center text-blue ">
     <h1>A continuación, complete la siguiente información:</h1>
     <!--Formulario de registro-->
@@ -55,5 +55,6 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 @endsection
