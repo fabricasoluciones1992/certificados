@@ -202,12 +202,10 @@ class ContractController extends Controller
     {
         $request->validate([
             'start'=>'date',
-            'end'=>'date',
             'salary'=>'required|numeric',
             'id_type_contracts'=>'in:1,2,3,4'
         ],[
             'start.date'=>'Por favor seleccione la fecha de inicio del contrato',
-            'end.date'=>'Por favor seleccione la fecha de fin del contrato',
             'salary.required'=>'Por favor digite el salario del contrato',
             'salary.numeric'=>'Por favor digite solo números',
             'id_type_contracts.in'=>'Seleccione un cargo'
