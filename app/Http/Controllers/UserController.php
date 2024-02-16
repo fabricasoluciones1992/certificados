@@ -101,14 +101,15 @@ class UserController extends Controller
     public function update(Request $request)
     {
             $request->validate([
-                'doc' => 'required|numeric|min:1000|max:999999999999999',
+                'doc' => 'required|numeric|digits_between:4,15',
                 'type' => 'required',
             ],[
                 'doc.required' => 'Se requiere número de documento',
                 'type.in' => 'Se requiere tipo de documento',
                 'doc.min' => 'Caracteres mínimos:4',
                 'doc.max' => 'Caracteres máximos:15',
-                'doc.numeric' => 'El documento debe ser de tipo numerico'
+                'doc.numeric' => 'El documento debe ser de tipo numerico',
+                'doc.digits_between' => 'El documento debe tener entre 4 y 15 caracteres'
             ]);
     
             $user = User::find(Auth::id());
