@@ -85,7 +85,7 @@ class HomeController extends Controller
             $request->session()->invalidate();
             return redirect()->route('login')->with('success', 'Contraseña cambiada exitosamente. Por favor, inicie sesión con su nueva contraseña.');
         }else{
-            return redirect('users.edit_password');
+            return redirect(route('users.edit_password'));
         }
     }
 
