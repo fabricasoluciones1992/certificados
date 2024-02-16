@@ -11,7 +11,7 @@
     <!--Formulario de registro-->
     <div class="card text-md-center">
         <div class="card-header  text-blue ">
-        <h1>Tu infomación:</h1>
+        <h1>Tu información:</h1>
       </div>
       <div class="card-body">
         <h2 class="py-2"><b class="pe-3">Nombres:</b>
@@ -31,10 +31,13 @@
           @endif</h4>
             <h4 class="py-2"><b class="pe-3">Rol:</b> {{$user->roles->role}}</h4>
             <div class="row container px-5">
-              <div class="col-6">
+              <div class="col-4">
+                <a class="btn btn-success" href="{{route('users.edit', Auth::id())}}" role="button">Cambiar Documento</a>
+              </div>
+              <div class="col-4">
                 <a class="btn btn-primary" href="{{route('select_contract')}}" role="button">Mis contratos</a>
               </div>
-              <div class="col-6">
+              <div class="col-4">
                 <a class="btn btn-success" href="{{route('edit_password')}}" role="button">Cambiar Contraseña</a>
               </div>
             </div>

@@ -98,7 +98,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         try {
             $request->validate([
@@ -111,7 +111,7 @@ class UserController extends Controller
                 'doc.max' => 'Caracteres máximos:15',
             ]);
     
-            $user = User::find($id);
+            $user = User::find(Auth::id());
             $user->id_documents = $request->type;
             $user->document = $request->doc; 
             $user->save();
