@@ -34,7 +34,7 @@
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-blue shadow-sm">
-                <a class="navbar-brand bg-white" href="{{ url('/') }}">
+                <a class="navbar-brand bg-white" href="{{ redirect(route('home')) }}">
                     {{ config('', '') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
