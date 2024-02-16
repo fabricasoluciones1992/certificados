@@ -13,12 +13,6 @@ use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-
      public function __construct()
      {
          $this->middleware('auth');
@@ -29,37 +23,14 @@ class AdminController extends Controller
         return redirect(route('home'));
         
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         try {
             $user = Auth::user();
-            if ($user->id_roles != 2) {
-                return redirect(route('users.index'));
-            }
             return view('users.admins.show', compact('users'));
         } catch (\Throwable $th) {
             $error = array();
@@ -69,25 +40,18 @@ class AdminController extends Controller
         }
         
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        try {
+        // try {
             $user = User::find($id);
             $roles = Role::all();
             return view('users.admins.edit', compact('user','roles'));
-        } catch (\Throwable $th) {
-            $error = array();
-            $error['tittle'] = "Error";
-            $error['message'] = "Opss se presento un error, pongase en contacto con fabrica de soluciones"; 
-            return view('errors.error', compact('error'));
-        }
+        // } catch (\Throwable $th) {
+        //     $error = array();
+        //     $error['tittle'] = "Error";
+        //     $error['message'] = "Opss se presento un error, pongase en contacto con fabrica de soluciones"; 
+        //     return view('errors.error', compact('error'));
+        // }
         
     }
 

@@ -100,15 +100,15 @@ class UserController extends Controller
      */
     public function update(Request $request)
     {
-        try {
             $request->validate([
-                'doc' => 'required|min:4|max:15',
-                'type' => 'required|in:2,3,4,5',
+                'doc' => 'required|numeric|min:1000|max:999999999999999',
+                'type' => 'required',
             ],[
                 'doc.required' => 'Se requiere número de documento',
                 'type.in' => 'Se requiere tipo de documento',
                 'doc.min' => 'Caracteres mínimos:4',
                 'doc.max' => 'Caracteres máximos:15',
+                'doc.numeric' => 'El documento debe ser de tipo numerico'
             ]);
     
             $user = User::find(Auth::id());
@@ -117,13 +117,6 @@ class UserController extends Controller
             $user->save();
     
             return redirect(route('home'));
-        } catch (\Throwable $th) {
-            $error = array();
-            $error['tittle'] = "Error";
-            $error['message'] = "Opss se presento un error, pongase en contacto con fabrica de soluciones"; 
-            return view('errors.error', compact('error'));
-        }
-        
     }
 
     /**
