@@ -3,7 +3,9 @@
   Registro
 @endsection
 @section('content')
-
+<div class="d-grid gap-2 d-md-flex justify-content-end m-5">
+    <a href="{{route('users.show', Auth::id())}}"><button class="btn btn-danger" id=""><i class="fa-solid fa-arrow-left px-3 justify-content-center"></button></i></button></a>
+  </div>
 <section class="registro"></section>
     <br><br>
     <div class=" col-form-label text-center text-blue ">

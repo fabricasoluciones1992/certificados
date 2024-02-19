@@ -6,6 +6,7 @@ use App\Models\Document;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
@@ -102,19 +103,20 @@ class UserController extends Controller
     {
             $request->validate([
                 'doc' => 'required|numeric|digits_between:4,15',
-                'type' => 'required',
+                'type' => 'required|'.Rule::notIn(['1']),
             ],[
                 'doc.required' => 'Se requiere número de documento',
-                'type.in' => 'Se requiere tipo de documento',
+                'type.not_in' => 'Se requiere tipo de documento',
                 'doc.min' => 'Caracteres mínimos:4',
                 'doc.max' => 'Caracteres máximos:15',
                 'doc.numeric' => 'El documento debe ser de tipo numerico',
                 'doc.digits_between' => 'El documento debe tener entre 4 y 15 caracteres'
             ]);
-    
+
+            $doc = str_replace(0, '', $request->doc);    
             $user = User::find(Auth::id());
             $user->id_documents = $request->type;
-            $user->document = $request->doc; 
+            $user->document = $doc; 
             $user->save();
     
             return redirect(route('home'));

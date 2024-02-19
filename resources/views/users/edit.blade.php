@@ -3,6 +3,11 @@
     Editar información 
 @endsection
 @section('content')
+@if (Auth::user()->document != 0)
+<div class="d-grid gap-2 d-md-flex justify-content-end m-5">
+    <a href="{{route('home')}}"><button class="btn btn-danger" id=""><i class="fa-solid fa-arrow-left px-3 justify-content-center"></button></i></button></a>
+  </div>
+@endif
 <div class="my-5">
     <div class=" col-form-label text-md-center text-blue ">
     <h1>A continuación, complete la siguiente información:</h1>
