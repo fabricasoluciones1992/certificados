@@ -113,7 +113,7 @@ class UserController extends Controller
                 'doc.digits_between' => 'El documento debe tener entre 4 y 15 caracteres'
             ]);
 
-            $doc = str_replace(0, '', $request->doc);    
+            $doc = ltrim($request->doc, '0');
             $user = User::find(Auth::id());
             $user->id_documents = $request->type;
             $user->document = $doc; 
