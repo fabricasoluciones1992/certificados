@@ -42,15 +42,18 @@
                         <div class="col-lg-5 col-md-12 text-center py-2">
                             <strong>Seleccione una opción</strong>
                             <div class="radio-inputs">
-                                <label>
-                                    <input class="radio-input" type="radio" name="opc" value="word">
-                                    <span class="radio-tile">
-                                        <span class="radio-icon px-3 pt-2">
-                                             <i class="fa-solid fa-file-word icon-download "></i> 
-                                        </span>
-                                        <span class="radio-label">Descargar en Word</span>
+                                @if (Auth::user()->id_roles == 2)
+                            <label>
+                                <input class="radio-input" type="radio" name="opc" value="word">
+                                <span class="radio-tile">
+                                    <span class="radio-icon px-3 pt-2">
+                                         <i class="fa-solid fa-file-word icon-download "></i> 
                                     </span>
-                                </label>
+                                    <span class="radio-label">Descargar en Word</span>
+                                </span>
+                            </label>
+                            @endif
+                               
                                 <label>
                                     <input checked="" class="radio-input" type="radio" name="opc" value="pdf">
                                     <span class="radio-tile">

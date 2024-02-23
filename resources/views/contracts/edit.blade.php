@@ -5,7 +5,7 @@
 @section('content')
 <div class="container">
   <div class="mb-5 mt-5 d-grid gap-2 d-md-flex justify-content-md-end ">
-    <a href="{{asset('/contracts')}}"><button class="btn btn-danger shadow bg-body-tertiary rounded" id=""><i class="fa-solid fa-arrow-left px-3 justify-content-center"></button></i></a>
+    <a href="{{route('contracts.index')}}"><button class="btn btn-danger shadow bg-body-tertiary rounded" id=""><i class="fa-solid fa-arrow-left px-3 justify-content-center"></button></i></a>
   </div>
     <div class="card text-dark bg-light  shadow p-3 mb-5 bg-body-tertiary rounded">
       <div class="card-body">

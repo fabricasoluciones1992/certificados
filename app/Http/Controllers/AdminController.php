@@ -64,12 +64,11 @@ class AdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        try {
             $val = DB::select("SELECT * FROM users WHERE document = $request->document");
             if (empty($val)) {
                 $request->validate([
                     'document' => 'required|min:4|max:15',
-                    'name' => 'required|min:2|max:100',
+                    'name' => 'required|min:2|max:100|regex:/^[a-zA-ZÁÉÍÓÚÜáéíóúü\s]+$/',
                 ],[
                     'document.required' => 'Se requiere número de documento',
                     'document.min' => 'Caracteres mínimos:4',
@@ -87,7 +86,7 @@ class AdminController extends Controller
             }elseif($val[0]->id == $id) {
                 $request->validate([
                     'document' => 'required|min:4|max:15',
-                    'name' => 'required|min:2|max:100',
+                    'name' => 'required|min:2|max:100|regex:/^[a-zA-ZÁÉÍÓÚÜáéíóúü\s]+$/',
                 ],[
                     'document.required' => 'Se requiere número de documento',
                     'document.min' => 'Caracteres mínimos:4',
@@ -95,6 +94,7 @@ class AdminController extends Controller
                     'name.min' => 'Caracteres mínimos:2',
                     'name.max' => 'Caracteres máximos:100',
                     'name.required' => 'Se requiere nombre',
+                    'name.regex' => 'El nombre contiene caracteres invalidos',
                     'role.in' => 'Se requiere rol',
                 ]);
                 $user = User::find($id);
@@ -109,14 +109,6 @@ class AdminController extends Controller
                 return view('errors.error', compact('error'));
             }
             return redirect(route('users.index'));
-
-        } catch (\Throwable $th) {
-            $error = array();
-            $error['tittle'] = "Error";
-            $error['message'] = "Opss se presento un error, pongase en contacto con fabrica de soluciones"; 
-            return view('errors.error', compact('error'));
-        }
-        
     }
 
 

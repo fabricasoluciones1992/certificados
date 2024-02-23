@@ -65,7 +65,8 @@ class ContractController extends Controller
         $request->validate([
             'id_users'=>'required',
             'id_posts'=>'required',
-            'start'=>'date',
+            'start'=>'date|before:end',
+            'end'=>'date|after:start',
             'salary'=>'required|numeric',
             'id_type_contracts'=>'required'
         ],[
@@ -86,13 +87,15 @@ class ContractController extends Controller
                 return view('contracts.modal',compact('request'));
         }else{
                 $contracts = new Contract();
+                $date = date('Y-m-d');
+                $status = ($request->end < $date) ? 0 : 1;
                 $contracts->id_users = $request->id_users;
                 $contracts->start = $request->start;
                 $contracts->end = $request->end;
                 $contracts->salary = $request->salary;
                 $contracts->id_posts = $request->id_posts;
                 $contracts->id_type_contracts = $request->id_type_contracts;
-                $contracts->status = 1;
+                $contracts->status = $status;
                 $contracts->save();
                 return redirect(route('contracts.index'));
             }
@@ -116,7 +119,7 @@ class ContractController extends Controller
                     $contracts->salary = $request->salary;
                     $contracts->id_posts = $request->id_posts;
                     $contracts->id_type_contracts = $request->id_type_contracts;
-                    $contracts->status = 1;
+                    $contracts->status = 0;
                     $contracts->save();
                     return redirect(route('contracts.index'));
                     } catch (\Exception $e) {
@@ -132,9 +135,9 @@ class ContractController extends Controller
                 return view('errors.error', compact('error'));
             }
         }else{
-            try {
+            // try {
                 $contract = DB::table("contracts")->where('id_users','=',$request->id_users)->where('status','=','1')->first();
-                $contract = Contract::findOrFail($contract->id);
+                $contract = Contract::find($contract->id);
                 $contract->status = 0;
                 $contract->end = date('Y-m-d');
                 $contract->save();
@@ -145,15 +148,17 @@ class ContractController extends Controller
                 $contracts->salary = $request->salary;
                 $contracts->id_posts = $request->id_posts;
                 $contracts->id_type_contracts = $request->id_type_contracts;
-                $contracts->status = 1;
+                $date = date('Y-m-d');
+                $status = ($request->end < $date) ? 0 : 1;
+                $contracts->status = $status;
                 $contracts->save();
                 return redirect(route('contracts.index'));
-            } catch (\Throwable $th) {
-                $error = array();
-                $error['tittle'] = "Error";
-                $error['message'] = "Opss se presento un error, pongase en contacto con fabrica de soluciones"; 
-                return view('errors.error', compact('error'));
-            }
+            // } catch (\Throwable $th) {
+            //     $error = array();
+            //     $error['tittle'] = "Error";
+            //     $error['message'] = "Opss se presento un error, pongase en contacto con fabrica de soluciones"; 
+            //     return view('errors.error', compact('error'));
+            // }
         }
     }
     /**
