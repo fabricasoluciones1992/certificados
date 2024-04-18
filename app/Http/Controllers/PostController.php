@@ -32,7 +32,7 @@ class PostController extends Controller
     public function create(Request $request)
     {
         try {
-            $areas = Area::all();
+            $areas = Area::orderby('name')->get();
             return view('posts.create', compact('areas'));
         } catch (\Throwable $th) {
             $error = array();
@@ -103,7 +103,7 @@ class PostController extends Controller
     {
         try {
             $post = Post::find($post);
-            $areas = Area::all();
+            $areas = Area::orderby('name')->get();
             return view('posts.edit', compact('post', 'areas'));
         } catch (\Throwable $th) {
             $error = array();

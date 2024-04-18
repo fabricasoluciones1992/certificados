@@ -13,7 +13,7 @@ header('Cache-Control: private, max-age=0, must-revalidate');
     <link href="\xampp\htdocs\certificados\public\css/pdf.css" rel="stylesheet">
 </head>
 <body>
-    <img src="img/header.png" alt="" class="img1">
+    <img src="img/headerCertificate.jpeg" alt="" class="img1">
     <!--"Header"-->
     <div class="container">
     <p class="title"> <b> LA FUNDACIÓN UNIVERSITARIA EMPRESARIAL DE LA CÁMARA DE COMERCIO DE BOGOTÁ
@@ -135,13 +135,11 @@ header('Cache-Control: private, max-age=0, must-revalidate');
         
 <p class="bodyText">Atentamente,</p><br>
 <div class="info">
-    <p class="foot">LUZ YAZMÍN LIZARAZO JIMÉNEZ</strong></p>
+ 
 <p class="foot">Directora de Talento Humano</p>
-<p class="foot1"><b>Proyecto:</b> Nicol Valencia – Profesional de Nómina y Contratación<br>
-<b>202311031-348</b></p>
 </div>
 
 </section class="margen">
-    <img src="img/footerpdf.png" alt="" class="img2 fixed-bottom">
+    <img src="img/footerCertificate.jpeg" alt="" class="img2 fixed-bottom">
 </body>
 </html>
