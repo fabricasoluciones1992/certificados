@@ -44,7 +44,7 @@ class ContractController extends Controller
             $contracts = Contract::all();
             $typeContracts = TypeContracts::all();
             $users = User::all();
-            $posts = Post::all();
+            $posts = Post::orderby('name')->get();
             return view('contracts.create', compact('contracts','typeContracts','users','posts'));
         } catch (\Throwable $th) {
             $error = array();
@@ -65,8 +65,8 @@ class ContractController extends Controller
         $request->validate([
             'id_users'=>'required',
             'id_posts'=>'required',
-            'start'=>'date|before:end',
-            'end'=>'date|after:start',
+            'start' => 'date',
+            'end' => 'nullable|date|after_or_equal:start',
             'salary'=>'required|numeric',
             'id_type_contracts'=>'required'
         ],[
@@ -78,7 +78,7 @@ class ContractController extends Controller
             'salary.numeric'=>'Por favor digite solo números',
             'id_type_contracts.required'=>'Seleccione un cargo'
         ]);
-        // try {
+        try {
             // Validar si el usuario ya tiene un contrato
         $existingContract = Contract::where('id_users', $request->id_users)->where('status', 1)->first();
         if ($existingContract) {
@@ -99,12 +99,12 @@ class ContractController extends Controller
                 $contracts->save();
                 return redirect(route('contracts.index'));
             }
-        // } catch (\Throwable $th) {
-        //     $error = array();
-        //     $error['tittle'] = "Error";
-        //     $error['message'] = "Opss se presento un error, pongase en contacto con fabrica de soluciones"; 
-        //     return view('errors.error', compact('error'));
-        // }
+        } catch (\Throwable $th) {
+            $error = array();
+            $error['tittle'] = "Error";
+            $error['message'] = "Opss se presento un error, pongase en contacto con fabrica de soluciones"; 
+            return view('errors.error', compact('error'));
+        }
 
     }
     public function create2(Request $request)
@@ -135,7 +135,7 @@ class ContractController extends Controller
                 return view('errors.error', compact('error'));
             }
         }else{
-            // try {
+            try {
                 $contract = DB::table("contracts")->where('id_users','=',$request->id_users)->where('status','=','1')->first();
                 $contract = Contract::find($contract->id);
                 $contract->status = 0;
@@ -153,12 +153,12 @@ class ContractController extends Controller
                 $contracts->status = $status;
                 $contracts->save();
                 return redirect(route('contracts.index'));
-            // } catch (\Throwable $th) {
-            //     $error = array();
-            //     $error['tittle'] = "Error";
-            //     $error['message'] = "Opss se presento un error, pongase en contacto con fabrica de soluciones"; 
-            //     return view('errors.error', compact('error'));
-            // }
+            } catch (\Throwable $th) {
+                $error = array();
+                $error['tittle'] = "Error";
+                $error['message'] = "Opss se presento un error, pongase en contacto con fabrica de soluciones"; 
+                return view('errors.error', compact('error'));
+            }
         }
     }
     /**
@@ -184,7 +184,7 @@ class ContractController extends Controller
         try {
             $contracts = Contract::find($id);
             $users = User::find($contracts->id_users);
-            $posts = Post::all();
+            $posts = Post::orderby('name')->get();
             $typeContracts = TypeContracts::all();
             return view('contracts.edit', compact('contracts','users','posts','typeContracts'));
         } catch (\Throwable $th) {
