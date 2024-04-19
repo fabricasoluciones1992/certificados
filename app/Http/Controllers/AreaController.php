@@ -19,8 +19,8 @@ class AreaController extends Controller
     public function index()
     {
         try {
-            $areas = Area::orderby('name')->get();
-            $posts = Post::orderby('name')->get();
+            $areas = Area::all();
+            $posts = Post::all();
          $user = Auth::user();
             if ($user->id_roles != 2) {
                 return redirect(route('users.index'));
