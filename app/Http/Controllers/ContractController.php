@@ -43,7 +43,7 @@ class ContractController extends Controller
         try {
             $contracts = Contract::all();
             $typeContracts = TypeContracts::all();
-            $users = User::all();
+            $users = User::orderby('name')->get();
             $posts = Post::orderby('name')->get();
             return view('contracts.create', compact('contracts','typeContracts','users','posts'));
         } catch (\Throwable $th) {
