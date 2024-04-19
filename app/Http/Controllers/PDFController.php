@@ -95,11 +95,13 @@ class PDFController extends Controller
                 $typeContract = "";
             }
             if($request->date_i == "on"){
-                if ($hoy > $contract->end) {
+                if ($hoy > $contract->end && $contract->end !== null) {
                     $msg = "Desde el ".$contract->start. " hasta el ". $contract->end.".";
                 }else{
-                    $msg = "Actualmente vigente desde el ".$contract->start.".";
-                }
+                    $msg = "Actualmente vigente desde el ".$contract->start;
+                    if ($contract->end != null) {
+                    $msg = $msg. " hasta el ". $contract->end;
+                    }                }
             }else{
                 $msg = "";
             }

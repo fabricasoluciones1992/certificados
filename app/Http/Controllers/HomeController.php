@@ -115,10 +115,13 @@ class HomeController extends Controller
             }
             if($request->date_i == "on"){
                 $msg = "";
-                if ($hoy > $contract->end) {
-                    $msg = "Desde el ".$contract->start. " hasta el ". $contract->end.".";
+                if ($hoy > $contract->end && $contract->end !== null) {
+                    $msg = "Desde el ".$contract->start. " hasta el ". $contract->end;
                 }else{
-                    $msg = "Actualmente vigente desde el ".$contract->start.".";
+                    $msg = "Actualmente vigente desde el ".$contract->start;
+                    if ($contract->end != null) {
+                    $msg = $msg. " hasta el ". $contract->end;
+                    }
                 }
                 $templete->setValue('start', $msg);
             }else{
