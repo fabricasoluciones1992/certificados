@@ -3,6 +3,7 @@
   Inicio sesión
 @endsection
 @section('content')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!--encabezado titulo-->
     <section class="sectionTitulo2">
         <div class="divTitulo2">
@@ -40,8 +41,13 @@
                             <div class="row mb-3">
                                 <label for="password" class="col-md-4 col-form-label text-md-start">{{ __('Contraseña') }}</label>
                                 <div class="col-md-6">
-                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" autocomplete="current-password">
-
+                                    <div class="input-group">
+                                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" autocomplete="current-password">
+                                        <div class="input-group-append">
+                                            <button id="show_password" class="btn btn-primary" type="button" onclick="mostrarPassword()"> <span class="fa fa-eye-slash icon"></span> </button>
+                                        </div>
+                                    </div>
+                                    
                                     @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -61,6 +67,19 @@
                         @if (Route::has('register'))
                             <a class="btn btn-link col-md-12 mt-2" href="{{ route('register') }}">{{ __('¿No tiene una cuenta?, Registrese') }}</a>
                         @endif
+                        <script type="text/javascript">
+                            function mostrarPassword(){
+                                var cambio = document.getElementById("password");
+                                if(cambio.type == "password"){
+                                    cambio.type = "text";
+                                    $('.icon').removeClass('fa fa-eye-slash').addClass('fa fa-eye');
+                                }else{
+                                    cambio.type = "password";
+                                    $('.icon').removeClass('fa fa-eye').addClass('fa fa-eye-slash');
+                                }
+                            } 
+                        </script>
+                        
                         </form>
                     </div>
                 </div>
