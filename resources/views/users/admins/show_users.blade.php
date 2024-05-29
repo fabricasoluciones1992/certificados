@@ -39,6 +39,9 @@
         </thead>
         <tbody class="table-group-divider">
           @foreach ($users as $user)
+          @if ($user->name == 0)
+            
+          @else
           <tr>
             <td scope="col"> {{$user->name}}</td>
             <td scope="col"> {{$user->email}}</td>
@@ -46,6 +49,7 @@
             <td><div hclass="btn-group " role="group" aria-label="Button group name"><a href="{{route('admins.edit', $user->id)}}"> <button type="button" class="btn btn-success"><i class="fa-solid fa-pen"></i></button></a></td>
             <td><div class="btn-group " role="group" aria-label="Button group name"><a href="{{route('select_contracts', $user->id)}}"> <button type="button" class="btn btn-success"><i class="fa-solid fa-file-pdf"></i></button></a></td>
           </tr>
+          @endif
           @endforeach
         </tbody>
       </table>
