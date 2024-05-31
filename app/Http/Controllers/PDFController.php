@@ -96,7 +96,7 @@ class PDFController extends Controller
             $contract->dayEnd = Contract::contractDay($contract->end);
             $user = User::find($contract->id_users);
             if($request->contract == "on"){
-                $typeContract = "con un contrato a término ".$contract->typeContracts->type_contract;
+                $typeContract = "con un contrato a ".$contract->typeContracts->type_contract;
             }else{
                 $typeContract = "";
             }
@@ -130,9 +130,8 @@ class PDFController extends Controller
                 'month' => $month_es,
                 'year' => date('Y')
             ];
+            $data["document"] = number_format($data["document"],0,".",".");
             $pdf = PDF::loadView('myPDF', $data);
-        
-    
             $certificate = new Certificates();
             date_default_timezone_set("America/Bogota");
             $certificate->download_date = date("y.m.d");

@@ -100,26 +100,32 @@ class HomeController extends Controller
             $date_create =" (".(date('d')).") días del mes de ($month_es) de ".(date('Y'))."";
             $hoy = date('Y-m-d');
             $contract = Contract::find($id);
+            $contract->mes = Contract::contractMonth($contract->start);
+            $contract->año = Contract::contractYear($contract->start);
+            $contract->day = Contract::contractDay($contract->start);
+            $contract->mesEmd = Contract::contractMonth($contract->end);
+            $contract->añoEnd = Contract::contractYear($contract->end);
+            $contract->dayEnd = Contract::contractDay($contract->end);
             $user = User::find($contract->id_users);
             $templete = new TemplateProcessor('document.docx');
             $templete->setValue('name', $user->name);
             $templete->setValue('type_document', $user->documents->type);
-            $templete->setValue('document', $user->document);
+            $templete->setValue('document', number_format($user->document,0,".","."));
             $templete->setValue('post', $contract->posts->name);
             $templete->setValue('date_create', $date_create);
             if($request->contract == "on"){
-                $templete->setValue('type_contract', "Mediante un contrato a ".$contract->typeContracts->type_contract.".");
+                $templete->setValue('type_contract', "con un contrato a ".$contract->typeContracts->type_contract);
             }else{
                 $templete->setValue('type_contract', "");
             }
             if($request->date_i == "on"){
                 $msg = "";
                 if ($hoy > $contract->end && $contract->end !== null) {
-                    $msg = "Desde el ".$contract->start. " hasta el ". $contract->end;
+                    $msg = " desde el ".$contract->day." de ".$contract->mes." de ".$contract->año. " hasta el ". $contract->dayEnd." de ".$contract->mesEnd." de ".$contract->añoEnd;
                 }else{
-                    $msg = "Actualmente vigente desde el ".$contract->start;
+                    $msg = " desde el ".$contract->day." de ".$contract->mes." de ".$contract->año;
                     if ($contract->end != null) {
-                    $msg = $msg. " hasta el ". $contract->end;
+                        $msg = $msg. "hasta el ". $contract->dayEnd." de ".$contract->mesEnd." de ".$contract->añoEnd;
                     }
                 }
                 $templete->setValue('start', $msg);
@@ -127,7 +133,7 @@ class HomeController extends Controller
                 $templete->setValue('start', "");
             }
             if($request->salary == "on"){
-                $templete->setValue('salary', "devengando un salario de $ ".$contract->salary.".");
+                $templete->setValue('salary', "devengando un salario de ($".number_format($contract->salary,2,".",",")."),");
             }else{
                 $templete->setValue('salary', "");
             }
