@@ -62,8 +62,8 @@ class HomeController extends Controller
     public function update(Request $request)
     {
         $request->validate([
-            'password' => ['required', 'regex:/^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&.])[A-Za-z\d@$!%*?&.]{8,}$/'],
-            'new_password' => ['required', 'regex:/^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&.])[A-Za-z\d@$!%*?&.]{8,}$/'],
+            'password' => ['required', 'regex:/^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&.+])[A-Za-z\d@$!%*?&.+]{8,20}$/'],
+            'new_password' => ['required', 'regex:/^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&.+])[A-Za-z\d@$!%*?&.+]{8,20}$/'],
             'password_confirmation' => ['required', 'same:new_password'],
         ], [
             'password.required' => "Contraseña requerida",
@@ -74,7 +74,6 @@ class HomeController extends Controller
             'password_confirmation.same' => "Las contraseñas no coinciden",
         ]);
         
-
         $user = Auth::id();
         $user = User::find($user);
 

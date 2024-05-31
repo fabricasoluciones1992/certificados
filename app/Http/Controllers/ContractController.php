@@ -24,6 +24,9 @@ class ContractController extends Controller
     {
         try {
             $contracts = Contract::all();
+            foreach ($contracts as $contract) {
+                $contract->salary = "$".number_format($contract->salary,2,".",",");
+            }
             return view('contracts.index', compact('contracts'));
         } catch (\Throwable $th) {
             $error = array();
@@ -88,7 +91,7 @@ class ContractController extends Controller
         }else{
                 $contracts = new Contract();
                 $date = date('Y-m-d');
-                $status = ($request->end < $date) ? 0 : 1;
+                $status = ($request->end < $date) ? 1 : 0;
                 $contracts->id_users = $request->id_users;
                 $contracts->start = $request->start;
                 $contracts->end = $request->end;
@@ -111,7 +114,6 @@ class ContractController extends Controller
     {
         if($request->opc == 1){
             try {
-                try {
                     $contracts = new Contract();
                     $contracts->id_users = $request->id_users;
                     $contracts->start = $request->start;
@@ -122,12 +124,6 @@ class ContractController extends Controller
                     $contracts->status = 0;
                     $contracts->save();
                     return redirect(route('contracts.index'));
-                    } catch (\Exception $e) {
-                        $error = array();
-                        $error['tittle'] = "Error";
-                        $error['message'] = "Opss se presento un error, pongase en contacto con fabrica de soluciones"; 
-                        return view('errors.error', compact('error'));
-                    }
             } catch (\Throwable $th) {
                 $error = array();
                 $error['tittle'] = "Error";
@@ -149,7 +145,7 @@ class ContractController extends Controller
                 $contracts->id_posts = $request->id_posts;
                 $contracts->id_type_contracts = $request->id_type_contracts;
                 $date = date('Y-m-d');
-                $status = ($request->end < $date) ? 0 : 1;
+                $status = ($request->end < $date) ? 1 : 0;
                 $contracts->status = $status;
                 $contracts->save();
                 return redirect(route('contracts.index'));

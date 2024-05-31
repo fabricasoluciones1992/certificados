@@ -47,8 +47,11 @@
     </thead>
     <tbody class="table-group-divider">
       @foreach ($contracts as $contract)
+      @if ($contract->users->name == "0")
+          
+      @else
       <tr>
-        <td scope="col" value="{{$contract->status}}" class="text-capitalize">@if($contract->status == 1) Inactivo @else Activo @endif</td>
+        <td scope="col" value="{{$contract->status}}" class="text-capitalize">@if($contract->status == 0) Inactivo @else Activo @endif</td>
         <td scope="col" class="text-capitalize"> {{$contract->users->name}}</td>
         <td scope="col" class="text-capitalize">{{$contract->posts->name}}</td>
         <td scope="col">{{$contract->typeContracts->type_contract}} </td>
@@ -66,6 +69,7 @@
           </form>
           </td>
       </tr>
+      @endif
       @endforeach
     </tbody>
   </table>

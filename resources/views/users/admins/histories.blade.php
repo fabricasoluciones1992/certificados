@@ -39,11 +39,15 @@
         </thead>
         <tbody class="table-group-divider">
           @foreach ($certificate as $certificate)
+          @if ($certificate->users->name == "0")
+            
+          @else
           <tr>
             <td scope="col">{{$certificate->users->name}}</td>
             <td scope="col">{{$certificate->download_date}}</td>
             <td scope="col">{{$certificate->download_hour}}</td>
           </tr>
+          @endif
           @endforeach
         </tbody>
       </table>

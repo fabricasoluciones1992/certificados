@@ -88,25 +88,31 @@ class PDFController extends Controller
             }
             $hoy = date('Y-m-d');
             $contract = Contract::find($id);
+            $contract->mes = Contract::contractMonth($contract->start);
+            $contract->año = Contract::contractYear($contract->start);
+            $contract->day = Contract::contractDay($contract->start);
+            $contract->mesEmd = Contract::contractMonth($contract->end);
+            $contract->añoEnd = Contract::contractYear($contract->end);
+            $contract->dayEnd = Contract::contractDay($contract->end);
             $user = User::find($contract->id_users);
             if($request->contract == "on"){
-                $typeContract = "Mediante un contrato a ".$contract->typeContracts->type_contract.".";
+                $typeContract = "con un contrato a término ".$contract->typeContracts->type_contract.".";
             }else{
                 $typeContract = "";
             }
             if($request->date_i == "on"){
                 if ($hoy > $contract->end && $contract->end !== null) {
-                    $msg = "Desde el ".$contract->start. " hasta el ". $contract->end.".";
+                    $msg = " desde el ".$contract->day." de ".$contract->mes." de".$contract->año. "hasta el ". $contract->dayEnd." de ".$contract->mesEnd." de ".$contract->añoEnd;
                 }else{
-                    $msg = "Actualmente vigente desde el ".$contract->start;
+                    $msg = " desde el ".$contract->day." de ".$contract->mes." de ".$contract->año;
                     if ($contract->end != null) {
-                    $msg = $msg. " hasta el ". $contract->end;
+                    $msg = $msg. "hasta el ". $contract->dayEnd." de ".$contract->mesEnd." de ".$contract->añoEnd;
                     }                }
             }else{
                 $msg = "";
             }
             if($request->salary == "on"){
-                $salary ="devengando un salario de $ ".$contract->salary.".";
+                $salary ="devengando un salario de ($".number_format($contract->salary,2,".",",")."),";
             }else{
                 $salary ="";
             }
