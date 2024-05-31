@@ -96,17 +96,17 @@ class PDFController extends Controller
             $contract->dayEnd = Contract::contractDay($contract->end);
             $user = User::find($contract->id_users);
             if($request->contract == "on"){
-                $typeContract = "con un contrato a término ".$contract->typeContracts->type_contract.".";
+                $typeContract = "con un contrato a término ".$contract->typeContracts->type_contract;
             }else{
                 $typeContract = "";
             }
             if($request->date_i == "on"){
                 if ($hoy > $contract->end && $contract->end !== null) {
-                    $msg = " desde el ".$contract->day." de ".$contract->mes." de".$contract->año. "hasta el ". $contract->dayEnd." de ".$contract->mesEnd." de ".$contract->añoEnd;
+                    $msg = " desde el ".$contract->day." de ".$contract->mes." de ".$contract->año. " hasta el ". $contract->dayEnd." de ".$contract->mesEnd." de ".$contract->añoEnd.".";
                 }else{
-                    $msg = " desde el ".$contract->day." de ".$contract->mes." de ".$contract->año;
+                    $msg = " desde el ".$contract->day." de ".$contract->mes." de ".$contract->año.".";
                     if ($contract->end != null) {
-                    $msg = $msg. "hasta el ". $contract->dayEnd." de ".$contract->mesEnd." de ".$contract->añoEnd;
+                    $msg = $msg. "hasta el ". $contract->dayEnd." de ".$contract->mesEnd." de ".$contract->añoEnd.".";
                     }                }
             }else{
                 $msg = "";

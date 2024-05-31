@@ -112,7 +112,7 @@
   <div class="test">
     <h3 >{{ $title }}</h3>
   </div>
-            <p class="textContent ">Que el/la Señor/a <b class="container">{{ $name }}</b>, identificado/a con <b> {{ $t_doc }} </b> No. <b>{{ $document }}</b>; está vinculado con la Fundación Universitaria Empresarial de la Cámara de Comercio de Bogotá Uniempresarial con NIT 830.084.876-6; desempeñando el cargo de <b>{{ $contract->posts->name }}</b>
+            <p class="textContent ">Que el/la Señor/a <b class="container">{{ $name }}</b>, identificado/a con <b> {{ $t_doc }} </b> No. <b>{{ $document }}</b>; está vinculado con la Fundación Universitaria Empresarial de la Cámara de Comercio de Bogotá Uniempresarial con NIT 830.084.876-6; desempeñando el cargo de <b>{{ $contract->posts->name }}</b>,
             {{$salary}}
             {{$type_contract}}
             {{$date}}
