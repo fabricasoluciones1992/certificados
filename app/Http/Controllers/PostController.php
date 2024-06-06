@@ -123,7 +123,7 @@ class PostController extends Controller
     public function update(Request $request, $post)
     {
         $request->validate([
-            'name' =>'required|min:1|max:60',
+            'name' =>'required|min:1|max:60|regex:/^[A-ZÑÁÉÍÓÚÜ\s]+$/u',
             'id_areas' =>'required',
         ],[
             'name.required' => 'Este campo es requerido.',

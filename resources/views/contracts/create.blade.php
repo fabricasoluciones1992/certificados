@@ -15,9 +15,11 @@
               <label for="name" class="form-label">Seleccione un usuario:</label>
               <select class="form-select" name="id_users" aria-label="Default select example">
                 <option value="" selected>Seleccione</option>
-                @foreach ($users as $users)
-                <option value="{{$users->id}}">{{$users->name}}</option>
-              @endforeach
+                @foreach ($users as $user)
+                @if ($user->name != 0 && $user->name != "Por definir")
+                    <option value="{{ $user->id }}">{{ $user->name }}</option>
+                @endif
+            @endforeach            
               </select>
                 {{-- Alerta Validación --}}
               @foreach($errors->get('id_users') as $error)

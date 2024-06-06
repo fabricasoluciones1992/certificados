@@ -64,7 +64,14 @@ class AdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-            $val = DB::select("SELECT * FROM users WHERE document = $request->document");
+            $val = DB::select("SELECT * FROM users WHERE document = '$request->document'");
+            $document = ltrim($request->document, '0');
+            if (strlen($document)<4) {
+                $error = array();
+                $error['tittle'] = "Documento invalido";
+                $error['message'] = "el documento debe ser minimo de 4"; 
+                return view('errors.error', compact('error'));
+            }
             if (empty($val)) {
                 $request->validate([
                     'document' => 'required|min:4|max:15',
@@ -80,7 +87,7 @@ class AdminController extends Controller
                 ]);
                 $user = User::find($id);
                 $user->name = $request->name;
-                $user->document = $request->document;
+                $user->document = $document;
                 $user->id_roles = $request->role;
                 $user->save();
             }elseif($val[0]->id == $id) {
@@ -98,8 +105,8 @@ class AdminController extends Controller
                     'role.in' => 'Se requiere rol',
                 ]);
                 $user = User::find($id);
-                $user->name = $request->name;
-                $user->document = $request->document;
+                $user->name = $request->name;                
+                $user->document = $document;
                 $user->id_roles = $request->role;
                 $user->save();
             }else{

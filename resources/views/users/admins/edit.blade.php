@@ -30,7 +30,7 @@
                         <div class="row mb-3">
                             <label for="CC" class="col-md-4 col-form-label text-md-end">{{ __('Documento') }}</label>
                             <div class="col-md-6">
-                                <input id="document" type="number" class="form-control @error('') is-invalid @enderror" name="document" value="{{$user->document}}" autocomplete="document" autofocus>
+                                <input id="document" type="text" class="form-control @error('') is-invalid @enderror" name="document" value="{{$user->document}}" autocomplete="document" autofocus>
                                 @foreach ($errors->get('document') as $error)
                                 <strong class="text-danger">{{ $error }}</strong>
                             @endforeach

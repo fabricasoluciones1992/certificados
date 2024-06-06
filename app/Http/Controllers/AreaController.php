@@ -44,7 +44,6 @@ class AreaController extends Controller
     public function store(Request $request)
     {
 
-       // Validación para crear un área
        $request->validate([
         'name' =>'required|min:1|max:60|regex:/^[A-ZÑÁÉÍÓÚÜ\s]+$/u',
         ],[
@@ -96,9 +95,8 @@ class AreaController extends Controller
 
     public function update(Request $request, $post)
     {
-        // Validación para editar un área
         $request->validate([
-            'name' =>'required|min:1|max:60',
+            'name' =>'required|min:1|max:60|regex:/^[A-ZÑÁÉÍÓÚÜ\s]+$/u',
         ],[
             'name.required' => 'El nombre del área es requerido.',
             'name.min' => 'El área debe tener al menos 1 caracter.',

@@ -41,7 +41,7 @@
                             <label for="CC" class="col-md-4 col-form-label text-md-end">{{ __('Número de documento') }}</label>
                             
                             <div class="col-md-6">    
-                                <input id="doc" type="number" onkeydown="return event.keyCode !== 69"  class="form-control @error('') is-invalid @enderror" name="doc" value="" autocomplete="doc">
+                                <input id="doc" type="text" onkeydown="return event.keyCode !== 69"  class="form-control @error('') is-invalid @enderror" name="doc" value="" autocomplete="doc">
                                 @foreach ($errors->get('doc') as $error)
                                 <strong class="text-danger">{{ $error }}</strong>
                             @endforeach

@@ -6,6 +6,7 @@ use App\Models\Document;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 
 class UserController extends Controller
@@ -101,8 +102,11 @@ class UserController extends Controller
      */
     public function update(Request $request)
     {
+        $val = DB::select("SELECT * FROM users WHERE document = '$request->doc'");
+        if (empty($val) || $val[0]->id == $request->id_users) {
+            $rule = ($request->type == "5") ? "required|min:4|max:15" : 'required|numeric|digits_between:4,15' ;
             $request->validate([
-                'doc' => 'required|numeric|digits_between:4,15',
+                'doc' => $rule,
                 'type' => 'required|'.Rule::notIn(['1']),
             ],[
                 'doc.required' => 'Se requiere número de documento',
@@ -120,6 +124,12 @@ class UserController extends Controller
             $user->save();
     
             return redirect(route('home'));
+        }else{
+            $error = array();
+            $error['tittle'] = "Documento existente";
+            $error['message'] = "Estas intentado usar el documento de un usuario existente"; 
+            return view('errors.error', compact('error'));
+        }
     }
 
     /**

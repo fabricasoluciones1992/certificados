@@ -27,9 +27,9 @@
 
                             <div class="col-md-6">  
                                 <div class="input-group">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" autocomplete="new-password">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" autocomplete="current-password">
                                 <div class="input-group-append">
-                                    <button class="btn btn-primary" type="button" onclick="mostrarPassword('password')"> <span class="fa fa-eye-slash icon"></span> </button>
+                                    <button class="btn btn-primary" type="button" onclick="mostrarPassword('password')"> <span class="fa fa-eye-slash icon eye1" id="eyes1"></span> </button>
                                 </div>                                
                             </div>
                             
@@ -47,7 +47,7 @@
                                 <div class="input-group">
                                     <input id="new_password" type="password" class="form-control @error('new_password') is-invalid @enderror" name="new_password" autocomplete="new-password">
                                     <div class="input-group-append">
-                                        <button class="btn btn-primary" type="button" onclick="mostrarPassword('new_password')"> <span class="fa fa-eye-slash icon"></span> </button>
+                                        <button class="btn btn-primary" type="button" onclick="mostrarPassword('new_password')"> <span class="fa fa-eye-slash icon eye2" id="eyes2"></span> </button>
                                     </div>
                                 </div>
                                 
@@ -65,7 +65,7 @@
                                 <div class="input-group">
                                     <input id="password_confirmation_field" type="password" class="form-control @error('password_confirmation') is-invalid @enderror" name="password_confirmation" autocomplete="new-password">
                                     <div class="input-group-append">
-                                        <button class="btn btn-primary" type="button" onclick="mostrarPassword('password_confirmation_field')"> <span class="fa fa-eye-slash icon"></span> </button>
+                                        <button class="btn btn-primary" type="button" onclick="mostrarPassword('password_confirmation_field')"> <span class="fa fa-eye-slash icon eye3" id="eyes3"></span> </button>
                                     </div>                                    
                                 </div>
                                 
@@ -87,17 +87,41 @@
                         <script type="text/javascript">
                             function mostrarPassword(targetId) {
                                 var cambio = document.getElementById(targetId);
-                                if (cambio.type == "password") {
-                                    cambio.type = "text";
-                                    $('#' + targetId + ' .icon').removeClass('fa fa-eye-slash').addClass('fa fa-eye');
-                                } else {
-                                    cambio.type = "password";
-                                    $('#' + targetId + ' .icon').removeClass('fa fa-eye').addClass('fa fa-eye-slash');
-                                }
+                                console.log(cambio)
+                                switch (cambio.name) {
+                                        case "password":
+                                            if (cambio.type == "password") {
+                                                cambio.type = "text";
+                                                $('.eye1').removeClass('fa-eye-slash').addClass('fa-eye');
+                                            } else {
+                                                cambio.type = "password";
+                                                $('.eye1').removeClass('fa-eye').addClass('fa-eye-slash');
+                                            }
+                                            break;
+                                        case "new_password":
+                                            if (cambio.type == "password") {
+                                                cambio.type = "text";
+                                                $('.eye2').removeClass('fa-eye-slash').addClass('fa-eye');
+                                            } else {
+                                                cambio.type = "password";
+                                                $('.eye2').removeClass('fa-eye').addClass('fa-eye-slash');
+                                            }
+                                            break;
+                                        case "password_confirmation":
+                                            if (cambio.type == "password") {
+                                                cambio.type = "text";
+                                                $('.eye3').removeClass('fa-eye-slash').addClass('fa-eye');
+                                            } else {
+                                                cambio.type = "password";
+                                                $('.eye3').removeClass('fa-eye').addClass('fa-eye-slash');
+                                            }
+                                            break;
+                                        default:
+                                        break;
+                                    }
+
                             }
-
-                        </script>
-
+                        </script> 
                     </form>
                 </div>
             </div>

@@ -110,7 +110,8 @@ class HomeController extends Controller
             $templete = new TemplateProcessor('document.docx');
             $templete->setValue('name', $user->name);
             $templete->setValue('type_document', $user->documents->type);
-            $templete->setValue('document', number_format($user->document,0,".","."));
+            $documentValue = is_numeric($user->document) ? number_format($user->document, 0, ".", ".") : $user->document;
+            $templete->setValue('document', $documentValue);
             $templete->setValue('post', $contract->posts->name);
             $templete->setValue('date_create', $date_create);
             if($request->contract == "on"){

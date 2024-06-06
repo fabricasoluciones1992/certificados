@@ -130,7 +130,7 @@ class PDFController extends Controller
                 'month' => $month_es,
                 'year' => date('Y')
             ];
-            $data["document"] = number_format($data["document"],0,".",".");
+            $data["document"] = is_numeric($data["document"]) ? number_format($data["document"], 0, ".", ".") : $data["document"];
             $pdf = PDF::loadView('myPDF', $data);
             $certificate = new Certificates();
             date_default_timezone_set("America/Bogota");

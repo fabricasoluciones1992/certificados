@@ -18,6 +18,7 @@
               <div class="mb-3 mt-3">
                 <label for="" class="form-label">Area:</label>
                 <select class="form-select form-select-lg" name="id_areas" id="">
+                  <option value="{{$post->id_areas}}">{{$post->areas->name}}</option>
                   @foreach ($areas as $area)
                       <option value="{{$area->id}}">{{$area->name}}</option>
                   @endforeach
