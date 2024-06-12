@@ -68,7 +68,7 @@ class ContractController extends Controller
         $request->validate([
             'id_users' => 'required|exists:users,id',
             'id_posts' => 'required|exists:posts,id',
-            'start' => 'required|date',
+            'start' => 'required|date|after_or_equal:1990-01-01|before_or_equal:2100-01-01',
             'end' => [
                 'nullable',
                 'date',
@@ -87,7 +87,9 @@ class ContractController extends Controller
             'end.date' => 'Por favor seleccione la fecha de fin del contrato',
             'salary.required' => 'Por favor digite el salario del contrato',
             'salary.numeric' => 'Por favor digite solo números',
-            'id_type_contracts.required' => 'Seleccione un cargo'
+            'id_type_contracts.required' => 'Seleccione un cargo',
+            'start.after_or_equal' => 'La fecha minima es: 1990-01-01',
+            'start.before_or_equal' => 'La fecha maxima es: 2100-01-01'
         ]);
         
         try {
@@ -213,23 +215,32 @@ class ContractController extends Controller
         $request->validate([
             'id_users' => 'required|exists:users,id',
             'id_posts' => 'required|exists:posts,id',
-            'start' => 'required|date',
+            'start' => 'required|date|after_or_equal:1990-01-01|before_or_equal:2100-01-01',
             'end' => [
                 'nullable',
                 'date',
                 function ($attribute, $value, $fail) use ($request) {
-                    if (!empty($value) && $value < $request->input('start')) {
-                        $fail('The end date must be after or equal to the start date.');
+                    $start = $request->input('start');
+                    if (!empty($value) && !empty($start)) {
+                        if (strtotime($value) < strtotime($start)) {
+                            $fail('La fecha de fin debe ser posterior o igual a la fecha de inicio.');
+                        }
                     }
                 },
             ],
             'salary' => 'required|numeric',
             'id_type_contracts' => 'required|exists:type_contracts,id'
         ],[
-            'start.date'=>'Por favor seleccione la fecha de inicio del contrato',
-            'salary.required'=>'Por favor digite el salario del contrato',
-            'salary.numeric'=>'Por favor digite solo números',
-            'id_type_contracts.in'=>'Seleccione un cargo'
+            'id_users.required' => 'Por favor seleccione un usuario',
+            'id_posts.required' => 'Por favor seleccione un post',
+            'start.required' => 'Por favor seleccione la fecha de inicio del contrato',
+            'end.date' => 'Por favor seleccione una fecha válida para el fin del contrato',
+            'salary.required' => 'Por favor digite el salario del contrato',
+            'salary.numeric' => 'Por favor digite solo números para el salario',
+            'id_type_contracts.required' => 'Por favor seleccione un tipo de contrato',
+            'id_type_contracts.exists' => 'El tipo de contrato seleccionado no es válido',
+            'start.after_or_equal' => 'La fecha minima es: 1990-01-01',
+            'start.before_or_equal' => 'La fecha maxima es: 2100-01-01'
         ]);
         try {
             $contracts = Contract::find($id);

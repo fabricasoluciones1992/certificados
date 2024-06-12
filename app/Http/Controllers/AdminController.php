@@ -69,7 +69,7 @@ class AdminController extends Controller
             if (strlen($document)<4) {
                 $error = array();
                 $error['tittle'] = "Documento invalido";
-                $error['message'] = "el documento debe ser minimo de 4"; 
+                $error['message'] = "el documento debe ser minimo de 4 caracteres"; 
                 return view('errors.error', compact('error'));
             }
             if (empty($val)) {
@@ -132,7 +132,7 @@ class AdminController extends Controller
 
     public function histories()
     {
-        try {
+        // try {
         $user = Auth::user();
         if ($user == null) {
             $errors = array();
@@ -141,21 +141,21 @@ class AdminController extends Controller
             return view('error', compact('errors'));
         }
         if ($user->id_roles == 2) {
-            $certificate = Certificates::all();
+            $certificate = Certificates::orderBy('download_date', 'desc')->take(100)->get();
             return view('users.admins.histories', compact('certificate'));
         }else{
             //agregar el error de permisos
             $errors = array();
-            $errors ['name'] = "Sin permisos";
-            $errors ['des'] = "Vuelva a la pagina anterior debido a que no posee los permisos necesarios";
+            $errors ['tittle'] = "Sin permisos";
+            $errors ['message'] = "Vuelva a la pagina anterior debido a que no posee los permisos necesarios";
             return view('error', compact('errors'));
         }
-        } catch (\Exception $e) {
-            $error = array();
-            $error ['des'] = "opss lo siento regrese a la vista anterior";
-            $error ['name'] = "La vista anterior";
-            return view('errors.error', compact('error'));
-        }
+        // } catch (\Exception $e) {
+        //     $error = array();
+        //     $error ['tittle'] = "opss lo siento regrese a la vista anterior";
+        //     $error ['message'] = "La vista anterior";
+        //     return view('errors.error', compact('error'));
+        // }
         
 
     }
@@ -192,9 +192,11 @@ class AdminController extends Controller
     public function export()
     {
         $data = DB::select("SELECT certificates.download_date, certificates.download_hour, users.name 
-        FROM certificates
-        INNER JOIN users ON certificates.id_users = users.id");
-        // return $data;
+FROM certificates
+INNER JOIN users ON certificates.id_users = users.id 
+ORDER BY certificates.download_date DESC
+LIMIT 100;
+");
 
         return view('users.admins.export', compact('data'));
     }

@@ -103,6 +103,13 @@ class UserController extends Controller
     public function update(Request $request)
     {
         $val = DB::select("SELECT * FROM users WHERE document = '$request->doc'");
+        $doc = ltrim($request->doc, '0');
+        if (strlen($doc)<4) {
+            $error = array();
+            $error['tittle'] = "Documento invalido";
+            $error['message'] = "el documento debe ser minimo de 4 caracteres"; 
+            return view('errors.error', compact('error'));
+        }
         if (empty($val) || $val[0]->id == $request->id_users) {
             $rule = ($request->type == "5") ? "required|min:4|max:15" : 'required|numeric|digits_between:4,15' ;
             $request->validate([

@@ -12,7 +12,9 @@
         <form action="{{route('contracts.update', $contracts->id)}}" method="POST">
             @csrf @method('PUT')
             <div class="mb-3 mt-3">
+              <input type="hidden" class="form-control" value="{{$contracts->id_users}}" name="id_users">
               <fieldset disabled>
+                
                 <label for="disabledTextInput" class="form-label">Usuario:</label>
                 <label class="form-label ms-2 text-danger text-capitalize" id="disabledTextInput" value="{{$contracts->id_users}}" aria-label="Default select example">{{$contracts->users->name}}</label>
               </fieldset>
