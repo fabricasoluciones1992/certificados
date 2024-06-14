@@ -103,7 +103,7 @@ class HomeController extends Controller
             $contract->mes = Contract::contractMonth($contract->start);
             $contract->año = Contract::contractYear($contract->start);
             $contract->day = Contract::contractDay($contract->start);
-            $contract->mesEmd = Contract::contractMonth($contract->end);
+            $contract->mesEnd = Contract::contractMonth($contract->end);
             $contract->añoEnd = Contract::contractYear($contract->end);
             $contract->dayEnd = Contract::contractDay($contract->end);
             $user = User::find($contract->id_users);
