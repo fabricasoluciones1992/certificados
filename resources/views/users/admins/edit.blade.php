@@ -15,6 +15,7 @@
                 <div class="card-body">
                     <form method="POST" action="{{ route('admins.update', $user->id) }}">
                         <input type="hidden" name="id_users" value="{{Auth::user()->id}}">
+                        <input type="hidden" value="{{$user->id_documents}}" name="type_document">
                         @csrf
                         @method('PUT')
                         <div class="row mb-3">
@@ -27,6 +28,13 @@
                                 <p class="fs-7 text-secondary">Los nombres deben contener mínimo 2 caracteres y máximo 100 caracteres</p>
                                 </div>
                                 </div>
+                    <div class="row mb-3">
+                        <label for="type" class="col-md-4 col-form-label text-md-end">{{ __('Tipo de Documento') }}</label>
+                    <div class="col-md-6"> 
+                        <input type="text" value="{{$user->documents->type}}" class="form-control" disabled>
+ 
+                    </div>
+                </div>
                         <div class="row mb-3">
                             <label for="CC" class="col-md-4 col-form-label text-md-end">{{ __('Documento') }}</label>
                             <div class="col-md-6">

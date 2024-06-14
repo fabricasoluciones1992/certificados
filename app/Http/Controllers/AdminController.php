@@ -45,7 +45,8 @@ class AdminController extends Controller
         // try {
             $user = User::find($id);
             $roles = Role::all();
-            return view('users.admins.edit', compact('user','roles'));
+            $documents = Document::all();
+            return view('users.admins.edit', compact('user','roles','documents'));
         // } catch (\Throwable $th) {
         //     $error = array();
         //     $error['tittle'] = "Error";
@@ -65,6 +66,7 @@ class AdminController extends Controller
     public function update(Request $request, $id)
     {
             $val = DB::select("SELECT * FROM users WHERE document = '$request->document'");
+            $rule = ($request->type_document == 5) ? "required|min:4|max:15" : 'required|numeric|digits_between:4,15' ;
             $document = ltrim($request->document, '0');
             if (strlen($document)<4) {
                 $error = array();
@@ -74,7 +76,7 @@ class AdminController extends Controller
             }
             if (empty($val)) {
                 $request->validate([
-                    'document' => 'required|min:4|max:15',
+                    'document' => $rule,
                     'name' => 'required|min:2|max:100|regex:/^[a-zA-ZÁÉÍÓÚÜáéíóúü\s]+$/',
                 ],[
                     'document.required' => 'Se requiere número de documento',
@@ -92,7 +94,7 @@ class AdminController extends Controller
                 $user->save();
             }elseif($val[0]->id == $id) {
                 $request->validate([
-                    'document' => 'required|min:4|max:15',
+                    'document' => $rule,
                     'name' => 'required|min:2|max:100|regex:/^[a-zA-ZÁÉÍÓÚÜáéíóúü\s]+$/',
                 ],[
                     'document.required' => 'Se requiere número de documento',

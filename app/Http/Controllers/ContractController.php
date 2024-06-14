@@ -74,7 +74,7 @@ class ContractController extends Controller
                 'date',
                 function ($attribute, $value, $fail) use ($request) {
                     if (!empty($value) && $value < $request->input('start')) {
-                        $fail('The end date must be after or equal to the start date.');
+                        $fail('la fecha de fin del contrato no puede ser menor o igual a la de inicio');
                     }
                 },
             ],
@@ -84,10 +84,12 @@ class ContractController extends Controller
             'id_users.required' => 'Seleccione un usuario',
             'id_posts.required' => 'Seleccione un cargo',
             'start.date' => 'Por favor seleccione la fecha de inicio del contrato',
+            'start.required' => 'Por favor seleccione la fecha de inicio del contrato',
             'end.date' => 'Por favor seleccione la fecha de fin del contrato',
+            'end.date' => 'la fecha de fin del contrato no puede ser menor o igual a la de inicio',
             'salary.required' => 'Por favor digite el salario del contrato',
             'salary.numeric' => 'Por favor digite solo números',
-            'id_type_contracts.required' => 'Seleccione un cargo',
+            'id_type_contracts.required' => 'Seleccione un tipo de contrato',
             'start.after_or_equal' => 'La fecha minima es: 1990-01-01',
             'start.before_or_equal' => 'La fecha maxima es: 2100-01-01'
         ]);
@@ -244,14 +246,22 @@ class ContractController extends Controller
         ]);
         try {
             $contracts = Contract::find($id);
-            $contracts->start = $request->start;
-            $contracts->end = $request->end;
-            $contracts->salary = $request->salary;
-            $contracts->id_posts = $request->id_posts;
-            $contracts->id_type_contracts = $request->id_type_contracts;
-            $contracts->status = 1;
-            $contracts->save();
-            return redirect(route('contracts.index'));
+            if($contracts->status == 0){
+                $error = array();
+                $error['tittle'] = "Error";
+                $error['message'] = "El contrato que intentas modificar esta inactivo"; 
+                return view('errors.error', compact('error'));
+            }else{
+                $valDate = (now()->format('Y-m-d') < $request->end) ? 1 : 0 ;
+                $contracts->start = $request->start;
+                $contracts->end = $request->end;
+                $contracts->salary = $request->salary;
+                $contracts->id_posts = $request->id_posts;
+                $contracts->id_type_contracts = $request->id_type_contracts;
+                $contracts->status = $valDate;
+                $contracts->save();
+                return redirect(route('contracts.index'));
+            }
         } catch (\Throwable $th) {
             $error = array();
             $error['tittle'] = "Error";

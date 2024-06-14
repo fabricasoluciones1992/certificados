@@ -54,9 +54,24 @@
     </div>
   </section>
   <script>
-    $(document).ready( function () {
-  $('#myTable').DataTable();
-} );
+$(document).ready(function() {
+    $('#myTable').DataTable({
+        "language": {
+            "search": "Buscar:",
+            "lengthMenu": "Mostrar _MENU_ registros por página",
+            "zeroRecords": "No se encontraron resultados",
+            "info": "Mostrando página _PAGE_ de _PAGES_",
+            "infoEmpty": "No hay registros disponibles",
+            "infoFiltered": "(filtrados de _MAX_ registros en total)",
+            "paginate": {
+                "first": "Primera",
+                "last": "Última",
+                "next": "Siguiente",
+                "previous": "Anterior"
+            }
+        }
+    });
+});
   </script>
 @endsection
 
