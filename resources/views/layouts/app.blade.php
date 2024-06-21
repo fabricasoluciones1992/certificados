@@ -90,6 +90,9 @@
                                     <a class="nav-link text-light rounded" href="{{ route('register') }}">{{ __('Registrarse') }}</a>
                                 </li>
                             @endif
+                                <li class="nav-item">
+                                    <a class="nav-link text-light rounded" href="{{ route('validate_code') }}">{{ __('Validar certificado') }}</a>
+                                </li>
                         @else
                             <li class="nav-item dropdown me-2">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle text-light rounded px-2" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

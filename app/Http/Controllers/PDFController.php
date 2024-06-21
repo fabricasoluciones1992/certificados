@@ -11,6 +11,7 @@ use App\Models\Document;
 use Barryvdh\DomPDF\PDF as DomPDFPDF;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use PDF;
   
 class PDFController extends Controller
@@ -95,6 +96,7 @@ class PDFController extends Controller
             $contract->añoEnd = Contract::contractYear($contract->end);
             $contract->dayEnd = Contract::contractDay($contract->end);
             $user = User::find($contract->id_users);
+
             if($request->contract == "on"){
                 $typeContract = "con un contrato a ".$contract->typeContracts->type_contract;
             }else{
@@ -117,6 +119,15 @@ class PDFController extends Controller
                 $salary ="";
             }
 
+            
+            $certificate = new Certificates();
+            date_default_timezone_set("America/Bogota");
+            $certificate->download_date = date("y.m.d");
+            $certificate->download_hour = date("H:i:s");
+            $certificate->id_users = Auth::user()->id;
+            $confirmdate = $request->confirmdate;
+            $certificate->save();
+
             $data = [
                 'title' => 'CERTIFICA',
                 'name' => $user->name,
@@ -128,25 +139,16 @@ class PDFController extends Controller
                 'salary' => $salary,
                 'day' => date('d'),
                 'month' => $month_es,
-                'year' => date('Y')
+                'year' => date('Y'),
+                'code' => base64_encode($certificate->id)
             ];
             $data["document"] = is_numeric($data["document"]) ? number_format($data["document"], 0, ".", ".") : $data["document"];
             $pdf = PDF::loadView('myPDF', $data);
-            $certificate = new Certificates();
-            date_default_timezone_set("America/Bogota");
-            $certificate->download_date = date("y.m.d");
-            $certificate->download_hour = date("H:i:s");
-            $certificate->id_users = Auth::user()->id;
-            $confirmdate = $request->confirmdate;
     
             if(Auth::user()->id_roles == '2'){
-                $certificate->save();
                 return $pdf->download('CertificadoLaboral.pdf');
             }else{
-    
                 if($confirmdate == $user->date){
-                    
-                    $certificate->save();
                     return $pdf->download('CertificadoLaboral.pdf');
     
                 }else{

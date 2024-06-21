@@ -8,6 +8,7 @@ use App\Http\Controllers\SalariesController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\ContractController;
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\PostController;
 use App\Models\Contract;
 use Illuminate\Support\Facades\Auth;
@@ -48,6 +49,8 @@ Route::get('/histories', [AdminController::class, 'histories'])->name('histories
 Route::get('/select/contract', [HomeController::class, 'select_contract'])->name('select_contract');
 Route::get('/select/contracts/{id}', [HomeController::class, 'select_contracts'])->middleware('ADMIN')->name('select_contracts');
 Route::put('/update/password', [HomeController::class, 'update'])->name('update_password');
+Route::get('/validatecode', [Controller::class, 'validateCode'])->name('validate_code');
+Route::post('/valcode', [Controller::class, 'valCode'])->name('valCode');
 
 Route::post('/generate/{id}', function (Request $request, $id) {
     $contract = Contract::find($id);

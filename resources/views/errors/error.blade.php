@@ -431,7 +431,13 @@
         </div>
         <div class="col-md-6 align-self-center">
           <h1>{{ $error['tittle'] }}</h1>
+          @if ($error['tittle'] == "EL contrato es valido.")
+          <h2>Contrato valido</h2>
+          @elseif ($error['tittle'] == "EL contrato es invalido")
+          <h2>Contrato invalido</h2>
+          @else
           <h2>UH OH! Error!!.</h2>
+          @endif
           <p>{{ $error['message'] }}
           </p>
           <div class="d-grid gap-2 d-md-flex justify-content-end m-5">
