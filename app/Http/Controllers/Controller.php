@@ -17,22 +17,23 @@ class Controller extends BaseController
     function validateCode(){
         return view('validarCertificado');
     }
-    function valCode(Request $request){
-        $code = base64_decode($request->valCode);
-        $contract = Certificates::find($code);
-            if (!empty($contract)){
-                $error = array();
-                $error['tittle'] = "EL contrato es valido.";
-                $error['message'] = "El contrato es validado y fue generado en la fecha: $contract->download_date "; 
-                return view('errors.error', compact('error'));
-            }else{
-                $error = array();
-                $error['tittle'] = "EL contrato es invalido";
-                $error['message'] = "El contrato que usted busca es invalidó."; 
-                return view('errors.error', compact('error'));
-            }
-            return $contract;
-            return view('validarCertificado');
+    function valCode(Request $request) {
+        $decoded_data = base64_decode($request->valCode);
+        $values = explode(',', $decoded_data);
+        $contract = Certificates::find($values[0]);
+        if (!empty($contract)) {
+            $error = [
+                'tittle' => "El contrato es válido.",
+                'message' => "El contrato fue validado y fue generado en la fecha: $values[1]"
+            ];
+            return view('errors.error', compact('error'));
+        } else {
+            $error = [
+                'tittle' => "El contrato es inválido.",
+                'message' => "El contrato que usted busca es inválido."
+            ];
+            return view('errors.error', compact('error'));
         }
+    }
 }
 

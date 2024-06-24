@@ -99,7 +99,8 @@
     margin-top: 18%;
 }
 .imgFirma{
-    
+    width: 30%;
+    height: 50%;
 }
 </style>
 <body>
@@ -126,7 +127,7 @@
 <p class="textContent">El presente certificado se expide a solicitud del interesado a los ({{ $day }}) días del mes de {{ $month }} de {{ $year }}.</p><br>
 <p class="bodyText">Atentamente, </p><br><br><br><br><br>
 <div class="info">
-    <img src="img/firma.png" alt="" class="imgFirma">
+    <img src="img/firma3.png" alt="" class="imgFirma">
     <p class="foot"><b>LUZ YAZMÍN LIZARAZO JIMÉNEZ</b></strong></p>
 <p class="foot2">Directora de Talento Humano</p>
 </div>

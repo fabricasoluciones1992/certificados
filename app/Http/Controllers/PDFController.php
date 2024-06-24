@@ -128,6 +128,8 @@ class PDFController extends Controller
             $confirmdate = $request->confirmdate;
             $certificate->save();
 
+            $data_to_encode = $certificate->id . ',' . $certificate->download_date;
+            $encoded_data = base64_encode($data_to_encode);
             $data = [
                 'title' => 'CERTIFICA',
                 'name' => $user->name,
@@ -140,7 +142,7 @@ class PDFController extends Controller
                 'day' => date('d'),
                 'month' => $month_es,
                 'year' => date('Y'),
-                'code' => base64_encode($certificate->id)
+                'code' => $encoded_data
             ];
             $data["document"] = is_numeric($data["document"]) ? number_format($data["document"], 0, ".", ".") : $data["document"];
             $pdf = PDF::loadView('myPDF', $data);
