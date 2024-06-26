@@ -128,7 +128,7 @@ class PDFController extends Controller
             $confirmdate = $request->confirmdate;
             $certificate->save();
 
-            $data_to_encode = $certificate->id . ',' . $certificate->download_date;
+            $data_to_encode = $certificate->id . ',' . $certificate->download_date . ',' . $contract->id;
             $encoded_data = base64_encode($data_to_encode);
             $data = [
                 'title' => 'CERTIFICA',

@@ -107,6 +107,15 @@ class HomeController extends Controller
             $contract->añoEnd = Contract::contractYear($contract->end);
             $contract->dayEnd = Contract::contractDay($contract->end);
             $user = User::find($contract->id_users);
+            $certificate = new Certificates();
+            date_default_timezone_set("America/Bogota");
+            $certificate->download_date = date("y.m.d");
+            $certificate->download_hour = date("H:i:s");
+            $certificate->id_users = Auth::user()->id;
+            $certificate->save();
+            $data_to_encode = $certificate->id . ',' . $certificate->download_date . ',' . $contract->id;
+            $encoded_data = base64_encode($data_to_encode);
+
             $templete = new TemplateProcessor('document.docx');
             $templete->setValue('name', $user->name);
             $templete->setValue('type_document', $user->documents->type);
@@ -114,6 +123,8 @@ class HomeController extends Controller
             $templete->setValue('document', $documentValue);
             $templete->setValue('post', $contract->posts->name);
             $templete->setValue('date_create', $date_create);
+            $templete->setValue('code', $encoded_data);
+
             if($request->contract == "on"){
                 $templete->setValue('type_contract', "con un contrato a ".$contract->typeContracts->type_contract);
             }else{

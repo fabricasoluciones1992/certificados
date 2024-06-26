@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Certificates;
+use App\Models\Contract;
+use App\Models\User;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -17,23 +19,25 @@ class Controller extends BaseController
     function validateCode(){
         return view('validarCertificado');
     }
-    function valCode(Request $request) {
+    public function valCode(Request $request) {
         $decoded_data = base64_decode($request->valCode);
         $values = explode(',', $decoded_data);
-        $contract = Certificates::find($values[0]);
+        $contract = Contract::find($values[2]);
         if (!empty($contract)) {
+            $user = User::find($contract->id_users);
             $error = [
-                'tittle' => "El contrato es válido.",
-                'message' => "El contrato fue validado y fue generado en la fecha: $values[1]"
+                'title' => "El contrato es válido.",    
+                'message' => "El contrato fue validado y generado en la fecha: $values[1], para la persona: $user->name, identificada con el número de documento: $user->document."
             ];
-            return view('errors.error', compact('error'));
+            return redirect()->back()->with('error', $error);
         } else {
             $error = [
-                'tittle' => "El contrato es inválido.",
+                'title' => "El contrato es inválido.",
                 'message' => "El contrato que usted busca es inválido."
             ];
-            return view('errors.error', compact('error'));
+            return redirect()->back()->with('error', $error);
         }
     }
+    
 }
 
